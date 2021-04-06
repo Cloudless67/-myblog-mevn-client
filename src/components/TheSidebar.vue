@@ -1,5 +1,5 @@
 <template>
-    <ul class="nav flex-column border text-start">
+    <ul class="nav flex-column text-start">
         <span class="m-3 fs-3 fw-bold">게시판</span>
         <li
             class="nav-item nav-link ps-3 py-0 my-1"
@@ -20,6 +20,7 @@ import { Options, Vue } from 'vue-class-component';
 import SidebarItem from '@/components/SidebarItem.vue';
 
 @Options({
+    name: 'TheSidebar',
     components: {
         SidebarItem,
     },

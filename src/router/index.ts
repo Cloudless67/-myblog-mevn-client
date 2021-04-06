@@ -3,7 +3,7 @@ import Home from '../views/Home.vue';
 
 const routes: Array<RouteRecordRaw> = [
     {
-        path: '/',
+        path: '/:category?',
         name: 'Home',
         component: Home,
     },

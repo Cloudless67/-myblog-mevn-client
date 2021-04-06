@@ -1,42 +1,47 @@
 <template>
-    <Navbar />
-    <router-view />
-    <MainFooter />
+    <the-navbar />
+    <section class="container my-3">
+        <router-view />
+    </section>
+    <the-footer />
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import Navbar from '@/components/Navbar.vue'; // @ is an alias to /src
-import MainFooter from '@/components/MainFooter.vue';
+import TheNavbar from '@/components/TheNavbar.vue'; // @ is an alias to /src
+import TheFooter from '@/components/TheFooter.vue';
 
 @Options({
     components: {
-        Navbar,
-        MainFooter,
+        TheNavbar,
+        TheFooter,
     },
 })
 export default class App extends Vue {}
 </script>
 
-<style>
+<style lang="scss">
 #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    & > nav,
+    & > footer {
+        flex: 0 0 0%;
+    }
+    & > section {
+        flex: 1 0 auto;
+    }
 }
 
-#nav {
-    padding: 30px;
-}
+a {
+    color: black;
+    text-decoration: none;
 
-#nav a {
-    font-weight: bold;
-    color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-    color: #42b983;
+    &:hover {
+        color: inherit;
+        text-decoration: underline;
+    }
 }
 </style>

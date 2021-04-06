@@ -1,5 +1,5 @@
 <template>
-    <footer class="navbar justify-content-center fixed-bottom bg-dark p-3">
+    <footer class="navbar justify-content-center bg-dark p-3">
         <small class="text-white">
             cloudlesslakitu67@gmail.com | &copy; 2021 by Cloudless
         </small>
@@ -7,8 +7,9 @@
 </template>
 
 <script lang="ts">
-import { Vue } from 'vue-class-component';
+import { Vue, Options } from 'vue-class-component';
 
+@Options({ name: 'Footer' })
 export default class MainFooter extends Vue {}
 </script>
 

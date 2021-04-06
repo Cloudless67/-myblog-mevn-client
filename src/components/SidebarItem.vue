@@ -2,24 +2,26 @@
     <div>
         <div>
             <toggle-button @toggled="toggle" />
-            <router-link :to="`/category/${name}`">{{ name }}</router-link>
+            <router-link :to="`/${name}`">{{ name }}</router-link>
         </div>
-        <ul class="nav flex-column text-start" v-if="children && pressed">
-            <li
-                :class="'nav-item nav-link p-0 mt-1'"
-                v-for="category in children"
-                :key="category.name"
-            >
-                <sidebar-item
-                    class="branch"
-                    v-if="typeof category === 'object'"
-                    :name="category.name"
-                    :isTopLevel="category.isTopLevel"
-                    :children="category.children"
-                />
-                <router-link v-else :to="`/category/${category}`">{{ category }}</router-link>
-            </li>
-        </ul>
+        <transition name="slide">
+            <ul class="nav flex-column flex-nowrap text-start" v-show="pressed">
+                <li
+                    :class="'nav-item nav-link p-0 mt-1'"
+                    v-for="category in children"
+                    :key="category.name"
+                >
+                    <sidebar-item
+                        class="branch"
+                        v-if="typeof category === 'object'"
+                        :name="category.name"
+                        :isTopLevel="category.isTopLevel"
+                        :children="category.children"
+                    />
+                    <router-link v-else :to="`/${category}`">{{ category }}</router-link>
+                </li>
+            </ul>
+        </transition>
     </div>
 </template>
 
@@ -28,6 +30,7 @@ import { Options, Vue } from 'vue-class-component';
 import ToggleButton from '@/components/ToggleButton.vue';
 
 @Options({
+    name: 'SidebarItem',
     components: {
         ToggleButton,
     },
@@ -50,15 +53,6 @@ export default class SidebarItem extends Vue {
 </script>
 
 <style lang="scss" scoped>
-a {
-    color: black;
-    text-decoration: none;
-
-    &:hover {
-        text-decoration: underline;
-    }
-}
-
 ul,
 li {
     position: relative;
@@ -102,5 +96,25 @@ li {
     bottom: -4px;
     left: -10px;
     border-left: 1px solid #fff;
+}
+
+.slide-enter-active {
+    transition: all 0.1s ease-in;
+}
+
+.slide-leave-active {
+    transition: all 0.1s ease-out;
+}
+
+.slide-enter-to,
+.slide-leave-from {
+    max-height: 100px;
+    overflow: hidden;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+    overflow: hidden;
+    max-height: 0;
 }
 </style>

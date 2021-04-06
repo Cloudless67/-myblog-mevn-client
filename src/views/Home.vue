@@ -1,21 +1,20 @@
 <template>
-    <div class="container my-3">
-        <div class="row">
-            <PostList class="col-md" msg="Welcome to Your Vue.js + TypeScript App" />
-            <Sidebar class="col-md-3" />
-        </div>
+    <div class="container row">
+        <post-list class="col-md-9" />
+        <the-sidebar class="col-md-3" />
     </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import PostList from '@/components/PostList.vue';
-import Sidebar from '@/components/Sidebar.vue';
+import TheSidebar from '@/components/TheSidebar.vue';
 
 @Options({
+    name: 'Home',
     components: {
         PostList,
-        Sidebar,
+        TheSidebar,
     },
 })
 export default class Home extends Vue {}

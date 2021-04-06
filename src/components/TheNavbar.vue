@@ -1,14 +1,14 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary p-0">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                <img id="logo" src="/Logo_White.png" alt="Logo" height="" />
-            </a>
+            <router-link class="navbar-brand" to="/">
+                <img id="logo" src="/logo-white.png" alt="Logo" height="" />
+            </router-link>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto fs-4">
                     <li class="nav-item">
-                        <a class="nav-link active fw-bold" aria-current="page" href="#"
-                            >Cloudless' Blog</a
+                        <router-link class="nav-link active fw-bold" aria-current="page" to="/"
+                            >Cloudless' Blog</router-link
                         >
                     </li>
                 </ul>
@@ -21,8 +21,9 @@
 </template>
 
 <script lang="ts">
-import { Vue } from 'vue-class-component';
+import { Options, Vue } from 'vue-class-component';
 
+@Options({ name: 'Navbar' })
 export default class Navbar extends Vue {}
 </script>
 
