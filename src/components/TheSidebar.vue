@@ -1,17 +1,15 @@
 <template>
-    <ul class="nav flex-column text-start">
-        <span class="m-3 fs-3 fw-bold">게시판</span>
-        <li
-            class="nav-item nav-link ps-3 py-0 my-1"
-            v-for="category in categories"
-            :key="category.name"
-        >
-            <sidebar-item
-                :name="category.name"
-                :isTopLevel="category.isTopLevel"
-                :children="category.children"
-            />
-        </li>
+    <ul class="sidebar nav flex-column text-start">
+        <div class="sidebar-inner">
+            <span class="ms-3 fs-3 fw-bold">게시판</span>
+            <li
+                class="nav-item nav-link ps-3 py-0 my-1"
+                v-for="category in categories"
+                :key="category.name || category"
+            >
+                <sidebar-item :name="category.name || category" :children="category.children" />
+            </li>
+        </div>
     </ul>
 </template>
 
@@ -43,5 +41,9 @@ export default class Sidebar extends Vue {
 #logo {
     width: 3rem;
     height: 3rem;
+}
+
+.sidebar {
+    height: fit-content;
 }
 </style>

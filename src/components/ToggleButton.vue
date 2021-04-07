@@ -11,8 +11,9 @@
 </template>
 
 <script lang="ts">
-import { Vue } from 'vue-class-component';
+import { Options, Vue } from 'vue-class-component';
 
+@Options({ name: 'Toggle Button' })
 export default class ToggleButton extends Vue {
     state: boolean = false;
 
@@ -27,7 +28,7 @@ export default class ToggleButton extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
 .btn {
     position: relative;
     width: 1em;

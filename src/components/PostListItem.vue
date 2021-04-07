@@ -1,15 +1,16 @@
 <template>
-    <div class="post-list mb-3 pt-3 border-top">
-        <router-link :to="`/post/${encodeURI(post.title)}`">
+    <div class="post-list pb-3 pt-3 border-bottom">
+        <router-link :to="`/post/${encodeURI(post.url)}`">
             <small class="float-end">조회 {{ post.views }} | 댓글 {{ post.repliesNum }}</small>
-            <h3 class="fw-bold">{{ post.title }}</h3>
-            <p class="text-black-50 m-0">{{ preview }}</p>
+            <h4 class="fw-bold">{{ post.title }}</h4>
+            <p class="text-black-50 lh-sm m-0">{{ preview }}</p>
         </router-link>
     </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import Post from '@/Post';
 
 @Options({
     name: 'Postlist Item',
@@ -27,17 +28,4 @@ export default class PostListItem extends Vue {
         );
     }
 }
-
-type Post = {
-    tags: string[];
-    writtenTime: string;
-    views: number;
-    repliesNum: number;
-    title: string;
-    url: string;
-    category: string;
-    body: string;
-    formattedBody: string;
-    replies: object[];
-};
 </script>

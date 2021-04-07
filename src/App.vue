@@ -1,6 +1,6 @@
 <template>
     <the-navbar />
-    <section class="container my-3">
+    <section class="container my-4">
         <router-view />
     </section>
     <the-footer />
@@ -43,5 +43,9 @@ a {
         color: inherit;
         text-decoration: underline;
     }
+}
+
+img {
+    max-width: 100%;
 }
 </style>

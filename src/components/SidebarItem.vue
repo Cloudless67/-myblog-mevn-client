@@ -1,24 +1,21 @@
 <template>
     <div>
         <div>
-            <toggle-button @toggled="toggle" />
+            <toggle-button v-if="children" @toggled="toggle" />
             <router-link :to="`/${name}`">{{ name }}</router-link>
         </div>
         <transition name="slide">
-            <ul class="nav flex-column flex-nowrap text-start" v-show="pressed">
+            <ul class="nav flex-column flex-nowrap text-start" v-if="children" v-show="pressed">
                 <li
-                    :class="'nav-item nav-link p-0 mt-1'"
+                    class="nav-item nav-link p-0 mt-1"
                     v-for="category in children"
                     :key="category.name"
                 >
                     <sidebar-item
                         class="branch"
-                        v-if="typeof category === 'object'"
-                        :name="category.name"
-                        :isTopLevel="category.isTopLevel"
+                        :name="category.name || category"
                         :children="category.children"
                     />
-                    <router-link v-else :to="`/${category}`">{{ category }}</router-link>
                 </li>
             </ul>
         </transition>
@@ -36,13 +33,11 @@ import ToggleButton from '@/components/ToggleButton.vue';
     },
     props: {
         name: String,
-        isTopLevel: Boolean,
         children: Array,
     },
 })
 export default class SidebarItem extends Vue {
     name!: string;
-    isTopLevel!: boolean;
     children!: Array<string | SidebarItem>;
     pressed: boolean = false;
 
@@ -53,6 +48,12 @@ export default class SidebarItem extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.btn-placeholder {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+}
+
 ul,
 li {
     position: relative;

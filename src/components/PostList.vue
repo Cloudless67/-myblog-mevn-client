@@ -1,15 +1,16 @@
 <template>
-    <main class="justify-content-center text-start px-md-5">
-        <h1 class="fw-bold mb-3">{{ title }}</h1>
-        <div v-if="!loading">
+    <div class="main-inner justify-content-center text-start">
+        <h1 class="fw-bold">{{ title }}</h1>
+        <div class="post-list" v-if="!loading">
             <post-list-item v-for="post in posts" :key="post._id" :post="post" />
         </div>
-    </main>
+    </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import PostListItem from './PostListItem.vue';
+import Post from '@/Post';
 
 @Options({
     name: 'Postlist',
@@ -42,24 +43,10 @@ export default class PostList extends Vue {
         const baseUrl = `http://localhost:3000/api/posts/${this.category}`;
         const queryParam = this.index == 0 ? '' : `?idx=${this.index}`;
 
-        const res = await fetch(baseUrl + queryParam, { mode: 'cors' }).then(res => res.json());
-        this.posts = res;
+        this.posts = await fetch(baseUrl + queryParam, { mode: 'cors' }).then(res => res.json());
         this.loading = false;
-        console.log(this.posts);
     }
 }
-
-type Post = {
-    tags: string[];
-    writtenTime: string;
-    views: number;
-    repliesNum: number;
-    title: string;
-    url: string;
-    category: string;
-    formattedBody: string;
-    replies: object[];
-};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -67,15 +54,22 @@ type Post = {
 h3 {
     margin: 40px 0 0;
 }
+
 ul {
     list-style-type: none;
     padding: 0;
 }
+
 li {
     display: inline-block;
     margin: 0 10px;
 }
+
 a {
     color: #42b983;
+}
+
+.post-list:last-child {
+    border: none im !important;
 }
 </style>
