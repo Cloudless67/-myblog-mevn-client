@@ -1,5 +1,5 @@
 <template>
-    <header>
+    <header class="position-relative">
         <div class="d-flex justify-content-between">
             <router-link class="fw-bold" :to="`/${post.category}`"
                 >{{ post.category }}
@@ -9,7 +9,7 @@
         <h1 class="fw-bold mb-2">
             {{ post.title }}
         </h1>
-        <time class="post-time">{{ post.writtenTime }}</time>
+        <time class="post-time position-absolute end-0 bottom-0">{{ post.writtenTime }}</time>
         <hr />
     </header>
 </template>

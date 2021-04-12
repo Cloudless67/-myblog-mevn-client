@@ -6,7 +6,7 @@
         autocomplete="off"
         @click="toggled"
     >
-        <i :class="`fas fa-${icon}-square position-absolute top-0 start-0`"></i>
+        <i class="fas position-absolute top-0 start-0" :class="`fa-${icon}-square`"></i>
     </button>
 </template>
 

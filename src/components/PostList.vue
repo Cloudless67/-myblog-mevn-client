@@ -1,52 +1,71 @@
 <template>
     <div class="main-inner justify-content-center text-start">
         <h1 class="fw-bold">{{ title }}</h1>
-        <div class="post-list" v-if="!loading">
+        <div class="post-list">
             <post-list-item v-for="post in posts" :key="post._id" :post="post" />
         </div>
+        <nav class="text-center mt-3">
+            <span
+                class="px-2"
+                :class="{
+                    'bg-gray-500': isSelected(i),
+                    'text-danger': isSelected(i),
+                    'border-end': i != maxIndex,
+                }"
+                v-for="i in maxIndex"
+                :key="i"
+                @click="changeIndexAndEmit(i)"
+            >
+                {{ i }}
+            </span>
+        </nav>
     </div>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import PostListItem from './PostListItem.vue';
-import Post from '@/Post';
+import { defineComponent } from 'vue';
+import PostListItem from '@/components/PostListItem.vue';
 
-@Options({
-    name: 'Postlist',
+const maxPostPerPage = 10;
+
+export default defineComponent({
+    name: 'Post List',
     components: {
         PostListItem,
     },
-})
-export default class PostList extends Vue {
-    title: string = '전체 글';
-    category: string = '';
-    index: number = 0;
-    loading = true;
-    posts!: Post[];
-
-    async created() {
-        await this.loadPosts();
-        this.$watch(
-            () => this.$route,
-            async () => {
-                this.loading = true;
-                await this.loadPosts();
-            },
-        );
-    }
-
-    async loadPosts() {
-        this.category = (this.$route.params.category as string) || '';
-        this.title = this.category || '전체 글';
-
-        const baseUrl = `http://localhost:3000/api/posts/${this.category}`;
-        const queryParam = this.index == 0 ? '' : `?idx=${this.index}`;
-
-        this.posts = await fetch(baseUrl + queryParam, { mode: 'cors' }).then(res => res.json());
-        this.loading = false;
-    }
-}
+    emits: ['changeIndex'],
+    props: {
+        posts: Array,
+        totalLength: Number,
+    },
+    data() {
+        return {
+            index: 1,
+        };
+    },
+    watch: {
+        title() {
+            this.index = 1;
+        },
+    },
+    computed: {
+        title(): string {
+            return (this.$route.params.category as string) || '전체 글';
+        },
+        maxIndex(): number {
+            return Math.ceil(this.totalLength! / maxPostPerPage);
+        },
+    },
+    methods: {
+        isSelected(i: number) {
+            return i == this.index;
+        },
+        changeIndexAndEmit(i: number) {
+            this.index = i;
+            this.$emit('changeIndex', i);
+        },
+    },
+});
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -69,7 +88,7 @@ a {
     color: #42b983;
 }
 
-.post-list:last-child {
-    border: none im !important;
+.bg-gray-500 {
+    background: #eee;
 }
 </style>

@@ -76,8 +76,10 @@ ul {
 }
 
 li {
+    padding-left: 2px !important;
+
     &::before {
-        width: 8px;
+        width: 10px;
         height: 0;
         border-top: 1px solid;
         margin-top: -1px;
@@ -86,7 +88,7 @@ li {
     }
 
     &:last-child::before {
-        width: 8px;
+        width: 10px;
         height: 100%;
         border-left: 1px solid #fff;
     }
