@@ -12,7 +12,7 @@
 import { defineComponent } from 'vue';
 import MainWithSidebar from '@/components/MainWithSidebar.vue';
 import PostContainer from '@/components/PostContainer.vue';
-import Post from '@/Post';
+import { Post } from '@/types';
 import Replies from '@/components/ReplyList.vue';
 
 export default defineComponent({

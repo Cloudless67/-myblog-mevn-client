@@ -9,23 +9,23 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import Post from '@/Post';
+import { defineComponent } from 'vue';
 
-@Options({
-    name: 'Postlist Item',
+export default defineComponent({
+    name: 'Post List Item',
     props: {
         post: Object,
     },
-})
-export default class PostListItem extends Vue {
-    post!: Post;
-
-    get preview() {
-        return this.post.body.substring(
-            0,
-            Math.min(this.post.body.indexOf('#') > 0 ? this.post.body.indexOf('#') : 200, 200),
-        );
-    }
-}
+    computed: {
+        preview(): string {
+            return this.post!.body.substring(
+                0,
+                Math.min(
+                    this.post!.body.indexOf('#') > 0 ? this.post!.body.indexOf('#') : 200,
+                    200,
+                ),
+            );
+        },
+    },
+});
 </script>

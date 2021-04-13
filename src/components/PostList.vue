@@ -4,9 +4,9 @@
         <div class="post-list">
             <post-list-item v-for="post in posts" :key="post._id" :post="post" />
         </div>
-        <nav class="text-center mt-3">
+        <nav class="text-center mt-3" v-if="maxIndex > 1">
             <span
-                class="px-2"
+                class="postlist-indexer px-2"
                 :class="{
                     'bg-gray-500': isSelected(i),
                     'text-danger': isSelected(i),
@@ -30,18 +30,11 @@ const maxPostPerPage = 10;
 
 export default defineComponent({
     name: 'Post List',
-    components: {
-        PostListItem,
-    },
+    components: { PostListItem },
     emits: ['changeIndex'],
     props: {
         posts: Array,
         totalLength: Number,
-    },
-    data() {
-        return {
-            index: 1,
-        };
     },
     watch: {
         title() {
@@ -50,10 +43,14 @@ export default defineComponent({
     },
     computed: {
         title(): string {
-            return (this.$route.params.category as string) || '전체 글';
+            if (this.$route.params.tag) return `Tag="${this.$route.params.tag}"`;
+            else return (this.$route.params.category as string) || '전체 글';
         },
         maxIndex(): number {
             return Math.ceil(this.totalLength! / maxPostPerPage);
+        },
+        index(): number {
+            return Number(this.$route.query.page || 1);
         },
     },
     methods: {
@@ -61,7 +58,7 @@ export default defineComponent({
             return i == this.index;
         },
         changeIndexAndEmit(i: number) {
-            this.index = i;
+            if (this.index === i) return;
             this.$emit('changeIndex', i);
         },
     },
@@ -84,11 +81,12 @@ li {
     margin: 0 10px;
 }
 
-a {
-    color: #42b983;
-}
-
 .bg-gray-500 {
     background: #eee;
+}
+
+.postlist-indexer:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
 </style>

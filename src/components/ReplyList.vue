@@ -2,18 +2,14 @@
     <section class="replies" v-if="replies">
         <h3 class="fw-bold mb-3">Replies</h3>
         <reply-list-item v-for="reply in replies" :key="reply._id" :reply="reply" />
-        <form
-            class="container"
-            :action="`localhost:3000/api${$route.fullPath}/reply`"
-            method="POST"
-        >
+        <form class="container">
             <div class="row">
                 <input
                     class="col-sm-6"
                     type="text"
                     id="reply-nickname"
                     placeholder="닉네임"
-                    v-model="replyNickname"
+                    v-model="nickname"
                 />
                 <input
                     class="col-sm-6"
@@ -21,11 +17,11 @@
                     id="reply-password"
                     placeholder="password"
                     required
-                    v-model="replyPassword"
+                    v-model="password"
                 />
             </div>
             <div class="row">
-                <textarea name="reply-body" rows="3" v-model="replyBody"></textarea>
+                <textarea id="reply-body" rows="3" v-model="body"></textarea>
             </div>
             <button
                 class="btn btn-primary float-end mt-1"
@@ -39,11 +35,10 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
 import ReplyListItem from '@/components/ReplyListItem.vue';
-import Reply from '@/Reply';
+import { defineComponent } from 'vue';
 
-@Options({
+export default defineComponent({
     name: 'Replies',
     components: {
         ReplyListItem,
@@ -51,8 +46,31 @@ import Reply from '@/Reply';
     props: {
         replies: Array,
     },
-})
-export default class Replies extends Vue {
-    replies!: Reply[];
-}
+    data() {
+        return {
+            nickname: 'ㅇㅇ',
+            password: '1234',
+            body: '',
+        };
+    },
+    methods: {
+        async submitReply() {
+            const url = `http://localhost:3000/api${this.$route.fullPath}/reply`;
+            const res = await fetch(url, {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    nickname: this.nickname,
+                    password: this.password,
+                    body: this.body,
+                }),
+            }).then(x => x.json());
+
+            this.replies!.push(res);
+        },
+    },
+});
 </script>

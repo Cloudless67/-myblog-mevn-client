@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import Reply from '@/Reply';
+import { Reply } from '@/types';
 
 @Options({
     name: 'Reply',
