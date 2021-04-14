@@ -55,7 +55,7 @@ export default defineComponent({
     },
     methods: {
         async submitReply() {
-            const url = `http://localhost:3000/api${this.$route.fullPath}/reply`;
+            const url = `/api${this.$route.fullPath}/reply`;
             const res = await fetch(url, {
                 method: 'POST',
                 mode: 'cors',

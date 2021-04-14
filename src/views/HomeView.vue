@@ -58,6 +58,6 @@ const buildPath = (to: RouteLocationNormalized): string => {
     else if (to.params.tag) path = to.fullPath;
     else path = '/posts' + to.fullPath;
 
-    return `http://localhost:3000/api${path}`;
+    return `/api${path}`;
 };
 </script>

@@ -14,26 +14,23 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
 import SidebarItem from '@/components/SidebarItem.vue';
+import { defineComponent } from 'vue';
 
-@Options({
-    name: 'TheSidebar',
-    components: {
-        SidebarItem,
+export default defineComponent({
+    name: 'The Sidebar',
+    components: { SidebarItem },
+    data() {
+        return {
+            categories: [],
+        };
     },
-})
-export default class Sidebar extends Vue {
-    categories = [];
-
-    async mounted() {
-        const res = await fetch('http://localhost:3000/api/categories', {
-            mode: 'cors',
-        });
-
+    async created() {
+        console.log('hi');
+        const res = await fetch('/api/categories');
         this.categories = await res.json();
-    }
-}
+    },
+});
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

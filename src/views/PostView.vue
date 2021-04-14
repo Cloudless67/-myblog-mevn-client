@@ -33,12 +33,8 @@ export default defineComponent({
         },
     },
     async beforeRouteEnter(to, from, next) {
-        console.log('Post View' + to.fullPath);
-
-        const baseUrl = `http://localhost:3000/api/post/${to.params.title}`;
-
-        const post: Post = await fetch(baseUrl, { mode: 'cors' }).then(res => res.json());
-        console.log(post);
+        const baseUrl = `/api/post/${to.params.title}`;
+        const post: Post = await fetch(baseUrl).then(res => res.json());
         next((vm: any) => vm.setPost(post));
     },
 });

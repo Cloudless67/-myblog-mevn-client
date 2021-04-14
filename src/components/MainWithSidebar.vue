@@ -8,14 +8,11 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
 import TheSidebar from '@/components/TheSidebar.vue';
+import { defineComponent } from 'vue';
 
-@Options({
+export default defineComponent({
     name: 'Main with Sidebar',
-    components: {
-        TheSidebar,
-    },
-})
-export default class MainWithSidebar extends Vue {}
+    components: { TheSidebar },
+});
 </script>
