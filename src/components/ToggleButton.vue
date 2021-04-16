@@ -11,21 +11,25 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { defineComponent } from 'vue';
 
-@Options({ name: 'Toggle Button' })
-export default class ToggleButton extends Vue {
-    state: boolean = false;
-
-    get icon(): 'minus' | 'plus' {
-        return this.state ? 'minus' : 'plus';
-    }
-
-    toggled() {
-        this.state = !this.state;
-        this.$emit('toggled', this.state);
-    }
-}
+export default defineComponent({
+    name: 'Toggle Button',
+    data() {
+        return { state: false };
+    },
+    methods: {
+        toggled() {
+            this.state = !this.state;
+            this.$emit('toggled', this.state);
+        },
+    },
+    computed: {
+        icon(): 'minus' | 'plus' {
+            return this.state ? 'minus' : 'plus';
+        },
+    },
+});
 </script>
 
 <style scoped>

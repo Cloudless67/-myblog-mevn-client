@@ -1,13 +1,10 @@
 <template>
-    <main-with-sidebar>
-        <post-list :totalLength="totalLength" :posts="posts" @changeIndex="changeIndex" />
-    </main-with-sidebar>
+    <post-list :totalLength="totalLength" :posts="posts" @changeIndex="changeIndex" />
 </template>
 
 <script lang="ts">
 import { RouteLocationNormalized } from 'node_modules/vue-router/dist/vue-router';
 import { defineComponent } from 'vue';
-import MainWithSidebar from '@/components/MainWithSidebar.vue';
 import PostList from '@/components/PostList.vue';
 import { Post } from '@/types';
 
@@ -16,7 +13,6 @@ type PostsRes = { posts: Post[]; totalLength: number };
 export default defineComponent({
     name: 'Home View',
     components: {
-        MainWithSidebar,
         PostList,
     },
     methods: {

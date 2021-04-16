@@ -1,23 +1,40 @@
 <template>
-    <the-navbar />
+    <the-navbar :login="login" @logout="logout()" />
     <section class="container my-4">
-        <router-view />
+        <main-with-sidebar>
+            <router-view @login="login = true" />
+        </main-with-sidebar>
     </section>
     <the-footer />
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { defineComponent } from 'vue';
 import TheNavbar from '@/components/TheNavbar.vue'; // @ is an alias to /src
+import MainWithSidebar from '@/components/MainWithSidebar.vue';
 import TheFooter from '@/components/TheFooter.vue';
 
-@Options({
+export default defineComponent({
+    name: 'App',
     components: {
         TheNavbar,
+        MainWithSidebar,
         TheFooter,
     },
-})
-export default class App extends Vue {}
+    data() {
+        return {
+            login: false,
+        };
+    },
+    methods: {
+        logout() {
+            if (localStorage.getItem('token')) {
+                localStorage.removeItem('token');
+            }
+            this.login = false;
+        },
+    },
+});
 </script>
 
 <style lang="scss">

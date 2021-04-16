@@ -2,17 +2,17 @@
     <section class="replies" v-if="replies">
         <h3 class="fw-bold mb-3">Replies</h3>
         <reply-list-item v-for="reply in replies" :key="reply._id" :reply="reply" />
-        <form class="container">
-            <div class="row">
+        <form>
+            <div class="input-group">
                 <input
-                    class="col-sm-6"
+                    class="col-sm-6 form-control"
                     type="text"
                     id="reply-nickname"
                     placeholder="닉네임"
                     v-model="nickname"
                 />
                 <input
-                    class="col-sm-6"
+                    class="col-sm-6 form-control"
                     type="password"
                     id="reply-password"
                     placeholder="password"
@@ -20,16 +20,12 @@
                     v-model="password"
                 />
             </div>
-            <div class="row">
-                <textarea id="reply-body" rows="3" v-model="body"></textarea>
+            <div class="input-group">
+                <textarea class="form-control" id="reply-body" rows="3" v-model="body"></textarea>
+                <button class="btn btn-primary" type="submit" @click.prevent="submitReply()">
+                    등록
+                </button>
             </div>
-            <button
-                class="btn btn-primary float-end mt-1"
-                type="submit"
-                @click.prevent="submitReply()"
-            >
-                등록
-            </button>
         </form>
     </section>
 </template>
@@ -48,8 +44,8 @@ export default defineComponent({
     },
     data() {
         return {
-            nickname: 'ㅇㅇ',
-            password: '1234',
+            nickname: '',
+            password: '',
             body: '',
         };
     },

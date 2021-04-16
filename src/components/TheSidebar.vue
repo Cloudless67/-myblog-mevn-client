@@ -26,7 +26,6 @@ export default defineComponent({
         };
     },
     async created() {
-        console.log('hi');
         const res = await fetch('/api/categories');
         this.categories = await res.json();
     },

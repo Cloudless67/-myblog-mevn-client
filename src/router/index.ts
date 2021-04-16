@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import LoginView from '@/views/LoginView.vue';
+import WriteView from '@/views/WriteView.vue';
 import HomeView from '@/views/HomeView.vue';
 import PostView from '@/views/PostView.vue';
 
@@ -8,6 +9,11 @@ const routes: Array<RouteRecordRaw> = [
         path: '/login',
         name: 'Login',
         component: LoginView,
+    },
+    {
+        path: '/write',
+        name: 'Login',
+        component: WriteView,
     },
     {
         path: '/post/:title',

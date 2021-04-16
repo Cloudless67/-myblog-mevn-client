@@ -11,20 +11,37 @@
                             >Cloudless' Blog</router-link
                         >
                     </li>
+                    <li class="nav-item">
+                        <router-link to="/write" class="nav-link text-white">글쓰기</router-link>
+                    </li>
                 </ul>
             </div>
-            <div class="d-flex">
-                <a href="/login"> <span class="fs-5 text-white">Login</span></a>
+            <div class="d-flex fs-5 text-white">
+                <a href="#" class="text-white" v-if="login" @click.prevent="$emit('logout')"
+                    >logout</a
+                >
+                <router-link to="/login" v-else>
+                    <span class="text-white">login</span>
+                </router-link>
             </div>
         </div>
     </nav>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { defineComponent } from 'vue';
 
-@Options({ name: 'Navbar' })
-export default class Navbar extends Vue {}
+export default defineComponent({
+    name: 'Navbar',
+    props: { login: Boolean },
+    emits: ['logout'],
+    computed: {
+        loggedIn() {
+            if (localStorage.getItem('token')) return true;
+            else return false;
+        },
+    },
+});
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

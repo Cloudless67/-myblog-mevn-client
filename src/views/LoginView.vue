@@ -8,7 +8,7 @@
             <label for="admin-password" class="form-label fw-bold">Password</label>
             <input type="password" class="form-control" id="admin-password" v-model="password" />
         </div>
-        <button type="submit" class="btn btn-primary" @click.prevent="tryLogin">Submit</button>
+        <button type="submit" class="btn btn-primary" @click.prevent="tryLogin">Login</button>
     </form>
 </template>
 
@@ -23,9 +23,23 @@ export default defineComponent({
             password: '',
         };
     },
+    emits: ['login'],
     methods: {
         async tryLogin() {
-            console.log(this.id, this.password);
+            const token = await fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: this.id,
+                    password: this.password,
+                }),
+            }).then(res => res.json());
+
+            localStorage.setItem('token', token.token);
+            this.$router.push({ path: '/' });
+            this.$emit('login');
         },
     },
 });
