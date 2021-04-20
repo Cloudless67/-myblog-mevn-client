@@ -26,7 +26,7 @@ export default defineComponent({
         };
     },
     async created() {
-        const res = await fetch('/api/categories');
+        const res = await fetch('/api/categories/structured');
         this.categories = await res.json();
     },
 });

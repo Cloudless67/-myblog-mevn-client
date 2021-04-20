@@ -12,7 +12,7 @@ const routes: Array<RouteRecordRaw> = [
     },
     {
         path: '/write',
-        name: 'Login',
+        name: 'Write',
         component: WriteView,
     },
     {

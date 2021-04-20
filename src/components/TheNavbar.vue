@@ -11,9 +11,6 @@
                             >Cloudless' Blog</router-link
                         >
                     </li>
-                    <li class="nav-item">
-                        <router-link to="/write" class="nav-link text-white">글쓰기</router-link>
-                    </li>
                 </ul>
             </div>
             <div class="d-flex fs-5 text-white">

@@ -5,6 +5,7 @@
             <router-view @login="login = true" />
         </main-with-sidebar>
     </section>
+    <router-link to="/write" class="btn btn-primary" id="write-button">글쓰기</router-link>
     <the-footer />
 </template>
 
@@ -23,7 +24,7 @@ export default defineComponent({
     },
     data() {
         return {
-            login: false,
+            login: localStorage.getItem('token') !== undefined,
         };
     },
     methods: {
@@ -64,5 +65,11 @@ a {
 
 img {
     max-width: 100%;
+}
+
+#write-button {
+    position: fixed;
+    bottom: 60px;
+    right: 40px;
 }
 </style>
