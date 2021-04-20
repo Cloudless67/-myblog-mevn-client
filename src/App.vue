@@ -2,7 +2,7 @@
     <the-navbar :login="login" @logout="logout()" />
     <section class="container my-4">
         <main-with-sidebar>
-            <router-view @login="login = true" />
+            <router-view @login="login = true" :loggedIn="login" />
         </main-with-sidebar>
     </section>
     <router-link to="/write" class="btn btn-primary" id="write-button">글쓰기</router-link>

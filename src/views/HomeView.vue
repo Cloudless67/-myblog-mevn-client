@@ -38,7 +38,6 @@ export default defineComponent({
     },
     data() {
         return {
-            index: 1,
             posts: [] as Post[],
             totalLength: 0,
         };
