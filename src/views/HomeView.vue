@@ -1,34 +1,71 @@
 <template>
-    <post-list :totalLength="totalLength" :posts="posts" @changeIndex="changeIndex" />
+    <div class="main-inner justify-content-center text-start">
+        <h1 class="fw-bold">{{ title }}</h1>
+        <div class="post-list">
+            <post-list-item v-for="post in posts" :key="post._id" :post="post" />
+        </div>
+        <nav class="text-center mt-3" v-if="maxIndex > 1">
+            <span
+                class="postlist-indexer px-2"
+                :class="{
+                    'bg-gray-500': isSelected(i),
+                    'text-danger': isSelected(i),
+                    'border-end': i != maxIndex,
+                }"
+                v-for="i in maxIndex"
+                :key="i"
+                @click="changeIndex(i)"
+            >
+                {{ i }}
+            </span>
+        </nav>
+    </div>
 </template>
 
 <script lang="ts">
 import { RouteLocationNormalized } from 'node_modules/vue-router/dist/vue-router';
 import { defineComponent } from 'vue';
-import PostList from '@/components/PostList.vue';
+import PostListItem from '@/components/PostListItem.vue';
 import { Post } from '@/types';
 
 type PostsRes = { posts: Post[]; totalLength: number };
+const maxPostPerPage = 10;
 
 export default defineComponent({
     name: 'Home View',
     components: {
-        PostList,
+        PostListItem,
+    },
+    data() {
+        return {
+            index: 1,
+            posts: [] as Post[],
+            totalLength: 0,
+        };
     },
     methods: {
         setPosts({ posts, totalLength }: PostsRes) {
             this.posts = posts;
             this.totalLength = totalLength;
         },
+        isSelected(i: number) {
+            return i == this.index;
+        },
         async changeIndex(index: number) {
             this.$router.push({ query: { page: index !== 1 ? index : undefined } });
         },
     },
-    data() {
-        return {
-            posts: [] as Post[],
-            totalLength: 0,
-        };
+    computed: {
+        title(): string {
+            if (this.$route.params.tag) return `Tag="${this.$route.params.tag}"`;
+            else return (this.$route.params.category as string) || '전체 글';
+        },
+        maxIndex(): number {
+            return Math.ceil(this.totalLength! / maxPostPerPage);
+        },
+        index(): number {
+            return Number(this.$route.query.page || 1);
+        },
     },
     async beforeRouteEnter(to, from, next) {
         const res = await getPosts(buildPath(to));
@@ -57,3 +94,28 @@ const buildPath = (to: RouteLocationNormalized): string => {
     return `/api${path}`;
 };
 </script>
+
+<style scoped>
+h3 {
+    margin: 40px 0 0;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.bg-gray-500 {
+    background: #eee;
+}
+
+.postlist-indexer:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+</style>
