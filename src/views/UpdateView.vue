@@ -73,7 +73,6 @@ export default defineComponent({
                     body: JSON.stringify(postData),
                 }).then(x => x.json());
 
-                console.log(res);
                 this.$router.push({ path: `/post/${encodeURI(res.url)}` });
             } catch (error) {
                 alert(error.message);
@@ -90,7 +89,7 @@ export default defineComponent({
             this.title = post.title;
             this.slug = post.url;
             this.body = post.body;
-            this.tags = post.tags;
+            this.tags = post.tags.join(',');
         } catch (error) {
             alert(error.message);
         }

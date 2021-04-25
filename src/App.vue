@@ -1,11 +1,13 @@
 <template>
     <the-navbar :login="login" @logout="logout()" />
     <section class="container my-4">
-        <main-with-sidebar>
+        <main-with-sidebar :login="login">
             <router-view @login="login = true" :loggedIn="login" />
         </main-with-sidebar>
     </section>
-    <router-link to="/write" class="btn btn-primary" id="write-button">글쓰기</router-link>
+    <router-link v-if="login" to="/write" class="btn btn-primary" id="write-button"
+        >글쓰기</router-link
+    >
     <the-footer />
 </template>
 
@@ -24,7 +26,7 @@ export default defineComponent({
     },
     data() {
         return {
-            login: localStorage.getItem('token') !== undefined,
+            login: localStorage.getItem('token') !== null,
         };
     },
     methods: {

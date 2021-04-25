@@ -14,9 +14,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import PostContainer from '@/components/PostContainer.vue';
+import PostContainer from '@/components/Post/PostContainer.vue';
+import Replies from '@/components/Post/ReplyList.vue';
 import { Post } from '@/types';
-import Replies from '@/components/ReplyList.vue';
 
 export default defineComponent({
     name: 'Post Route',

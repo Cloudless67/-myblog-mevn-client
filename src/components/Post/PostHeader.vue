@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import PostTags from '@/components/PostTags.vue';
+import PostTags from '@/components/Post/PostTags.vue';
 import { Post } from '@/types';
 
 @Options({

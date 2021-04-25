@@ -32,12 +32,6 @@ export default defineComponent({
     name: 'Navbar',
     props: { login: Boolean },
     emits: ['logout'],
-    computed: {
-        loggedIn() {
-            if (localStorage.getItem('token')) return true;
-            else return false;
-        },
-    },
 });
 </script>
 

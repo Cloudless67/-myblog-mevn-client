@@ -5,7 +5,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import PostHeader from '@/components/PostHeader.vue';
+import PostHeader from '@/components/Post/PostHeader.vue';
 import { Post } from '@/types';
 
 @Options({

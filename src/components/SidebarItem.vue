@@ -1,8 +1,16 @@
 <template>
-    <div>
+    <div
+        :class="{ 'pointer-on-hover': editing }"
+        @dragstart="dragStart"
+        @drop="drop($event)"
+        @dragenter.prevent
+        @dragover.prevent
+        :draggable="editing"
+    >
         <div>
             <toggle-button v-if="children" @toggled="toggle" />
-            <router-link :to="`/${name}`">{{ name }}</router-link>
+            <router-link :to="`/${name}`" v-if="!editing">{{ name }}</router-link>
+            <span v-else>{{ name }}</span>
         </div>
         <transition name="slide">
             <ul class="nav flex-column flex-nowrap text-start" v-if="children" v-show="pressed">
@@ -15,6 +23,8 @@
                         class="branch"
                         :name="category.name || category"
                         :children="category.children"
+                        :editing="editing"
+                        @structureChanged="$emit('structureChanged')"
                     />
                 </li>
             </ul>
@@ -23,28 +33,56 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
 import ToggleButton from '@/components/ToggleButton.vue';
+import { defineComponent } from 'vue';
 
-@Options({
-    name: 'SidebarItem',
-    components: {
-        ToggleButton,
-    },
+export default defineComponent({
+    name: 'Sidebar Item',
+    components: { ToggleButton },
+    emits: ['structureChanged'],
     props: {
         name: String,
         children: Array,
+        editing: Boolean,
     },
-})
-export default class SidebarItem extends Vue {
-    name!: string;
-    children!: Array<string | SidebarItem>;
-    pressed: boolean = false;
+    data() {
+        return {
+            pressed: false,
+        };
+    },
+    methods: {
+        dragStart(event: Event) {
+            event.stopPropagation();
+            (event as DragEventInit).dataTransfer!.dropEffect = 'move';
+            (event as DragEventInit).dataTransfer!.effectAllowed = 'move';
+            (event as DragEventInit).dataTransfer!.setData('category', this.name!);
+            console.log(`Dragging ${this.name}`);
+        },
+        async drop(event: Event) {
+            event.stopPropagation();
+            const droppedCategory = (event as DragEventInit).dataTransfer!.getData('category');
+            if (droppedCategory === this.name) return;
+            console.log(`${droppedCategory} dropped to ${this.name}`);
+            try {
+                const res = await fetch(`/api/category/${droppedCategory}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    },
+                    body: JSON.stringify({ parent: this.name }),
+                }).then(res => res.json());
 
-    toggle(state: boolean) {
-        this.pressed = state;
-    }
-}
+                this.$emit('structureChanged', res);
+            } catch (error) {
+                alert(error.message);
+            }
+        },
+        toggle(state: boolean) {
+            this.pressed = state;
+        },
+    },
+});
 </script>
 
 <style lang="scss" scoped>
@@ -119,5 +157,11 @@ li {
 .slide-leave-to {
     overflow: hidden;
     max-height: 0;
+}
+
+.fa-edit {
+    &:hover {
+        cursor: pointer;
+    }
 }
 </style>

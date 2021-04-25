@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts">
-import ReplyListItem from '@/components/ReplyListItem.vue';
+import ReplyListItem from '@/components/Post/ReplyListItem.vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
