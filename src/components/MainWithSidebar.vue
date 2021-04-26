@@ -3,7 +3,7 @@
         <main class="col-lg-9">
             <slot></slot>
         </main>
-        <the-sidebar :login="login" class="col-lg-3" />
+        <the-sidebar class="col-lg-3" />
     </div>
 </template>
 
@@ -14,6 +14,5 @@ import { defineComponent } from 'vue';
 export default defineComponent({
     name: 'Main with Sidebar',
     components: { TheSidebar },
-    props: { login: Boolean },
 });
 </script>

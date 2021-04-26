@@ -1,8 +1,8 @@
 <template>
-    <the-navbar :login="login" @logout="logout()" />
+    <the-navbar @logout="logout()" />
     <section class="container my-4">
-        <main-with-sidebar :login="login">
-            <router-view @login="login = true" :loggedIn="login" />
+        <main-with-sidebar>
+            <router-view @login="login = true" />
         </main-with-sidebar>
     </section>
     <router-link v-if="login" to="/write" class="btn btn-primary" id="write-button"
@@ -13,6 +13,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { computed } from 'vue';
 import TheNavbar from '@/components/TheNavbar.vue'; // @ is an alias to /src
 import MainWithSidebar from '@/components/MainWithSidebar.vue';
 import TheFooter from '@/components/TheFooter.vue';
@@ -27,6 +28,11 @@ export default defineComponent({
     data() {
         return {
             login: localStorage.getItem('token') !== null,
+        };
+    },
+    provide() {
+        return {
+            login: computed(() => this.login),
         };
     },
     methods: {

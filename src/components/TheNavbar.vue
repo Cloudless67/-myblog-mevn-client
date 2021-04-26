@@ -14,7 +14,7 @@
                 </ul>
             </div>
             <div class="d-flex fs-5 text-white">
-                <a href="#" class="text-white" v-if="login" @click.prevent="$emit('logout')"
+                <a href="#" class="text-white" v-if="login.value" @click.prevent="$emit('logout')"
                     >logout</a
                 >
                 <router-link to="/login" v-else>
@@ -30,7 +30,7 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
     name: 'Navbar',
-    props: { login: Boolean },
+    inject: ['login'],
     emits: ['logout'],
 });
 </script>

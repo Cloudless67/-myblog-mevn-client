@@ -1,5 +1,5 @@
 <template>
-    <div class="reply pb-2">
+    <div class="reply p-1 mb-2">
         <h6 class="fw-bold d-inline-block me-1">{{ reply.nickname }}</h6>
         <time class="reply-time text-black-50">{{ reply.writtenTime }}</time>
         <p class="reply-body ms-2">{{ reply.body }}</p>

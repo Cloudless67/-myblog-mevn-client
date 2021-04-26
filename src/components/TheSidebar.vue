@@ -6,7 +6,7 @@
                 <i
                     id="edit-categories"
                     class="fas fa-cog ms-2 pointer-on-hover"
-                    v-if="login"
+                    v-if="login.value"
                     @click="toggleEditState"
                 ></i>
             </div>
@@ -39,7 +39,7 @@ import { defineComponent } from 'vue';
 export default defineComponent({
     name: 'The Sidebar',
     components: { SidebarItem },
-    props: { login: Boolean },
+    inject: ['login'],
     data() {
         return {
             categories: [] as any[],

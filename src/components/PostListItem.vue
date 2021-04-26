@@ -21,8 +21,8 @@ export default defineComponent({
             return this.post!.body.substring(
                 0,
                 Math.min(
-                    this.post!.body.indexOf('#') > 0 ? this.post!.body.indexOf('#') : 200,
-                    200,
+                    this.post!.body.indexOf('#') > 0 ? this.post!.body.indexOf('#') : 160,
+                    160,
                 ),
             );
         },
