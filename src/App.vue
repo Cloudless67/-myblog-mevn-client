@@ -12,9 +12,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import { computed } from 'vue';
-import TheNavbar from '@/components/TheNavbar.vue'; // @ is an alias to /src
+import { computed, defineComponent } from 'vue';
+import TheNavbar from '@/components/TheNavbar.vue';
 import MainWithSidebar from '@/components/MainWithSidebar.vue';
 import TheFooter from '@/components/TheFooter.vue';
 

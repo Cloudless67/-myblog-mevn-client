@@ -1,7 +1,12 @@
 <template>
     <section class="replies" v-if="replies">
         <h3 class="fw-bold mb-3">Replies</h3>
-        <reply-list-item v-for="reply in replies" :key="reply._id" :reply="reply" />
+        <reply-list-item
+            v-for="reply in replies"
+            :key="reply._id"
+            :reply="reply"
+            @removed="removeReply"
+        />
         <form>
             <div class="input-group">
                 <input
@@ -32,15 +37,14 @@
 
 <script lang="ts">
 import ReplyListItem from '@/components/Post/ReplyListItem.vue';
-import { defineComponent } from 'vue';
+import { Reply } from '@/types';
+import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
     name: 'Replies',
-    components: {
-        ReplyListItem,
-    },
+    components: { ReplyListItem },
     props: {
-        replies: Array,
+        replies: Array as PropType<Reply[]>,
     },
     data() {
         return {
@@ -65,7 +69,15 @@ export default defineComponent({
                 }),
             }).then(x => x.json());
 
+            this.password = '';
+            this.body = '';
             this.replies!.push(res);
+        },
+        removeReply(id: string) {
+            this.replies?.splice(
+                this.replies.findIndex((x: Reply) => x._id === id),
+                1,
+            );
         },
     },
 });
