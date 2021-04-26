@@ -9,26 +9,27 @@
         <h1 class="fw-bold mb-2">
             {{ post.title }}
         </h1>
-        <time class="post-time position-absolute end-0 bottom-0">{{ post.writtenTime }}</time>
+        <time class="post-time position-absolute end-0 bottom-0">{{
+            formatDateTime(post.writtenTime)
+        }}</time>
         <hr />
     </header>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { defineComponent, PropType } from 'vue';
 import PostTags from '@/components/Post/PostTags.vue';
 import { Post } from '@/types';
+import { DateTime } from 'luxon';
 
-@Options({
+export default defineComponent({
     name: 'Post Header',
-    components: {
-        PostTags,
+    components: { PostTags },
+    props: { post: Object as PropType<Post> },
+    methods: {
+        formatDateTime(dateTime: string) {
+            return DateTime.fromISO(dateTime).toLocaleString();
+        },
     },
-    props: {
-        post: Object,
-    },
-})
-export default class PostHeader extends Vue {
-    post!: Post;
-}
+});
 </script>

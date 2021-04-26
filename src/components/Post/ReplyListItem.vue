@@ -1,7 +1,7 @@
 <template>
     <div class="reply p-1 mb-2">
         <h6 class="fw-bold d-inline-block me-1">{{ reply.nickname }}</h6>
-        <time class="reply-time text-black-50">{{ reply.writtenTime }}</time>
+        <time class="reply-time text-black-50">{{ formatDateTime(reply.writtenTime) }}</time>
         <span class="position-relative float-end">
             <i class="fas fa-trash-alt pointer-on-hover" @click="onDeleteClick"></i>
             <form class="position-absolute border shadow p-1" v-show="showPasswordForm">
@@ -32,6 +32,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { DateTime } from 'luxon';
 
 export default defineComponent({
     name: 'Reply Item',
@@ -65,10 +66,20 @@ export default defineComponent({
             this.handleResponse(res);
         },
         async handleResponse(res: Response) {
-            if (res.status == 200) {
+            if (res.status === 200) {
                 this.$emit('removed', this.reply!._id);
             } else {
                 alert(await res.text());
+            }
+        },
+        formatDateTime(dateTime: string) {
+            const dt = DateTime.fromISO(dateTime);
+            const now = DateTime.now();
+
+            if (dt.day === now.day && dt.month === now.month && dt.year === now.year) {
+                return dt.toLocaleString(DateTime.TIME_24_SIMPLE);
+            } else {
+                return dt.toLocaleString();
             }
         },
     },
