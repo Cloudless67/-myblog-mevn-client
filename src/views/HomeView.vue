@@ -4,20 +4,18 @@
         <div class="post-list">
             <post-list-item v-for="post in posts" :key="post._id" :post="post" />
         </div>
-        <nav class="text-center mt-3" v-if="maxIndex > 1">
-            <span
-                class="postlist-indexer px-2"
-                :class="{
-                    'bg-gray-500': isSelected(i),
-                    'text-danger': isSelected(i),
-                    'border-end': i != maxIndex,
-                }"
-                v-for="i in maxIndex"
-                :key="i"
-                @click="changeIndex(i)"
-            >
-                {{ i }}
-            </span>
+        <nav class="mt-3" v-if="maxIndex > 1">
+            <ul class="pagination justify-content-center pointer-on-hover">
+                <li
+                    class="page-item"
+                    :class="{ active: isSelected(i) }"
+                    v-for="i in maxIndex"
+                    :key="i"
+                    @click="changeIndex(i)"
+                >
+                    <span class="page-link">{{ i }}</span>
+                </li>
+            </ul>
         </nav>
     </div>
 </template>
@@ -99,22 +97,7 @@ h3 {
     margin: 40px 0 0;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    display: inline-block;
-    margin: 0 10px;
-}
-
 .bg-gray-500 {
     background: #eee;
-}
-
-.postlist-indexer:hover {
-    cursor: pointer;
-    text-decoration: underline;
 }
 </style>
