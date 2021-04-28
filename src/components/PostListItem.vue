@@ -29,3 +29,9 @@ export default defineComponent({
     },
 });
 </script>
+
+<style lang="scss" scoped>
+h4 {
+    color: #000;
+}
+</style>

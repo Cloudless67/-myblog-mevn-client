@@ -60,16 +60,6 @@ export default defineComponent({
     }
 }
 
-a {
-    color: black;
-    text-decoration: none;
-
-    &:hover {
-        color: inherit;
-        text-decoration: underline;
-    }
-}
-
 img {
     max-width: 100%;
 }

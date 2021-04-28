@@ -13,7 +13,11 @@
             <span v-else>{{ name }}</span>
         </div>
         <transition name="slide">
-            <ul class="nav flex-column flex-nowrap text-start" v-if="children" v-show="pressed">
+            <ul
+                class="flex-column flex-nowrap text-start list-unstyled"
+                v-if="children"
+                v-show="pressed"
+            >
                 <li
                     class="nav-item nav-link p-0 mt-1"
                     v-for="category in children"

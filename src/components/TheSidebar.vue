@@ -1,34 +1,37 @@
 <template>
-    <ul class="sidebar nav flex-column text-start">
-        <div class="sidebar-inner" @drop="drop($event)" @dragenter.prevent @dragover.prevent>
-            <div class="d-flex flex-row align-items-center">
-                <span class="ms-3 fs-3 fw-bold">게시판</span>
-                <i
-                    id="edit-categories"
-                    class="fas fa-cog ms-2 pointer-on-hover"
-                    v-if="login.value"
-                    @click="toggleEditState"
-                ></i>
-            </div>
-            <li
-                class="nav-item nav-link ps-3 py-0 my-1"
-                v-for="category in categories"
-                :key="category.name || category"
-            >
-                <sidebar-item
-                    :name="category.name || category"
-                    :children="category.children"
-                    :editing="editing"
-                    @structureChanged="onStructureChange"
-                />
-            </li>
-            <form class="text-end" v-if="editing">
-                <input class="form-control" type="text" v-model="categoryToAdd" />
-                <button class="btn btn-primary" type="submit" @click.prevent="addCategory">
-                    추가
-                </button>
-            </form>
+    <ul
+        class="sidebar flex-column text-start list-unstyled"
+        @drop="drop($event)"
+        @dragenter.prevent
+        @dragover.prevent
+    >
+        <div class="d-flex flex-row align-items-center">
+            <span class="ms-3 fs-3 fw-bold">게시판</span>
+            <i
+                id="edit-categories"
+                class="fas fa-cog ms-2 pointer-on-hover"
+                v-if="login.value"
+                @click="toggleEditState"
+            ></i>
         </div>
+        <li
+            class="nav-item nav-link ps-3 py-0 my-1"
+            v-for="category in categories"
+            :key="category.name || category"
+        >
+            <sidebar-item
+                :name="category.name || category"
+                :children="category.children"
+                :editing="editing"
+                @structureChanged="onStructureChange"
+            />
+        </li>
+        <form class="text-end" v-if="editing">
+            <input class="form-control" type="text" v-model="categoryToAdd" />
+            <button class="btn btn-primary" type="submit" @click.prevent="addCategory">
+                추가
+            </button>
+        </form>
     </ul>
 </template>
 
@@ -102,7 +105,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 #logo {
     width: 3rem;
     height: 3rem;
@@ -110,11 +113,5 @@ export default defineComponent({
 
 .sidebar {
     height: fit-content;
-}
-
-.pointer-on-hover {
-    &:hover {
-        cursor: pointer;
-    }
 }
 </style>

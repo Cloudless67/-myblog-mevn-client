@@ -21,14 +21,3 @@ export default class PostContainer extends Vue {
     post!: Post;
 }
 </script>
-
-<style lang="scss">
-article a {
-    color: #4f83cc;
-
-    &:hover {
-        color: #4f83cc;
-        text-decoration: underline;
-    }
-}
-</style>
