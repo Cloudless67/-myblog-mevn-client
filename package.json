@@ -30,5 +30,11 @@
         "sass-loader": "^10.1.1",
         "typescript": "~4.1.5",
         "vue-jest": "^5.0.0-0"
+    },
+    "prettier": {
+        "singleQuote": true,
+        "trailingComma": "all",
+        "tabWidth": 4,
+        "printWidth": 100
     }
 }
