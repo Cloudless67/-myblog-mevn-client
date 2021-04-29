@@ -5,9 +5,9 @@
             <post-list-item v-for="post in posts" :key="post._id" :post="post" />
         </div>
         <nav class="mt-3" v-if="maxIndex > 1">
-            <ul class="pagination justify-content-center pointer-on-hover">
+            <ul class="pagination justify-content-center">
                 <li
-                    class="page-item"
+                    class="page-item pointer-on-hover"
                     :class="{ active: isSelected(i) }"
                     v-for="i in maxIndex"
                     :key="i"
