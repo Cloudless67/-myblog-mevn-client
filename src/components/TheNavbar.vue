@@ -1,12 +1,12 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary p-0">
+    <nav class="navbar navbar-expand navbar-dark bg-primary p-0">
         <div class="container">
             <router-link class="navbar-brand" to="/">
                 <img id="logo" src="../assets/logo-white.png" alt="Logo" height="" />
             </router-link>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto fs-4">
-                    <li class="nav-item">
+                    <li class="nav-item d-none d-md-block">
                         <router-link class="nav-link active fw-bold" aria-current="page" to="/"
                             >Cloudless' Blog</router-link
                         >

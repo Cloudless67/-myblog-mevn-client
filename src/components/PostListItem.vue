@@ -3,7 +3,7 @@
         <router-link :to="`/post/${encodeURI(post.url)}`">
             <small class="float-end">조회 {{ post.views }} | 댓글 {{ post.repliesNum }}</small>
             <h4 class="fw-bold text-black">{{ post.title }}</h4>
-            <p class="text-black-50 lh-sm m-0">{{ preview }}</p>
+            <p class="text-black-50 lh-sm m-0 overflow-hidden">{{ preview }}</p>
         </router-link>
     </div>
 </template>
