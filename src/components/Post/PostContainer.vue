@@ -4,20 +4,13 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
 import PostHeader from '@/components/Post/PostHeader.vue';
+import { defineComponent, PropType } from 'vue';
 import { Post } from '@/types';
 
-@Options({
+export default defineComponent({
     name: 'Post Container',
-    components: {
-        PostHeader,
-    },
-    props: {
-        post: Object,
-    },
-})
-export default class PostContainer extends Vue {
-    post!: Post;
-}
+    components: { PostHeader },
+    props: { post: Object as PropType<Post> },
+});
 </script>

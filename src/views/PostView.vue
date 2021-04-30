@@ -33,6 +33,25 @@ export default defineComponent({
     methods: {
         setPost(post: Post) {
             this.post = post;
+            document.title = post.title;
+
+            this.setMetaContent('title', post.title);
+
+            const firstHeading = post.body.indexOf('#');
+            const end = Math.min(firstHeading > 0 ? firstHeading : 160, 160);
+            const description = post.body.substring(0, end);
+            this.setMetaContent('description', description);
+        },
+        setMetaContent(name: string, content: string) {
+            const metaTag = document.querySelector(`meta[name=${name}]`);
+            if (metaTag) {
+                metaTag.setAttribute('content', content);
+            } else {
+                const meta = document.createElement('meta');
+                meta.setAttribute('name', name);
+                meta.setAttribute('content', content);
+                document.head.appendChild(meta);
+            }
         },
         async editPost() {
             this.$router.push({ path: '/update' });

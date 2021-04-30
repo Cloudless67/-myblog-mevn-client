@@ -66,6 +66,7 @@ export default defineComponent({
     },
     async beforeRouteEnter(to, from, next) {
         const res = await getPosts(buildPath(to));
+        document.title = 'Cloudless의 블로그';
         next((vm: any) => vm.setPosts(res));
     },
     async beforeRouteUpdate(to, from, next) {
