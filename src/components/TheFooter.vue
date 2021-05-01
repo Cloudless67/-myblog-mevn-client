@@ -12,8 +12,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from 'vue-class-component';
+import { defineComponent } from 'vue';
 
-@Options({ name: 'Footer' })
-export default class MainFooter extends Vue {}
+export default defineComponent({ name: 'Footer' });
 </script>

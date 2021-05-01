@@ -1,5 +1,5 @@
 <template>
-    <div class="main-inner justify-content-center text-start" v-if="post">
+    <div v-if="post">
         <post-container :post="post" />
         <div class="d-flex justify-content-end" v-if="login.value">
             <router-link :to="`/update/${encodeURI(post.url)}`" class="btn btn-primary me-3"

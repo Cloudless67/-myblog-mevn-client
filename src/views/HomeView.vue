@@ -1,30 +1,19 @@
 <template>
-    <div class="main-inner justify-content-center text-start">
+    <div>
         <h1 class="fw-bold">{{ title }}</h1>
-        <div class="post-list">
+        <ul class="list-unstyled">
             <post-list-item v-for="post in posts" :key="post._id" :post="post" />
-        </div>
-        <nav class="mt-3" v-if="maxIndex > 1">
-            <ul class="pagination justify-content-center">
-                <li
-                    class="page-item pointer-on-hover"
-                    :class="{ active: isSelected(i) }"
-                    v-for="i in maxIndex"
-                    :key="i"
-                    @click="changeIndex(i)"
-                >
-                    <span class="page-link">{{ i }}</span>
-                </li>
-            </ul>
-        </nav>
+        </ul>
+        <post-list-pagination :maxIndex="maxIndex" v-if="maxIndex > 1" />
     </div>
 </template>
 
 <script lang="ts">
-import { RouteLocationNormalized } from 'node_modules/vue-router/dist/vue-router';
 import { defineComponent } from 'vue';
-import PostListItem from '@/components/PostListItem.vue';
+import { RouteLocationNormalized } from 'vue-router';
 import { Post } from '@/types';
+import PostListItem from '@/components/PostListItem.vue';
+import PostListPagination from '@/components/PostListPagination.vue';
 
 type PostsRes = { posts: Post[]; totalLength: number };
 const maxPostPerPage = 10;
@@ -33,6 +22,7 @@ export default defineComponent({
     name: 'Home View',
     components: {
         PostListItem,
+        PostListPagination,
     },
     data() {
         return {
@@ -45,12 +35,6 @@ export default defineComponent({
             this.posts = posts;
             this.totalLength = totalLength;
         },
-        isSelected(i: number) {
-            return i == this.index;
-        },
-        async changeIndex(index: number) {
-            this.$router.push({ query: { page: index !== 1 ? index : undefined } });
-        },
     },
     computed: {
         title(): string {
@@ -59,9 +43,6 @@ export default defineComponent({
         },
         maxIndex(): number {
             return Math.ceil(this.totalLength! / maxPostPerPage);
-        },
-        index(): number {
-            return Number(this.$route.query.page || 1);
         },
     },
     async beforeRouteEnter(to, from, next) {
@@ -92,13 +73,3 @@ const buildPath = (to: RouteLocationNormalized): string => {
     return `/api${path}`;
 };
 </script>
-
-<style scoped>
-h3 {
-    margin: 40px 0 0;
-}
-
-.bg-gray-500 {
-    background: #eee;
-}
-</style>
