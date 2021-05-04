@@ -61,7 +61,6 @@ async function getPosts(url: string) {
 
     const posts: PostPreview[] = res.posts;
     const totalLength: number = res.totalLength;
-    console.log(posts);
     return { posts, totalLength };
 }
 

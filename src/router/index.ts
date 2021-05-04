@@ -1,40 +1,35 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import LoginView from '@/views/LoginView.vue';
-import WriteView from '@/views/WriteView.vue';
-import UpdateView from '@/views/UpdateView.vue';
-import HomeView from '@/views/HomeView.vue';
-import PostView from '@/views/PostView.vue';
 
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/login',
         name: 'Login',
-        component: LoginView,
+        component: () => import('@/views/LoginView.vue'),
     },
     {
         path: '/write',
         name: 'Write',
-        component: WriteView,
+        component: () => import('@/views/WriteView.vue'),
     },
     {
         path: '/update/:slug',
         name: 'Update',
-        component: UpdateView,
+        component: () => import('@/views/UpdateView.vue'),
     },
     {
         path: '/post/:title',
         name: 'Post',
-        component: PostView,
+        component: () => import('@/views/PostView.vue'),
     },
     {
         path: '/tags/:tag?',
         name: 'Tags View',
-        component: HomeView,
+        component: () => import('@/views/HomeView.vue'),
     },
     {
         path: '/:category?',
         name: 'Categories View',
-        component: HomeView,
+        component: () => import('@/views/HomeView.vue'),
     },
 ];
 
