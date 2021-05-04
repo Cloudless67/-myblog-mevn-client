@@ -56,20 +56,20 @@ export default defineComponent({
     },
 });
 
-const getPosts = async (url: string) => {
+async function getPosts(url: string) {
     const res = await fetch(url).then(res => res.json());
 
     const posts: Post[] = res.posts;
     const totalLength: number = res.totalLength;
     return { posts, totalLength };
-};
+}
 
-const buildPath = (to: RouteLocationNormalized): string => {
+function buildPath(to: RouteLocationNormalized): string {
     let path: string;
     if (to.params.category) path = '/posts' + to.fullPath;
     else if (to.params.tag) path = to.fullPath;
     else path = '/posts' + to.fullPath;
 
     return `/api${path}`;
-};
+}
 </script>
