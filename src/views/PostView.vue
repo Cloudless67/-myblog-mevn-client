@@ -74,7 +74,10 @@ export default defineComponent({
     },
     async beforeRouteEnter(to, from, next) {
         const baseUrl = `/api/post/${to.params.title}`;
-        const post: Post = await fetch(baseUrl).then(res => res.json());
+        const headers = localStorage.getItem('token')
+            ? { Authorization: `Bearer ${localStorage.getItem('token')}` }
+            : undefined;
+        const post: Post = await fetch(baseUrl, { headers }).then(res => res.json());
         next((vm: any) => vm.setPost(post));
     },
 });

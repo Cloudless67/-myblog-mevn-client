@@ -2,9 +2,7 @@
     <the-navbar @logout="logout()" />
     <section class="container my-4">
         <main-with-sidebar>
-            <transition name="fade" mode="out-in">
-                <router-view @login="login = true" />
-            </transition>
+            <router-view @login="login = true" />
         </main-with-sidebar>
     </section>
     <router-link v-if="login" to="/write" class="btn btn-primary" id="write-button"
