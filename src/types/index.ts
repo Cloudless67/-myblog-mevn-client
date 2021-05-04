@@ -11,6 +11,15 @@ export type Post = {
     replies: object[];
 };
 
+export type PostPreview = {
+    writtenTime: string;
+    views: number;
+    repliesNum: number;
+    title: string;
+    url: string;
+    preview: string;
+};
+
 export type Reply = {
     _id: string;
     writtenTime: string;

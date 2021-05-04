@@ -11,11 +11,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { RouteLocationNormalized } from 'vue-router';
-import { Post } from '@/types';
+import { PostPreview } from '@/types';
 import PostListItem from '@/components/PostListItem.vue';
 import PostListPagination from '@/components/PostListPagination.vue';
 
-type PostsRes = { posts: Post[]; totalLength: number };
+type PostsRes = { posts: PostPreview[]; totalLength: number };
 const maxPostPerPage = 10;
 
 export default defineComponent({
@@ -26,7 +26,7 @@ export default defineComponent({
     },
     data() {
         return {
-            posts: [] as Post[],
+            posts: [] as PostPreview[],
             totalLength: 0,
         };
     },
@@ -59,8 +59,9 @@ export default defineComponent({
 async function getPosts(url: string) {
     const res = await fetch(url).then(res => res.json());
 
-    const posts: Post[] = res.posts;
+    const posts: PostPreview[] = res.posts;
     const totalLength: number = res.totalLength;
+    console.log(posts);
     return { posts, totalLength };
 }
 
