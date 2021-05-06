@@ -20,6 +20,13 @@
                 <router-link to="/login" v-else>
                     <span class="text-white">login</span>
                 </router-link>
+                <a
+                    href="https://github.com/Cloudless67"
+                    target="_blank"
+                    class="text-white ms-3"
+                    rel="noopener noreferrer"
+                    ><i class="fab fa-github"></i
+                ></a>
             </div>
         </div>
     </nav>
