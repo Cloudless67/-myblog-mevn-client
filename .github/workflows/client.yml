@@ -25,4 +25,4 @@ jobs:
     - name: install dependencies
       run: npm install
     - name: build
-      run: npm run build
+      run: npx -- vue-cli-service build --dest='../../../../actions-runner/myblog/myblog-mevn-server/myblog-mevn-server/dist'
