@@ -41,6 +41,7 @@
 </template>
 
 <script lang="ts">
+import { Post } from '@/types';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -81,10 +82,12 @@ export default defineComponent({
     },
     async created() {
         try {
+            const url = this.$route.params.slug;
             this.categories = await fetch('/api/categories').then(res => res.json());
-            const post = await fetch(`/api/post/${this.$route.params.slug}`).then(res =>
-                res.json(),
-            );
+            const headers = localStorage.getItem('token')
+                ? { Authorization: `Bearer ${localStorage.getItem('token')}` }
+                : undefined;
+            const post: Post = await fetch(`/api/post/${url}`, { headers }).then(res => res.json());
             this.category = post.category;
             this.title = post.title;
             this.slug = post.url;
