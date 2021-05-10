@@ -7,9 +7,6 @@ const mutations = {
     logout(state: State) {
         state.login = false;
     },
-    setCategories(state: State, { categories }: { categories: string[] }) {
-        state.categories = categories;
-    },
 };
 
 export default mutations;
