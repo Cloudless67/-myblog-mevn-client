@@ -38,7 +38,6 @@ export default defineComponent({
     name: 'Reply Item',
     props: { reply: Object },
     emits: ['removed'],
-    inject: ['login'],
     data() {
         return {
             showPasswordForm: false,
@@ -47,7 +46,7 @@ export default defineComponent({
     },
     methods: {
         async onDeleteClick() {
-            const login = (this as any).login.value; // No way to let TS infer inject type
+            const login = this.$store.state.login;
             const postUrl = this.$route.params.title as string;
 
             if (login) {

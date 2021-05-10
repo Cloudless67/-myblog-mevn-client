@@ -1,7 +1,7 @@
 <template>
     <div v-if="post">
         <post-container :post="post" />
-        <div class="d-flex justify-content-end" v-if="login.value">
+        <div class="d-flex justify-content-end" v-if="login">
             <router-link :to="`/update/${encodeURI(post.url)}`" class="btn btn-primary me-3"
                 >수정</router-link
             >
@@ -24,11 +24,15 @@ export default defineComponent({
         PostContainer,
         Replies,
     },
-    inject: ['login'],
     data() {
         return {
             post: {} as Post,
         };
+    },
+    computed: {
+        login() {
+            return this.$store.state.login;
+        },
     },
     methods: {
         setPost(post: Post) {

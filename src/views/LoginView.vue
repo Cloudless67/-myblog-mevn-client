@@ -23,7 +23,6 @@ export default defineComponent({
             password: '',
         };
     },
-    emits: ['login'],
     methods: {
         async tryLogin() {
             const token = await fetch('/api/login', {
@@ -39,7 +38,7 @@ export default defineComponent({
 
             localStorage.setItem('token', token.token);
             this.$router.push({ path: '/' });
-            this.$emit('login');
+            this.$store.commit('login');
         },
     },
 });

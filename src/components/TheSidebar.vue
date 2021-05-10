@@ -10,7 +10,7 @@
             <i
                 id="edit-categories"
                 class="fas fa-cog ms-2 pointer-on-hover"
-                v-if="login.value"
+                v-if="login"
                 @click="toggleEditState"
             ></i>
         </div>
@@ -42,13 +42,17 @@ import { defineComponent } from 'vue';
 export default defineComponent({
     name: 'The Sidebar',
     components: { SidebarItem },
-    inject: ['login'],
     data() {
         return {
             categories: [] as any[],
             categoryToAdd: '',
             editing: false,
         };
+    },
+    computed: {
+        login() {
+            return this.$store.state.login;
+        },
     },
     methods: {
         toggleEditState() {

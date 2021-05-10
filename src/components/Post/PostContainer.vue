@@ -11,6 +11,11 @@ import { Post } from '@/types';
 export default defineComponent({
     name: 'Post Container',
     components: { PostHeader },
-    props: { post: Object as PropType<Post> },
+    props: {
+        post: {
+            type: Object as PropType<Post>,
+            required: true,
+        },
+    },
 });
 </script>
