@@ -32,6 +32,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { logout } from '@/types/mutations';
 
 export default defineComponent({
     name: 'Navbar',
@@ -45,7 +46,7 @@ export default defineComponent({
             if (localStorage.getItem('token')) {
                 localStorage.removeItem('token');
             }
-            this.$store.commit('logout');
+            this.$store.commit(logout);
         },
     },
 });

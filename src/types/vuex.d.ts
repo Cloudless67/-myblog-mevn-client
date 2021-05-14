@@ -6,10 +6,8 @@ declare module '@vue/runtime-core' {
     // declare your own store states
     interface State {
         login: boolean;
-    }
-
-    interface Commit {
-        login: boolean;
+        lastPost?: Post;
+        categories: string[];
     }
 
     // provide typings for `this.$store`

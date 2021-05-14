@@ -48,7 +48,7 @@ export default defineComponent({
     name: 'Update Route',
     data() {
         return {
-            categories: [],
+            categories: [] as string[],
             title: '',
             slug: '',
             category: '',
@@ -80,22 +80,14 @@ export default defineComponent({
             }
         },
     },
-    async created() {
-        try {
-            const url = this.$route.params.slug;
-            this.categories = await fetch('/api/categories').then(res => res.json());
-            const headers = localStorage.getItem('token')
-                ? { Authorization: `Bearer ${localStorage.getItem('token')}` }
-                : undefined;
-            const post: Post = await fetch(`/api/post/${url}`, { headers }).then(res => res.json());
-            this.category = post.category;
-            this.title = post.title;
-            this.slug = post.url;
-            this.body = post.body;
-            this.tags = post.tags.join(',');
-        } catch (error) {
-            alert(error.message);
-        }
+    created() {
+        this.categories = this.$store.state.categories!;
+        const post: Post = this.$store.state.lastPost!;
+        this.category = post.category;
+        this.title = post.title;
+        this.slug = post.url;
+        this.body = post.body;
+        this.tags = post.tags.join(',');
     },
 });
 </script>

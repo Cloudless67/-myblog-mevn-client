@@ -16,6 +16,7 @@ import { defineComponent } from 'vue';
 import TheNavbar from '@/components/TheNavbar.vue';
 import MainWithSidebar from '@/components/MainWithSidebar.vue';
 import TheFooter from '@/components/TheFooter.vue';
+import { login, logout, setCategories } from '@/types/mutations';
 
 export default defineComponent({
     name: 'App',
@@ -29,11 +30,17 @@ export default defineComponent({
             return this.$store.state.login;
         },
     },
-    mounted() {
+    async mounted() {
         if (localStorage.getItem('token')) {
-            this.$store.commit('login');
+            this.$store.commit(login);
         } else {
-            this.$store.commit('logout');
+            this.$store.commit(logout);
+        }
+        try {
+            const categories = await fetch('/api/categories').then(res => res.json());
+            this.$store.commit(setCategories, categories);
+        } catch (e) {
+            alert(e.message);
         }
     },
 });

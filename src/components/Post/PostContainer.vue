@@ -7,6 +7,7 @@
 import PostHeader from '@/components/Post/PostHeader.vue';
 import { defineComponent, PropType } from 'vue';
 import { Post } from '@/types';
+import { setLastPost } from '@/types/mutations';
 
 export default defineComponent({
     name: 'Post Container',
@@ -15,6 +16,14 @@ export default defineComponent({
         post: {
             type: Object as PropType<Post>,
             required: true,
+        },
+    },
+    watch: {
+        post() {
+            if (this.post) {
+                if (this.$store.state.login) this.$store.commit(setLastPost, this.post);
+                this.$nextTick(() => {});
+            }
         },
     },
 });
