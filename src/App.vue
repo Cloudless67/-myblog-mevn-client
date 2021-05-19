@@ -47,6 +47,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+@import '@/scss/custom';
+
 #app {
     height: 100vh;
     display: flex;
