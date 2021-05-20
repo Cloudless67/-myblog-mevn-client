@@ -109,7 +109,7 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 #logo {
     width: 3rem;
     height: 3rem;
