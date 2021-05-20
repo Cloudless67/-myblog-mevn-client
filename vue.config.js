@@ -18,18 +18,11 @@ module.exports = {
         },
     },
     outputDir: '../server/dist/public',
-    css: {
-        loaderOptions: {
-            css: {
-                // options here will be passed to css-loader
-            },
-        },
-    },
     configureWebpack: {
         plugins: [
             new PurgecssPlugin({
                 paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
-                only: ['bundle'],
+                only: ['bundle', 'vendor'],
             }),
         ],
     },

@@ -8,6 +8,7 @@ import PostHeader from '@/components/Post/PostHeader.vue';
 import { defineComponent, PropType } from 'vue';
 import { Post } from '@/types';
 import { setLastPost } from '@/types/mutations';
+import '@/assets/prism.css';
 
 export default defineComponent({
     name: 'Post Container',
