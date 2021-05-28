@@ -3,9 +3,9 @@ $primary: #1976d2;
 $light: #63a4ff;
 $dark: #004ba0;
 
-$font-family-sans-serif: system-ui, -apple-system, 'Segoe UI', 맑은고딕, Roboto, 'Helvetica Neue',
-    Arial, 'Noto Sans', 'Liberation Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol', 'Noto Color Emoji';
+$font-family-sans-serif: 'Nanum Gothic', system-ui, -apple-system, 'Segoe UI', 맑은고딕, Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
 // Configuration
 @import '../../node_modules/bootstrap/scss/functions';
