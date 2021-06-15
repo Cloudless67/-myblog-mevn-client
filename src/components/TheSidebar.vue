@@ -44,7 +44,7 @@ export default defineComponent({
     components: { SidebarItem },
     data() {
         return {
-            categories: [] as any[],
+            categories: [] as (string | string[])[],
             categoryToAdd: '',
             editing: false,
         };
@@ -58,7 +58,7 @@ export default defineComponent({
         toggleEditState() {
             this.editing = !this.editing;
         },
-        onStructureChange(res: any[]) {
+        onStructureChange(res: (string | string[])[]) {
             this.categories = res;
         },
         async addCategory() {

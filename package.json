@@ -5,6 +5,7 @@
     "scripts": {
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
+        "build:report": "vue-cli-service build --report",
         "style": "sass src/scss/custom.scss public/bootstrap.css --style=compressed",
         "style:watch": "sass src/scss/custom.scss public/bootstrap.css --watch --style=compressed",
         "test:unit": "vue-cli-service test:unit"

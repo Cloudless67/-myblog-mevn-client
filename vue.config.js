@@ -22,7 +22,7 @@ module.exports = {
         plugins: [
             new PurgecssPlugin({
                 paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
-                only: ['bundle', 'vendor'],
+                safelist: () => [/v-/],
             }),
         ],
     },
