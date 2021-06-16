@@ -32,7 +32,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { DateTime } from 'luxon';
+import dayjs, { Dayjs } from 'dayjs';
 
 export default defineComponent({
     name: 'Reply Item',
@@ -72,13 +72,15 @@ export default defineComponent({
             }
         },
         formatDateTime(dateTime: string) {
-            const dt = DateTime.fromISO(dateTime);
-            const now = DateTime.now();
+            const dt = dayjs(dateTime);
+            const now = dayjs();
+            const isSameDay = (day1: Dayjs, day2: Dayjs) =>
+                day1.startOf('date').isSame(day2.startOf('date'));
 
-            if (dt.day === now.day && dt.month === now.month && dt.year === now.year) {
-                return dt.toLocaleString(DateTime.TIME_24_SIMPLE);
+            if (isSameDay(dt, now)) {
+                return dt.format('HH:mm');
             } else {
-                return dt.toLocaleString();
+                return dt.format('MM.DD');
             }
         },
     },

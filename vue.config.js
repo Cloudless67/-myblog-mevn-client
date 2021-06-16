@@ -22,6 +22,7 @@ module.exports = {
         plugins: [
             new PurgecssPlugin({
                 paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
+                //  Should not remove data-v- style selectors created by Vue
                 safelist: () => [/v-/],
             }),
         ],

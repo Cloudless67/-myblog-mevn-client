@@ -20,7 +20,7 @@
 import { defineComponent, PropType } from 'vue';
 import PostTags from '@/components/Post/PostTags.vue';
 import { Post } from '@/types';
-import { DateTime } from 'luxon';
+import dayjs from 'dayjs';
 
 export default defineComponent({
     name: 'Post Header',
@@ -28,7 +28,7 @@ export default defineComponent({
     props: { post: Object as PropType<Post> },
     methods: {
         formatDateTime(dateTime: string) {
-            return DateTime.fromISO(dateTime).toLocaleString();
+            return dayjs(dateTime).format('YYYY. MM. DD');
         },
     },
 });
