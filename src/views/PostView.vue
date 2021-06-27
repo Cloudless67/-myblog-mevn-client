@@ -16,6 +16,7 @@
 import { defineComponent } from 'vue';
 import PostContainer from '@/components/Post/PostContainer.vue';
 import Replies from '@/components/Post/ReplyList.vue';
+import { deletePost, getPost } from '@/lib/httpClient';
 import { Post } from '@/types';
 
 export default defineComponent({
@@ -62,13 +63,7 @@ export default defineComponent({
         },
         async deletePost() {
             try {
-                const res = await fetch(`/api/post/${this.post.url}`, {
-                    method: 'DELETE',
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`,
-                    },
-                });
-
+                const res = await deletePost(this.post.url);
                 if (res.status == 200) this.$router.push({ path: '/' });
                 else alert(`${res.status}: ${res.statusText}`);
             } catch (error) {
@@ -77,11 +72,7 @@ export default defineComponent({
         },
     },
     async beforeRouteEnter(to, from, next) {
-        const baseUrl = `/api/post/${to.params.title}`;
-        const headers = localStorage.getItem('token')
-            ? { Authorization: `Bearer ${localStorage.getItem('token')}` }
-            : undefined;
-        const post: Post = await fetch(baseUrl, { headers }).then(res => res.json());
+        const post: Post = await getPost(to.params.title as string);
         next((vm: any) => vm.setPost(post));
     },
 });

@@ -27,3 +27,17 @@ export type Reply = {
     body: string;
     replies: Reply[];
 };
+
+export type postPostData = {
+    category: string;
+    title: string;
+    url: string;
+    body: string;
+    tags: string;
+};
+
+export type putPostData = {
+    category: string;
+    body: string;
+    tags: string;
+};

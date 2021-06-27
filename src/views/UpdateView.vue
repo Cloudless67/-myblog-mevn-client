@@ -3,7 +3,7 @@
         <div class="row mb-2">
             <label for="write-category" class="col-sm-1 form-label">Category</label>
             <div class="col-sm-11">
-                <select id="write-category" class="form-select" v-model="category">
+                <select id="write-category" class="form-select" v-model="postData.category">
                     <option v-for="category in categories" :key="category" :value="category">{{
                         category
                     }}</option>
@@ -13,25 +13,36 @@
         <div class="row mb-2">
             <label for="write-title" class="col-sm-1 form-label">Title</label>
             <div class="col-sm-11">
-                <input type="text" id="write-title" class="form-control" v-model="title" />
+                <input type="text" id="write-title" class="form-control" v-model="postData.title" />
             </div>
         </div>
         <div class="row mb-2">
-            <label for="write-slug" class="col-sm-1 form-label">URL</label>
+            <label for="write-url" class="col-sm-1 form-label">URL</label>
             <div class="col-sm-11">
-                <input type="text" id="write-slug" class="form-control" disabled v-model="slug" />
+                <input
+                    type="text"
+                    id="write-url"
+                    class="form-control"
+                    disabled
+                    v-model="postData.url"
+                />
             </div>
         </div>
         <div class="row align-items-start mb-2">
-            <label for="write-slug" class="col-sm-1 form-label">Body</label>
+            <label for="write-url" class="col-sm-1 form-label">Body</label>
             <div class="col-sm-11">
-                <textarea id="write-body" class="form-control" rows="10" v-model="body"></textarea>
+                <textarea
+                    id="write-body"
+                    class="form-control"
+                    rows="10"
+                    v-model="postData.body"
+                ></textarea>
             </div>
         </div>
         <div class="row mb-2">
             <label for="write-tags" class="col-sm-1 form-label">Tags</label>
             <div class="col-sm-11">
-                <input type="text" id="write-tags" class="form-control" v-model="tags" />
+                <input type="text" id="write-tags" class="form-control" v-model="postData.tags" />
             </div>
         </div>
         <div class="d-flex justify-content-end">
@@ -41,6 +52,7 @@
 </template>
 
 <script lang="ts">
+import { putPost } from '@/lib/httpClient';
 import { Post } from '@/types';
 import { defineComponent } from 'vue';
 
@@ -49,30 +61,23 @@ export default defineComponent({
     data() {
         return {
             categories: [] as string[],
-            title: '',
-            slug: '',
-            category: '',
-            body: '',
-            tags: '',
+            postData: {
+                category: '',
+                title: '',
+                url: '',
+                body: '',
+                tags: '',
+            },
         };
     },
     methods: {
         async submit() {
-            const postData = {
-                category: this.category,
-                body: this.body,
-                tags: this.tags,
-            };
-
             try {
-                const res = await fetch(`/api/post/${this.$route.params.slug}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${localStorage.getItem('token')}`,
-                    },
-                    body: JSON.stringify(postData),
-                }).then(x => x.json());
+                const res = await putPost(this.$route.params.slug as string, {
+                    category: this.postData.category,
+                    body: this.postData.body,
+                    tags: this.postData.tags,
+                });
 
                 this.$router.push({ path: `/post/${encodeURI(res.url)}` });
             } catch (error) {
@@ -83,11 +88,7 @@ export default defineComponent({
     created() {
         this.categories = this.$store.state.categories!;
         const post: Post = this.$store.state.lastPost!;
-        this.category = post.category;
-        this.title = post.title;
-        this.slug = post.url;
-        this.body = post.body;
-        this.tags = post.tags.join(',');
+        this.postData = { ...post, tags: post.tags.join(',') };
     },
 });
 </script>

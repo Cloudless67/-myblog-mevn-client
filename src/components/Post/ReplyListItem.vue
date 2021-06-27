@@ -32,6 +32,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { deleteReply, forceDeleteReply } from '@/lib/httpClient';
 import dayjs, { Dayjs } from 'dayjs';
 
 export default defineComponent({
@@ -73,33 +74,15 @@ export default defineComponent({
         },
         formatDateTime(dateTime: string) {
             const dt = dayjs(dateTime);
-            const now = dayjs();
-            const isSameDay = (day1: Dayjs, day2: Dayjs) =>
-                day1.startOf('date').isSame(day2.startOf('date'));
 
-            if (isSameDay(dt, now)) {
-                return dt.format('HH:mm');
-            } else {
-                return dt.format('MM.DD');
-            }
+            if (this.isSameDay(dt, dayjs())) return dt.format('HH:mm');
+            else return dt.format('MM.DD');
+        },
+        isSameDay(day1: Dayjs, day2: Dayjs) {
+            return day1.startOf('date').isSame(day2.startOf('date'));
         },
     },
 });
-
-async function forceDeleteReply(postUrl: string, replyID: string) {
-    return await fetch(`/api/post/${postUrl}/reply/${replyID}`, {
-        method: 'DELETE',
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-    });
-}
-
-async function deleteReply(postUrl: string, replyID: string, password: string) {
-    return await fetch(`/api/post/${postUrl}/reply/${replyID}`, {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
-    });
-}
 </script>
 
 <style lang="scss" scoped>
