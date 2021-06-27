@@ -1,8 +1,8 @@
 <template>
     <div
         :class="{ 'pointer-on-hover': editing }"
-        @dragstart="dragStart"
-        @drop="drop($event)"
+        @dragstart.stop="dragStart($event.dataTransfer)"
+        @drop.stop="drop($event.dataTransfer)"
         @dragenter.prevent
         @dragover.prevent
         :draggable="editing"
@@ -38,6 +38,7 @@
 
 <script lang="ts">
 import ToggleButton from '@/components/ToggleButton.vue';
+import { putCategory } from '@/lib/httpClient';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -55,28 +56,19 @@ export default defineComponent({
         };
     },
     methods: {
-        dragStart(event: Event) {
-            event.stopPropagation();
-            (event as DragEventInit).dataTransfer!.dropEffect = 'move';
-            (event as DragEventInit).dataTransfer!.effectAllowed = 'move';
-            (event as DragEventInit).dataTransfer!.setData('category', this.name!);
+        dragStart(dataTransfer: DataTransfer) {
+            dataTransfer.dropEffect = 'move';
+            dataTransfer.effectAllowed = 'move';
+            dataTransfer.setData('category', this.name!);
             console.log(`Dragging ${this.name}`);
         },
-        async drop(event: Event) {
-            event.stopPropagation();
-            const droppedCategory = (event as DragEventInit).dataTransfer!.getData('category');
+        async drop(dataTransfer: DataTransfer) {
+            const droppedCategory = dataTransfer.getData('category');
             if (droppedCategory === this.name) return;
             console.log(`${droppedCategory} dropped to ${this.name}`);
-            try {
-                const res = await fetch(`/api/category/${droppedCategory}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${localStorage.getItem('token')}`,
-                    },
-                    body: JSON.stringify({ parent: this.name }),
-                }).then(res => res.json());
 
+            try {
+                const res = await putCategory(droppedCategory, this.name);
                 this.$emit('structureChanged', res);
             } catch (error) {
                 alert(error.message);

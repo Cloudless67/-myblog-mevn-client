@@ -10,7 +10,7 @@
             <i
                 id="edit-categories"
                 class="fas fa-cog ms-2 pointer-on-hover"
-                v-if="login"
+                v-if="$store.state.login"
                 @click="toggleEditState"
             ></i>
         </div>
@@ -28,7 +28,7 @@
         </li>
         <form class="text-end" v-if="editing">
             <input class="form-control" type="text" v-model="categoryToAdd" />
-            <button class="btn btn-primary" type="submit" @click.prevent="addCategory">
+            <button class="btn btn-primary" type="submit" @click.prevent="tryAddCategory">
                 추가
             </button>
         </form>
@@ -38,42 +38,30 @@
 <script lang="ts">
 import SidebarItem from '@/components/SidebarItem.vue';
 import { defineComponent } from 'vue';
+import { postCategory, putCategory } from '@/lib/httpClient';
+
+type Category = string | string[];
 
 export default defineComponent({
     name: 'The Sidebar',
     components: { SidebarItem },
     data() {
         return {
-            categories: [] as (string | string[])[],
+            categories: [] as Category[],
             categoryToAdd: '',
             editing: false,
         };
-    },
-    computed: {
-        login() {
-            return this.$store.state.login;
-        },
     },
     methods: {
         toggleEditState() {
             this.editing = !this.editing;
         },
-        onStructureChange(res: (string | string[])[]) {
+        onStructureChange(res: Category[]) {
             this.categories = res;
         },
-        async addCategory() {
-            const newCategory = { name: this.categoryToAdd };
-
+        async tryAddCategory() {
             try {
-                const res = await fetch('/api/category', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${localStorage.getItem('token')}`,
-                    },
-                    body: JSON.stringify(newCategory),
-                });
-
+                const res = await postCategory(this.categoryToAdd);
                 if (res.status == 200) {
                     this.categories.push(this.categoryToAdd);
                     this.categoryToAdd = '';
@@ -88,14 +76,7 @@ export default defineComponent({
             event.stopPropagation();
             const droppedCategory = (event as DragEventInit).dataTransfer!.getData('category');
             try {
-                const res = await fetch(`/api/category/${droppedCategory}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${localStorage.getItem('token')}`,
-                    },
-                }).then(res => res.json());
-
+                const res = await putCategory(droppedCategory);
                 this.onStructureChange(res);
             } catch (error) {
                 alert(error.message);
