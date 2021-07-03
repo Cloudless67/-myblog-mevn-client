@@ -12,15 +12,14 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/runtime-core';
-import { Options, Vue } from 'vue-class-component';
 
-@Options({
+export default defineComponent({
     name: 'Post Tags',
     props: {
-        tags: Array,
+        tags: {
+            type: Array,
+            required: true,
+        },
     },
-})
-export default class PostTags extends Vue {
-    tags!: string[];
-}
+});
 </script>
