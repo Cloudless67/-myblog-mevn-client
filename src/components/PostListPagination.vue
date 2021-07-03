@@ -2,7 +2,7 @@
     <nav class="mt-3">
         <ul class="pagination justify-content-center">
             <li
-                class="page-item pointer-on-hover"
+                class="page-item hover-cursor-pointer"
                 :class="{ active: isSelected(i) }"
                 v-for="i in maxIndex"
                 :key="i"

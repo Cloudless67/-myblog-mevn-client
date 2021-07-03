@@ -1,6 +1,7 @@
 <template>
     <ul
-        class="sidebar flex-column text-start list-unstyled"
+        id="sidebar"
+        class="flex-column text-start list-unstyled"
         @drop="drop($event)"
         @dragenter.prevent
         @dragover.prevent
@@ -9,7 +10,7 @@
             <span class="ms-3 fs-3 fw-bold">게시판</span>
             <i
                 id="edit-categories"
-                class="fas fa-cog ms-2 pointer-on-hover"
+                class="fas fa-cog ms-2 hover-cursor-pointer"
                 v-if="$store.state.login"
                 @click="toggleEditState"
             ></i>
@@ -90,13 +91,8 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
-#logo {
-    width: 3rem;
-    height: 3rem;
-}
-
-.sidebar {
+<style>
+#sidebar {
     height: fit-content;
 }
 </style>

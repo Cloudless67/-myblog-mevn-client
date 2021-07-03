@@ -63,6 +63,11 @@ export default defineComponent({
     }
 }
 
+#logo {
+    width: 3rem;
+    height: 3rem;
+}
+
 img {
     max-width: 100%;
 }

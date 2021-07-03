@@ -1,6 +1,6 @@
 <template>
     <div
-        :class="{ 'pointer-on-hover': editing }"
+        :class="{ 'hover-cursor-pointer': editing }"
         @dragstart.stop="dragStart($event.dataTransfer)"
         @drop.stop="drop($event.dataTransfer)"
         @dragenter.prevent
@@ -91,6 +91,7 @@ export default defineComponent({
 ul,
 li {
     position: relative;
+
     &::before {
         content: '';
         display: block;
@@ -153,11 +154,5 @@ li {
 .slide-leave-to {
     overflow: hidden;
     max-height: 0;
-}
-
-.fa-edit {
-    &:hover {
-        cursor: pointer;
-    }
 }
 </style>

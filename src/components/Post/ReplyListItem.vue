@@ -3,7 +3,7 @@
         <h6 class="fw-bold d-inline-block me-1">{{ reply.nickname }}</h6>
         <time class="reply-time text-black-50">{{ formatDateTime(reply.writtenTime) }}</time>
         <span class="position-relative float-end">
-            <i class="fas fa-trash-alt pointer-on-hover" @click="onDeleteClick"></i>
+            <i class="fas fa-trash-alt hover-cursor-pointer" @click="onDeleteClick"></i>
             <form class="position-absolute border shadow p-1" v-show="showPasswordForm">
                 <div>
                     <div class="input-group">

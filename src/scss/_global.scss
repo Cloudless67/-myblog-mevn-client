@@ -56,8 +56,6 @@ article {
     }
 }
 
-.pointer-on-hover {
-    &:hover {
-        cursor: pointer;
-    }
+.hover-cursor-pointer:hover {
+    cursor: pointer;
 }
