@@ -1,28 +1,26 @@
 <template>
     <div class="reply p-1 mb-2">
         <h6 class="fw-bold d-inline-block me-1">{{ reply.nickname }}</h6>
-        <time class="reply-time text-black-50">{{ formatDateTime(reply.writtenTime) }}</time>
+        <time class="reply-time">{{ formatDateTime(reply.writtenTime) }}</time>
         <span class="position-relative float-end">
             <i class="fas fa-trash-alt hover-cursor-pointer" @click="onDeleteClick"></i>
             <form class="position-absolute border shadow p-1" v-show="showPasswordForm">
-                <div>
-                    <div class="input-group">
-                        <input
-                            type="password"
-                            class="form-control"
-                            placeholder="Password"
-                            aria-label="Reply password"
-                            aria-describedby="password of reply"
-                            v-model="password"
-                        />
-                        <button
-                            class="btn btn-primary"
-                            type="submit"
-                            @click.prevent="onReplyPasswordSubmit"
-                        >
-                            삭제
-                        </button>
-                    </div>
+                <div class="input-group">
+                    <input
+                        type="password"
+                        class="form-control"
+                        placeholder="Password"
+                        aria-label="Reply password"
+                        aria-describedby="password of reply"
+                        v-model="password"
+                    />
+                    <button
+                        class="btn btn-primary"
+                        type="submit"
+                        @click.prevent="onReplyPasswordSubmit"
+                    >
+                        삭제
+                    </button>
                 </div>
             </form>
         </span>
@@ -31,13 +29,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import { deleteReply, forceDeleteReply } from '@/lib/httpClient';
 import dayjs, { Dayjs } from 'dayjs';
+import { Reply } from '@/types';
 
 export default defineComponent({
     name: 'Reply Item',
-    props: { reply: Object },
+    props: { reply: { type: Object as PropType<Reply>, required: true } },
     emits: ['removed'],
     data() {
         return {
@@ -52,7 +51,7 @@ export default defineComponent({
 
             if (login) {
                 if (window.confirm('Delete reply?')) {
-                    const res = await forceDeleteReply(postUrl, this.reply!._id);
+                    const res = await forceDeleteReply(postUrl, this.reply._id);
                     this.handleResponse(res);
                 }
             } else {
@@ -61,13 +60,13 @@ export default defineComponent({
         },
         async onReplyPasswordSubmit() {
             const postUrl = this.$route.params.title as string;
-            const res = await deleteReply(postUrl, this.reply!._id, this.password);
+            const res = await deleteReply(postUrl, this.reply._id, this.password);
 
             this.handleResponse(res);
         },
         async handleResponse(res: Response) {
             if (res.status === 200) {
-                this.$emit('removed', this.reply!._id);
+                this.$emit('removed', this.reply._id);
             } else {
                 alert(await res.text());
             }

@@ -21,9 +21,8 @@ export default defineComponent({
     },
     watch: {
         post() {
-            if (this.post) {
-                if (this.$store.state.login) this.$store.commit(setLastPost, this.post);
-                this.$nextTick(() => {});
+            if (this.post && this.$store.state.login) {
+                this.$store.commit(setLastPost, this.post);
             }
         },
     },

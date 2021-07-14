@@ -20,10 +20,7 @@ const maxPostPerPage = 10;
 
 export default defineComponent({
     name: 'Home View',
-    components: {
-        PostListItem,
-        PostListPagination,
-    },
+    components: { PostListItem, PostListPagination },
     data() {
         return {
             posts: [] as PostPreview[],
@@ -55,7 +52,7 @@ export default defineComponent({
         next();
     },
 });
-
+ 
 async function getPosts(url: string) {
     const res = await fetch(url).then(res => res.json());
 

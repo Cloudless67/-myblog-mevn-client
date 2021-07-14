@@ -14,7 +14,7 @@
                     type="text"
                     id="reply-nickname"
                     placeholder="닉네임"
-                    v-model="nickname"
+                    v-model="replyFormData.nickname"
                 />
                 <input
                     class="col-sm-6 form-control"
@@ -22,11 +22,16 @@
                     id="reply-password"
                     placeholder="password"
                     required
-                    v-model="password"
+                    v-model="replyFormData.password"
                 />
             </div>
             <div class="input-group">
-                <textarea class="form-control" id="reply-body" rows="3" v-model="body"></textarea>
+                <textarea
+                    class="form-control"
+                    id="reply-body"
+                    rows="3"
+                    v-model="replyFormData.body"
+                ></textarea>
                 <button class="btn btn-primary" type="submit" @click.prevent="submitReply()">
                     등록
                 </button>
@@ -44,40 +49,41 @@ export default defineComponent({
     name: 'Replies',
     components: { ReplyListItem },
     props: {
-        replies: Array as PropType<Reply[]>,
+        replies: { type: Array as PropType<Reply[]>, required: true },
     },
     data() {
         return {
-            nickname: '',
-            password: '',
-            body: '',
+            replyFormData: {
+                nickname: '',
+                password: '',
+                body: '',
+            },
         };
     },
     methods: {
         async submitReply() {
             const url = `/api${this.$route.fullPath}/reply`;
-            const res = await fetch(url, {
+            const newReply = await fetch(url, {
                 method: 'POST',
                 mode: 'cors',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    nickname: this.nickname,
-                    password: this.password,
-                    body: this.body,
-                }),
-            }).then(x => x.json());
+                body: JSON.stringify(this.replyFormData),
+            }).then(res => res.json());
 
-            this.password = '';
-            this.body = '';
-            this.replies!.push(res);
+            this.resetSubmitForm();
+            this.replies.push(newReply);
         },
         removeReply(id: string) {
-            this.replies?.splice(
-                this.replies.findIndex((x: Reply) => x._id === id),
+            this.replies.splice(
+                this.replies.findIndex(reply => reply._id === id),
                 1,
             );
+        },
+        resetSubmitForm() {
+            this.replyFormData.password = '';
+            this.replyFormData.body = '';
         },
     },
 });

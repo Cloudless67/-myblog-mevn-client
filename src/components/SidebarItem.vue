@@ -46,7 +46,7 @@ export default defineComponent({
     components: { ToggleButton },
     emits: ['structureChanged'],
     props: {
-        name: String,
+        name: { type: String, required: true },
         children: Array,
         editing: Boolean,
     },
@@ -59,7 +59,7 @@ export default defineComponent({
         dragStart(dataTransfer: DataTransfer) {
             dataTransfer.dropEffect = 'move';
             dataTransfer.effectAllowed = 'move';
-            dataTransfer.setData('category', this.name!);
+            dataTransfer.setData('category', this.name);
             console.log(`Dragging ${this.name}`);
         },
         async drop(dataTransfer: DataTransfer) {
@@ -106,7 +106,7 @@ ul {
         top: 0;
         bottom: 0;
         left: 8px;
-        border-left: 1px solid #000;
+        border-left: 1px solid var(--text-color);
     }
 }
 
@@ -116,7 +116,7 @@ li {
     &::before {
         width: 10px;
         height: 0;
-        border-top: 1px solid;
+        border-top: 1px solid var(--text-color);
         margin-top: -1px;
         top: 12px;
         left: -10px;
@@ -125,7 +125,7 @@ li {
     &:last-child::before {
         width: 10px;
         height: 100%;
-        border-left: 1px solid #fff;
+        border-left: 1px solid var(--bg-color);
     }
 }
 
@@ -133,7 +133,7 @@ li {
     top: 12px;
     bottom: -4px;
     left: -10px;
-    border-left: 1px solid #fff;
+    border-left: 1px solid var(--bg-color);
 }
 
 .slide-enter-active {

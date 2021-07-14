@@ -32,10 +32,15 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .btn {
     position: relative;
+    color: var(--text-color);
     width: 1em;
     height: 1em;
+
+    &:hover {
+        color: var(--text-color);
+    }
 }
 </style>
