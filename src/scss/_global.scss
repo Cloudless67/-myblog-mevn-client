@@ -42,6 +42,18 @@ body {
     }
 }
 
+.page-item.active .page-link {
+    background-color: var(--text-color);
+    color: var(--bs-primary);
+    border-color: var(--bs-primary);
+}
+
+.page-link {
+    background-color: var(--bs-primary);
+    color: var(--text-color);
+    border-color: var(--bs-primary);
+}
+
 a {
     color: inherit;
     text-decoration: none;
