@@ -25,6 +25,14 @@
                     rel="noopener noreferrer"
                     ><i class="fab fa-github"></i
                 ></a>
+                <div class="form-check form-switch ms-3">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="flexSwitchCheckChecked"
+                        checked
+                    />
+                </div>
             </div>
         </div>
     </nav>

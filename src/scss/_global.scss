@@ -54,6 +54,15 @@ body {
     border-color: var(--bs-primary);
 }
 
+.form-check-input {
+    transition: all 1s linear;
+
+    &:checked {
+        background-color: var(--bg-color);
+        border-color: var(--bg-color);
+    }
+}
+
 a {
     color: inherit;
     text-decoration: none;
