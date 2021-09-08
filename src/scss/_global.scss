@@ -19,41 +19,6 @@ body {
     background: var(--bs-dark) !important;
 }
 
-.btn-primary {
-    background-color: var(--bs-primary);
-    color: var(--text-color);
-    border-color: var(--bs-primary);
-
-    &:hover {
-        background-color: var(--text-color);
-        color: var(--bs-primary);
-        border-color: var(--text-color);
-    }
-}
-
-.btn-outline-primary {
-    color: var(--text-color);
-    border-color: var(--text-color);
-
-    &:hover {
-        background-color: var(--text-color);
-        color: var(--bs-primary);
-        border-color: var(--bs-primary);
-    }
-}
-
-.page-item.active .page-link {
-    background-color: var(--text-color);
-    color: var(--bs-primary);
-    border-color: var(--bs-primary);
-}
-
-.page-link {
-    background-color: var(--bs-primary);
-    color: var(--text-color);
-    border-color: var(--bs-primary);
-}
-
 .form-check-input {
     transition: all 1s linear;
 
@@ -88,5 +53,40 @@ a {
 
     img {
         filter: brightness(0.8) contrast(1.2);
+    }
+
+    .btn-primary {
+        background-color: var(--bs-primary);
+        color: var(--text-color);
+        border-color: var(--bs-primary);
+
+        &:hover {
+            background-color: var(--text-color);
+            color: var(--bs-primary);
+            border-color: var(--text-color);
+        }
+    }
+
+    .btn-outline-primary {
+        color: var(--text-color);
+        border-color: var(--text-color);
+
+        &:hover {
+            background-color: var(--text-color);
+            color: var(--bs-primary);
+            border-color: var(--bs-primary);
+        }
+    }
+
+    .page-item.active .page-link {
+        background-color: var(--text-color);
+        color: var(--bs-primary);
+        border-color: var(--bs-primary);
+    }
+
+    .page-link {
+        background-color: var(--bs-primary);
+        color: var(--text-color);
+        border-color: var(--bs-primary);
     }
 }
