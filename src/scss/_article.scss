@@ -41,5 +41,17 @@ article {
         padding-left: 1em;
         border-left: 3px solid #ccc;
     }
+
+    pre {
+        background: #eee;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    code {
+        background: #eee;
+        padding: 2px 5px;
+        border-radius: 5px;
+    }
 }
 /*! purgecss end ignore */
