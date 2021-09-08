@@ -54,4 +54,20 @@ article {
         border-radius: 5px;
     }
 }
+
+@media (prefers-color-scheme: dark) {
+    article {
+        pre {
+            background: #2d2d2d;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        code {
+            background: #2d2d2d;
+            padding: 2px 5px;
+            border-radius: 5px;
+        }
+    }
+}
 /*! purgecss end ignore */
