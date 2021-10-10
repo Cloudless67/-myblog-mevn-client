@@ -8,7 +8,7 @@ export type Post = {
     category: string;
     body: string;
     formattedBody: string;
-    replies: object[];
+    replies: Reply[];
 };
 
 export type PostPreview = {
