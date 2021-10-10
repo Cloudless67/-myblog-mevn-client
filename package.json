@@ -30,6 +30,7 @@
         "@vue/cli-service": "^4.5.13",
         "@vue/compiler-sfc": "^3.0.0",
         "@vue/test-utils": "^2.0.0-rc.6",
+        "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-vue": "^7.19.1",
         "purgecss-webpack-plugin": "^4.0.3",
         "sass": "^1.32.13",
