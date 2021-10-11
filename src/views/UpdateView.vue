@@ -6,9 +6,9 @@
             >
             <div class="col-sm-11">
                 <select id="write-category" v-model="postData.category" class="form-select">
-                    <option v-for="category in categories" :key="category" :value="category">{{
-                        category
-                    }}</option>
+                    <option v-for="category in categories" :key="category" :value="category">
+                        {{ category }}
+                    </option>
                 </select>
             </div>
         </div>

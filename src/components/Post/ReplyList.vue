@@ -70,7 +70,7 @@ export default defineComponent({
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(this.replyFormData),
-            }).then(res => res.json());
+            }).then((res) => res.json());
 
             this.resetSubmitForm();
             // eslint-disable-next-line vue/no-mutating-props
@@ -79,8 +79,8 @@ export default defineComponent({
         removeReply(id: string) {
             // eslint-disable-next-line vue/no-mutating-props
             this.replies.splice(
-                this.replies.findIndex(reply => reply._id === id),
-                1,
+                this.replies.findIndex((reply) => reply._id === id),
+                1
             );
         },
         resetSubmitForm() {

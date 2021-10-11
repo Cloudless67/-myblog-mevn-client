@@ -4,9 +4,9 @@
             <label for="write-category" class="col-sm-1 form-label">Category</label>
             <div class="col-sm-11">
                 <select id="write-category" v-model="postData.category" class="form-select">
-                    <option v-for="category in categories" :key="category" :value="category">{{
-                        category
-                    }}</option>
+                    <option v-for="category in categories" :key="category" :value="category">
+                        {{ category }}
+                    </option>
                 </select>
             </div>
         </div>
@@ -64,7 +64,7 @@ export default defineComponent({
         };
     },
     async created() {
-        this.categories = await fetch('/api/categories').then(res => res.json());
+        this.categories = await fetch('/api/categories').then((res) => res.json());
     },
     methods: {
         async submit() {

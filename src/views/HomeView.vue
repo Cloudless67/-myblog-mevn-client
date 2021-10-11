@@ -56,7 +56,7 @@ export default defineComponent({
 });
 
 async function getPosts(url: string) {
-    const res = await fetch(url).then(res => res.json());
+    const res = await fetch(url).then((res) => res.json());
 
     const posts: PostPreview[] = res.posts;
     const totalLength: number = res.totalLength;

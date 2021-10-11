@@ -37,7 +37,7 @@ export default defineComponent({
             this.$store.commit(logout);
         }
         try {
-            const categories = await fetch('/api/categories').then(res => res.json());
+            const categories = await fetch('/api/categories').then((res) => res.json());
             this.$store.commit(setCategories, categories);
         } catch (e) {
             alert(e.message);
