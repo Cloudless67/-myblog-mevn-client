@@ -1,27 +1,27 @@
 <template>
     <div
         :class="{ 'hover-cursor-pointer': editing }"
+        :draggable="editing"
         @dragstart.stop="dragStart($event.dataTransfer)"
         @drop.stop="drop($event.dataTransfer)"
         @dragenter.prevent
         @dragover.prevent
-        :draggable="editing"
     >
         <div>
             <toggle-button v-if="children" @toggled="toggle" />
-            <router-link :to="`/${name}`" v-if="!editing">{{ name }}</router-link>
+            <router-link v-if="!editing" :to="`/${name}`">{{ name }}</router-link>
             <span v-else>{{ name }}</span>
         </div>
         <transition name="slide">
             <ul
-                class="flex-column flex-nowrap text-start list-unstyled"
                 v-if="children"
                 v-show="pressed"
+                class="flex-column flex-nowrap text-start list-unstyled"
             >
                 <li
-                    class="nav-item nav-link p-0 mt-1"
                     v-for="category in children"
                     :key="category.name"
+                    class="nav-item nav-link p-0 mt-1"
                 >
                     <sidebar-item
                         class="branch"
@@ -42,14 +42,14 @@ import { putCategory } from '@/lib/httpClient';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-    name: 'Sidebar Item',
+    name: 'SidebarItem',
     components: { ToggleButton },
-    emits: ['structureChanged'],
     props: {
         name: { type: String, required: true },
-        children: Array,
+        children: { type: Array, required: true },
         editing: Boolean,
     },
+    emits: ['structureChanged'],
     data() {
         return {
             pressed: false,

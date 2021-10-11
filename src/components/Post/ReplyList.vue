@@ -1,5 +1,5 @@
 <template>
-    <section class="replies" v-if="replies">
+    <section v-if="replies" class="replies">
         <h3 class="fw-bold mb-3">Replies</h3>
         <reply-list-item
             v-for="reply in replies"
@@ -10,27 +10,27 @@
         <form>
             <div class="input-group">
                 <input
-                    class="col-sm-6 form-control"
-                    type="text"
                     id="reply-nickname"
-                    placeholder="닉네임"
                     v-model="replyFormData.nickname"
+                    class="col-sm-6 form-control"
+                    placeholder="닉네임"
+                    type="text"
                 />
                 <input
-                    class="col-sm-6 form-control"
-                    type="password"
                     id="reply-password"
-                    placeholder="password"
-                    required
                     v-model="replyFormData.password"
+                    class="col-sm-6 form-control"
+                    placeholder="password"
+                    type="password"
+                    required
                 />
             </div>
             <div class="input-group">
                 <textarea
-                    class="form-control"
                     id="reply-body"
-                    rows="3"
                     v-model="replyFormData.body"
+                    class="form-control"
+                    rows="3"
                 ></textarea>
                 <button class="btn btn-primary" type="submit" @click.prevent="submitReply()">
                     등록
@@ -42,7 +42,7 @@
 
 <script lang="ts">
 import ReplyListItem from '@/components/Post/ReplyListItem.vue';
-import { Reply } from '@/types';
+import { Reply } from '@/types/reply';
 import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
@@ -73,9 +73,11 @@ export default defineComponent({
             }).then(res => res.json());
 
             this.resetSubmitForm();
+            // eslint-disable-next-line vue/no-mutating-props
             this.replies.push(newReply);
         },
         removeReply(id: string) {
+            // eslint-disable-next-line vue/no-mutating-props
             this.replies.splice(
                 this.replies.findIndex(reply => reply._id === id),
                 1,

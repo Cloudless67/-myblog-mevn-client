@@ -12,7 +12,7 @@ import TheSidebar from '@/components/TheSidebar.vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-    name: 'Main with Sidebar',
+    name: 'MainWithSidebar',
     components: { TheSidebar },
 });
 </script>

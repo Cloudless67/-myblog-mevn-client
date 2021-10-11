@@ -9,13 +9,13 @@
 </template>
 
 <script lang="ts">
-import { PostPreview } from '@/types';
+import { PostPreview } from '@/types/post';
 import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
-    name: 'Post List Item',
+    name: 'PostListItem',
     props: {
-        post: Object as PropType<PostPreview>,
+        post: { type: Object as PropType<PostPreview>, required: true },
     },
 });
 </script>

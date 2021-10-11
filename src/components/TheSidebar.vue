@@ -9,26 +9,26 @@
         <div class="d-flex flex-row align-items-center">
             <span class="ms-3 fs-3 fw-bold">게시판</span>
             <i
+                v-if="$store.state.login"
                 id="edit-categories"
                 class="fas fa-cog ms-2 hover-cursor-pointer"
-                v-if="$store.state.login"
                 @click="toggleEditState"
             ></i>
         </div>
         <li
-            class="nav-item nav-link ps-3 py-0 my-1"
             v-for="category in categories"
-            :key="category.name || category"
+            :key="getCategoryName(category)"
+            class="nav-item nav-link ps-3 py-0 my-1"
         >
             <sidebar-item
-                :name="category.name || category"
-                :children="category.children"
+                :name="getCategoryName(category)"
+                :children="getCategoryChildren(category)"
                 :editing="editing"
                 @structureChanged="onStructureChange"
             />
         </li>
-        <form class="text-end" v-if="editing">
-            <input class="form-control" type="text" v-model="categoryToAdd" />
+        <form v-if="editing" class="text-end">
+            <input v-model="categoryToAdd" class="form-control" type="text" />
             <button class="btn btn-primary" type="submit" @click.prevent="tryAddCategory">
                 추가
             </button>
@@ -40,11 +40,10 @@
 import SidebarItem from '@/components/SidebarItem.vue';
 import { defineComponent } from 'vue';
 import { postCategory, putCategory } from '@/lib/httpClient';
-
-type Category = string | string[];
+import Category from '@/types/category';
 
 export default defineComponent({
-    name: 'The Sidebar',
+    name: 'TheSidebar',
     components: { SidebarItem },
     data() {
         return {
@@ -53,7 +52,17 @@ export default defineComponent({
             editing: false,
         };
     },
+    async created() {
+        const res = await fetch('/api/categories/structured');
+        this.categories = await res.json();
+    },
     methods: {
+        getCategoryName(category: Category) {
+            return typeof category === 'string' ? category : category.name;
+        },
+        getCategoryChildren(category: Category) {
+            return typeof category === 'string' ? [] : category.children;
+        },
         toggleEditState() {
             this.editing = !this.editing;
         },
@@ -75,7 +84,9 @@ export default defineComponent({
         },
         async drop(event: Event) {
             event.stopPropagation();
-            const droppedCategory = (event as DragEventInit).dataTransfer!.getData('category');
+            const droppedCategory = (event as DragEvent).dataTransfer?.getData('category');
+            if (droppedCategory === undefined) return;
+
             try {
                 const res = await putCategory(droppedCategory);
                 this.onStructureChange(res);
@@ -83,10 +94,6 @@ export default defineComponent({
                 alert(error.message);
             }
         },
-    },
-    async created() {
-        const res = await fetch('/api/categories/structured');
-        this.categories = await res.json();
     },
 });
 </script>

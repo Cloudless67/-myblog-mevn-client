@@ -1,4 +1,6 @@
-export type Post = {
+import { Reply } from './reply';
+
+type Post = {
     tags: string[];
     writtenTime: string;
     views: number;
@@ -11,7 +13,8 @@ export type Post = {
     replies: Reply[];
 };
 
-export type PostPreview = {
+type PostPreview = {
+    _id: string;
     writtenTime: string;
     views: number;
     repliesNum: number;
@@ -19,16 +22,7 @@ export type PostPreview = {
     url: string;
     preview: string;
 };
-
-export type Reply = {
-    _id: string;
-    writtenTime: string;
-    nickname: string;
-    body: string;
-    replies: Reply[];
-};
-
-export type postPostData = {
+type PostPostData = {
     category: string;
     title: string;
     url: string;
@@ -36,8 +30,10 @@ export type postPostData = {
     tags: string;
 };
 
-export type putPostData = {
+type PutPostData = {
     category: string;
     body: string;
     tags: string;
 };
+
+export { Post, PostPreview, PostPostData, PutPostData };

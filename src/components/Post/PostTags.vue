@@ -1,10 +1,10 @@
 <template>
     <div class="tags">
         <router-link
-            class="btn btn-outline-primary fs-6 rounded-pill mx-1 py-0"
-            :to="`/tags/${tag}`"
             v-for="tag in tags"
             :key="tag"
+            class="btn btn-outline-primary fs-6 rounded-pill mx-1 py-0"
+            :to="`/tags/${tag}`"
             >{{ tag }}</router-link
         >
     </div>
@@ -14,7 +14,7 @@
 import { defineComponent } from '@vue/runtime-core';
 
 export default defineComponent({
-    name: 'Post Tags',
+    name: 'PostTags',
     props: {
         tags: {
             type: Array,

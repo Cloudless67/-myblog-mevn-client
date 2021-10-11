@@ -4,15 +4,15 @@
         <time class="reply-time">{{ formatDateTime(reply.writtenTime) }}</time>
         <span class="position-relative float-end">
             <i class="fas fa-trash-alt hover-cursor-pointer" @click="onDeleteClick"></i>
-            <form class="position-absolute border shadow p-1" v-show="showPasswordForm">
+            <form v-show="showPasswordForm" class="position-absolute border shadow p-1">
                 <div class="input-group">
                     <input
-                        type="password"
+                        v-model="password"
                         class="form-control"
+                        type="password"
                         placeholder="Password"
                         aria-label="Reply password"
                         aria-describedby="password of reply"
-                        v-model="password"
                     />
                     <button
                         class="btn btn-primary"
@@ -32,10 +32,10 @@
 import { defineComponent, PropType } from 'vue';
 import { deleteReply, forceDeleteReply } from '@/lib/httpClient';
 import dayjs, { Dayjs } from 'dayjs';
-import { Reply } from '@/types';
+import { Reply } from '@/types/reply';
 
 export default defineComponent({
-    name: 'Reply Item',
+    name: 'ReplyItem',
     props: { reply: { type: Object as PropType<Reply>, required: true } },
     emits: ['removed'],
     data() {

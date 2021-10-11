@@ -19,13 +19,13 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 import PostTags from '@/components/Post/PostTags.vue';
-import { Post } from '@/types';
+import { Post } from '@/types/post';
 import dayjs from 'dayjs';
 
 export default defineComponent({
-    name: 'Post Header',
+    name: 'PostHeader',
     components: { PostTags },
-    props: { post: Object as PropType<Post> },
+    props: { post: { type: Object as PropType<Post>, required: true } },
     methods: {
         formatDateTime(dateTime: string) {
             return dayjs(dateTime).format('YYYY. MM. DD');

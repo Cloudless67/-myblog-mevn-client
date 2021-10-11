@@ -5,7 +5,7 @@
             <router-view />
         </main-with-sidebar>
     </section>
-    <router-link v-if="login" to="/write" class="btn btn-primary" id="write-button"
+    <router-link v-if="login" id="write-button" class="btn btn-primary" to="/write"
         >글쓰기</router-link
     >
     <the-footer />

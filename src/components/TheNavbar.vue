@@ -4,7 +4,7 @@
             <router-link class="navbar-brand" to="/">
                 <img id="logo" src="../assets/logo-white.png" alt="Logo" height="" />
             </router-link>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
                 <ul class="navbar-nav me-auto fs-4">
                     <li class="nav-item d-none d-md-block">
                         <router-link class="nav-link active fw-bold" aria-current="page" to="/"
@@ -14,8 +14,8 @@
                 </ul>
             </div>
             <div class="d-flex fs-5 text-white">
-                <a href="#" class="text-white" v-if="login" @click.prevent="logout">logout</a>
-                <router-link to="/login" v-else>
+                <a v-if="login" href="#" class="text-white" @click.prevent="logout">logout</a>
+                <router-link v-else to="/login">
                     <span class="text-white">login</span>
                 </router-link>
                 <a
@@ -27,9 +27,9 @@
                 ></a>
                 <div class="form-check form-switch ms-3">
                     <input
+                        id="flexSwitchCheckChecked"
                         class="form-check-input"
                         type="checkbox"
-                        id="flexSwitchCheckChecked"
                         checked
                     />
                 </div>
