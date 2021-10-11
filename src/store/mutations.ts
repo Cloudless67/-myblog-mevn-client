@@ -1,5 +1,5 @@
 import * as mutationTypes from '@/types/mutations';
-import { Post } from '@/types';
+import { Post } from '@/types/post';
 import { State } from '@vue/runtime-core';
 
 const mutations = {
