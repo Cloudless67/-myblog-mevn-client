@@ -24,6 +24,7 @@ export default defineComponent({
     async beforeRouteEnter(to, from, next) {
         const res = await getPosts(buildPath(to));
         document.title = 'Cloudless의 블로그';
+        // Using any due to issue: https://github.com/vuejs/vue-router-next/issues/701
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         next((vm: any) => vm.setPosts(res));
     },

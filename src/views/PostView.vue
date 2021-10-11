@@ -27,6 +27,7 @@ export default defineComponent({
     },
     async beforeRouteEnter(to, from, next) {
         const post: Post = await getPost(to.params.title as string);
+        // Using any due to issue: https://github.com/vuejs/vue-router-next/issues/701
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         next((vm: any) => vm.setPost(post));
     },

@@ -1,4 +1,4 @@
-import { postPostData, putPostData } from '@/types';
+import { PostPostData, PutPostData } from '@/types/post';
 
 const bearerToken = () => `Bearer ${localStorage.getItem('token')}`;
 
@@ -55,7 +55,7 @@ export function getPost(url: string) {
     }).then(res => res.json());
 }
 
-export function postPost(body: postPostData) {
+export function postPost(body: PostPostData) {
     return fetch('/api/post', {
         method: 'POST',
         headers: {
@@ -66,7 +66,7 @@ export function postPost(body: postPostData) {
     }).then(res => res.json());
 }
 
-export function putPost(url: string, body: putPostData) {
+export function putPost(url: string, body: PutPostData) {
     return fetch(`/api/post/${url}`, {
         method: 'PUT',
         headers: {
