@@ -2,11 +2,11 @@
     <form>
         <div class="mb-3">
             <label for="admin-user" class="form-label fw-bold">Admin User</label>
-            <input type="text" class="form-control" id="admin-user" v-model="id" />
+            <input id="admin-user" v-model="id" class="form-control" type="text" />
         </div>
         <div class="mb-3">
             <label for="admin-password" class="form-label fw-bold">Password</label>
-            <input type="password" class="form-control" id="admin-password" v-model="password" />
+            <input id="admin-password" v-model="password" class="form-control" type="password" />
         </div>
         <button type="submit" class="btn btn-primary" @click.prevent="tryLogin">Login</button>
     </form>
@@ -17,7 +17,7 @@ import { defineComponent } from 'vue';
 import { postLoginData } from '@/lib/httpClient';
 
 export default defineComponent({
-    name: 'Login Route',
+    name: 'LoginRoute',
     data() {
         return {
             id: '',

@@ -1,7 +1,7 @@
 <template>
     <div v-if="post">
         <post-container :post="post" />
-        <div class="d-flex justify-content-end" v-if="login">
+        <div v-if="login" class="d-flex justify-content-end">
             <router-link :to="`/update/${encodeURI(post.url)}`" class="btn btn-primary me-3"
                 >수정</router-link
             >
@@ -14,16 +14,22 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { Post } from '@/types/post';
 import PostContainer from '@/components/Post/PostContainer.vue';
 import Replies from '@/components/Post/ReplyList.vue';
 import { deletePost, getPost } from '@/lib/httpClient';
-import { Post } from '@/types';
 
 export default defineComponent({
-    name: 'Post Route',
+    name: 'PostRoute',
     components: {
         PostContainer,
         Replies,
+    },
+    async beforeRouteEnter(to, from, next) {
+        const post: Post = await getPost(to.params.title as string);
+        // Using any due to issue: https://github.com/vuejs/vue-router-next/issues/701
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        next((vm: any) => vm.setPost(post));
     },
     data() {
         return {
@@ -70,10 +76,6 @@ export default defineComponent({
                 alert(error.message);
             }
         },
-    },
-    async beforeRouteEnter(to, from, next) {
-        const post: Post = await getPost(to.params.title as string);
-        next((vm: any) => vm.setPost(post));
     },
 });
 </script>

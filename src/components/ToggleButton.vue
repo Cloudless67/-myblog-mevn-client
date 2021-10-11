@@ -14,19 +14,20 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-    name: 'Toggle Button',
+    name: 'ToggleButton',
+    emits: ['toggled'],
     data() {
         return { state: false };
+    },
+    computed: {
+        icon(): 'minus' | 'plus' {
+            return this.state ? 'minus' : 'plus';
+        },
     },
     methods: {
         toggled() {
             this.state = !this.state;
             this.$emit('toggled', this.state);
-        },
-    },
-    computed: {
-        icon(): 'minus' | 'plus' {
-            return this.state ? 'minus' : 'plus';
         },
     },
 });

@@ -5,28 +5,28 @@
                 >Category</label
             >
             <div class="col-sm-11">
-                <select id="write-category" class="form-select" v-model="postData.category">
-                    <option v-for="category in categories" :key="category" :value="category">{{
-                        category
-                    }}</option>
+                <select id="write-category" v-model="postData.category" class="form-select">
+                    <option v-for="category in categories" :key="category" :value="category">
+                        {{ category }}
+                    </option>
                 </select>
             </div>
         </div>
         <div class="row align-items-center mb-2">
             <label for="write-title" class="col-sm-1 form-label fw-bold text-end">Title</label>
             <div class="col-sm-11">
-                <input type="text" id="write-title" class="form-control" v-model="postData.title" />
+                <input id="write-title" v-model="postData.title" class="form-control" type="text" />
             </div>
         </div>
         <div class="row align-items-center mb-2">
             <label for="write-url" class="col-sm-1 form-label fw-bold text-end">URL</label>
             <div class="col-sm-11">
                 <input
-                    type="text"
                     id="write-url"
-                    class="form-control"
-                    disabled
                     v-model="postData.url"
+                    class="form-control"
+                    type="text"
+                    disabled
                 />
             </div>
         </div>
@@ -35,16 +35,16 @@
             <div class="col-sm-11">
                 <textarea
                     id="write-body"
+                    v-model="postData.body"
                     class="form-control"
                     rows="10"
-                    v-model="postData.body"
                 ></textarea>
             </div>
         </div>
         <div class="row align-items-center mb-2">
             <label for="write-tags" class="col-sm-1 form-label fw-bold text-end">Tags</label>
             <div class="col-sm-11">
-                <input type="text" id="write-tags" class="form-control" v-model="postData.tags" />
+                <input id="write-tags" v-model="postData.tags" class="form-control" type="text" />
             </div>
         </div>
         <div class="d-flex justify-content-end">
@@ -55,11 +55,11 @@
 
 <script lang="ts">
 import { putPost } from '@/lib/httpClient';
-import { Post } from '@/types';
+import { Post } from '@/types/post';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-    name: 'Update Route',
+    name: 'UpdateRoute',
     data() {
         return {
             categories: [] as string[],
@@ -71,6 +71,11 @@ export default defineComponent({
                 tags: '',
             },
         };
+    },
+    created() {
+        this.categories = this.$store.state.categories;
+        const post: Post = this.$store.state.lastPost;
+        this.postData = { ...post, tags: post.tags.join(',') };
     },
     methods: {
         async submit() {
@@ -86,11 +91,6 @@ export default defineComponent({
                 alert(error.message);
             }
         },
-    },
-    created() {
-        this.categories = this.$store.state.categories!;
-        const post: Post = this.$store.state.lastPost!;
-        this.postData = { ...post, tags: post.tags.join(',') };
     },
 });
 </script>

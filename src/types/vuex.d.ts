@@ -1,6 +1,5 @@
-import { ComponentCustomProperties } from 'vue';
 import { Store } from 'vuex';
-import { Post } from '.';
+import { Post } from './post';
 
 declare module '@vue/runtime-core' {
     // declare your own store states

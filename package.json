@@ -6,9 +6,12 @@
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "build:report": "vue-cli-service build --report",
-        "style": "sass src/scss/custom.scss public/bootstrap.css --style=compressed",
-        "style:watch": "sass src/scss/custom.scss public/bootstrap.css --watch --style=compressed",
-        "test:unit": "vue-cli-service test:unit"
+        "sass": "sass src/scss/custom.scss public/bootstrap.css --style=compressed",
+        "sass:watch": "sass src/scss/custom.scss public/bootstrap.css --watch --style=compressed",
+        "lint:es": "npx eslint src/**/*.{ts,vue}",
+        "prettier": "npx prettier -c .",
+        "style": "npm run lint:es && npm run prettier",
+        "test": "vue-cli-service test:unit"
     },
     "dependencies": {
         "bootstrap": "^5.0.1",
@@ -22,6 +25,7 @@
     "devDependencies": {
         "@types/jest": "^24.0.19",
         "@types/luxon": "^1.26.5",
+        "@typescript-eslint/eslint-plugin": "^4.33.0",
         "@vue/cli-plugin-babel": "^4.5.13",
         "@vue/cli-plugin-router": "^4.5.13",
         "@vue/cli-plugin-typescript": "^4.5.13",
@@ -29,6 +33,10 @@
         "@vue/cli-service": "^4.5.13",
         "@vue/compiler-sfc": "^3.0.0",
         "@vue/test-utils": "^2.0.0-rc.6",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-import-resolver-typescript": "^2.5.0",
+        "eslint-plugin-import": "^2.24.2",
+        "eslint-plugin-vue": "^7.19.1",
         "purgecss-webpack-plugin": "^4.0.3",
         "sass": "^1.32.13",
         "sass-loader": "^10.2.0",
@@ -36,11 +44,5 @@
         "typescript": "~4.1.5",
         "vue-cli-plugin-compression": "~1.1.3",
         "vue-jest": "^5.0.0-alpha.9"
-    },
-    "prettier": {
-        "singleQuote": true,
-        "trailingComma": "all",
-        "tabWidth": 4,
-        "printWidth": 100
     }
 }

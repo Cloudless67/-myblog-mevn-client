@@ -1,4 +1,4 @@
-import { postPostData, putPostData } from '@/types';
+import { PostPostData, PutPostData } from '@/types/post';
 
 const bearerToken = () => `Bearer ${localStorage.getItem('token')}`;
 
@@ -21,7 +21,7 @@ export function putCategory(category: string, parent?: string) {
             Authorization: bearerToken(),
         },
         body: JSON.stringify({ parent }),
-    }).then(res => res.json());
+    }).then((res) => res.json());
 }
 
 export function forceDeleteReply(postUrl: string, replyID: string) {
@@ -46,16 +46,16 @@ export function postLoginData(id: string, password: string) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({ id, password }),
-    }).then(res => res.json());
+    }).then((res) => res.json());
 }
 
 export function getPost(url: string) {
     return fetch(`/api/post/${url}`, {
         headers: { Authorization: bearerToken() },
-    }).then(res => res.json());
+    }).then((res) => res.json());
 }
 
-export function postPost(body: postPostData) {
+export function postPost(body: PostPostData) {
     return fetch('/api/post', {
         method: 'POST',
         headers: {
@@ -63,10 +63,10 @@ export function postPost(body: postPostData) {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
         body: JSON.stringify(body),
-    }).then(res => res.json());
+    }).then((res) => res.json());
 }
 
-export function putPost(url: string, body: putPostData) {
+export function putPost(url: string, body: PutPostData) {
     return fetch(`/api/post/${url}`, {
         method: 'PUT',
         headers: {
@@ -74,7 +74,7 @@ export function putPost(url: string, body: putPostData) {
             Authorization: bearerToken(),
         },
         body: JSON.stringify(body),
-    }).then(res => res.json());
+    }).then((res) => res.json());
 }
 
 export function deletePost(url: string) {
