@@ -54,8 +54,8 @@
 </template>
 
 <script lang="ts">
-import { putPost } from '@/lib/httpClient';
 import { defineComponent } from 'vue';
+import { putPost } from '@/lib/httpClient';
 
 export default defineComponent({
     name: 'UpdateRoute',
