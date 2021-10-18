@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts">
-import PostHeader from '@/components/Post/PostHeader.vue';
 import { defineComponent, PropType } from 'vue';
+import PostHeader from '@/components/Post/PostHeader.vue';
 import { Post } from '@/types/post';
 import { setLastPost } from '@/types/mutations';
 import '@/assets/prism.css';

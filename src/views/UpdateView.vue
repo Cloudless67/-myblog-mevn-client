@@ -54,9 +54,8 @@
 </template>
 
 <script lang="ts">
-import { putPost } from '@/lib/httpClient';
-import { Post } from '@/types/post';
 import { defineComponent } from 'vue';
+import { putPost } from '@/lib/httpClient';
 
 export default defineComponent({
     name: 'UpdateRoute',
@@ -74,8 +73,8 @@ export default defineComponent({
     },
     created() {
         this.categories = this.$store.state.categories;
-        const post: Post = this.$store.state.lastPost;
-        this.postData = { ...post, tags: post.tags.join(',') };
+        const post = this.$store.state.lastPost;
+        if (post) this.postData = { ...post, tags: post.tags.join(',') };
     },
     methods: {
         async submit() {
