@@ -8,7 +8,7 @@
         @dragover.prevent
     >
         <div>
-            <toggle-button v-if="children" @toggled="toggle" />
+            <toggle-button v-if="children.length" @toggled="toggle" />
             <router-link v-if="!editing" :to="`/${name}`">{{ name }}</router-link>
             <span v-else>{{ name }}</span>
         </div>
@@ -26,7 +26,7 @@
                     <sidebar-item
                         class="branch"
                         :name="category.name || category"
-                        :children="category.children"
+                        :children="category.children || []"
                         :editing="editing"
                         @structureChanged="$emit('structureChanged')"
                     />

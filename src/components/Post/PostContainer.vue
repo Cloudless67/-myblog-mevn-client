@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts">
-import PostHeader from '@/components/Post/PostHeader.vue';
 import { defineComponent, PropType } from 'vue';
-import { Post } from '@/types/post';
+import PostHeader from '@/components/Post/PostHeader.vue';
 import { setLastPost } from '@/types/mutations';
+import { Post } from '@/types/post';
 import '@/assets/prism.css';
 
 export default defineComponent({
@@ -20,12 +20,8 @@ export default defineComponent({
             required: true,
         },
     },
-    watch: {
-        post() {
-            if (this.post && this.$store.state.login) {
-                this.$store.commit(setLastPost, this.post);
-            }
-        },
+    created() {
+        this.$store.commit(setLastPost, this.post);
     },
 });
 </script>

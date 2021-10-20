@@ -82,9 +82,9 @@ export default defineComponent({
                 alert(error.message);
             }
         },
-        async drop(event: Event) {
+        async drop(event: DragEvent) {
             event.stopPropagation();
-            const droppedCategory = (event as DragEvent).dataTransfer?.getData('category');
+            const droppedCategory = event.dataTransfer?.getData('category');
             if (droppedCategory === undefined) return;
 
             try {
