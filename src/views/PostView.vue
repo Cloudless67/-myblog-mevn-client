@@ -18,6 +18,7 @@ import { Post } from '@/types/post';
 import PostContainer from '@/components/Post/PostContainer.vue';
 import Replies from '@/components/Post/ReplyList.vue';
 import { deletePost, getPost } from '@/lib/httpClient';
+import isError from '@/types/error';
 
 export default defineComponent({
     name: 'PostRoute',
@@ -73,7 +74,7 @@ export default defineComponent({
                 if (res.status == 200) this.$router.push({ path: '/' });
                 else alert(`${res.status}: ${res.statusText}`);
             } catch (error) {
-                alert(error.message);
+                if (isError(error)) alert(error.message);
             }
         },
     },
