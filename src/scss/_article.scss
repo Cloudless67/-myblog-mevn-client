@@ -68,6 +68,12 @@ article {
             padding: 2px 5px;
             border-radius: 5px;
         }
+
+        .inline-code {
+            font-size: 0.875em;
+            color: #d63384;
+            word-wrap: break-word;
+        }
     }
 }
 /*! purgecss end ignore */
