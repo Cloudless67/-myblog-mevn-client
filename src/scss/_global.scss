@@ -42,14 +42,12 @@ a {
     cursor: pointer;
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bs-primary: #35363a;
-        --bs-dark: #303030;
-        --text-color: #eaeaea;
-        --text-light: #ccc;
-        --bg-color: #202124;
-    }
+:root.dark-mode {
+    --bs-primary: #35363a;
+    --bs-dark: #303030;
+    --text-color: #eaeaea;
+    --text-light: #ccc;
+    --bg-color: #202124;
 
     img {
         filter: brightness(0.8) contrast(1.2);
