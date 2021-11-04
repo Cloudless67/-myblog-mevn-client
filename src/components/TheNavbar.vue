@@ -27,10 +27,11 @@
                 ></a>
                 <div class="form-check form-switch ms-3">
                     <input
-                        id="flexSwitchCheckChecked"
+                        id="dark-mode-override"
+                        v-model="isDarkMode"
                         class="form-check-input"
                         type="checkbox"
-                        checked
+                        @click="toggleTheme"
                     />
                 </div>
             </div>
@@ -44,12 +45,42 @@ import { logout } from '@/types/mutations';
 
 export default defineComponent({
     name: 'Navbar',
+    data() {
+        return {
+            isDarkMode: false,
+        };
+    },
     computed: {
         login() {
             return this.$store.state.login;
         },
     },
+    mounted() {
+        const isSystemDarkMode = window.matchMedia('(prefers-color-scheme: Dark)').matches;
+        const hasDarkModeOverride = localStorage.getItem('theme') !== null;
+
+        if (hasDarkModeOverride) {
+            this.isDarkMode = localStorage.getItem('theme') === 'dark';
+            this.applyTheme();
+        } else if (isSystemDarkMode) {
+            this.isDarkMode = isSystemDarkMode;
+            document.documentElement.classList.add('dark-mode');
+        }
+    },
     methods: {
+        toggleTheme() {
+            localStorage.setItem('theme', this.isDarkMode ? 'light' : 'dark');
+            this.applyTheme();
+        },
+        applyTheme() {
+            if (localStorage.getItem('theme') === 'dark') {
+                document.documentElement.classList.add('dark-mode');
+                this.isDarkMode = true;
+            } else {
+                document.documentElement.classList.remove('dark-mode');
+                this.isDarkMode = false;
+            }
+        },
         logout() {
             if (localStorage.getItem('token')) {
                 localStorage.removeItem('token');
