@@ -6,7 +6,7 @@ https://prismjs.com/download.html#themes=prism-coy */
  * @author Tim  Shedor
  */
 /*! purgecss start ignore */
-@media (prefers-color-scheme: light) {
+:root:not(.dark-mode) {
     code[class*='language-'],
     pre[class*='language-'] {
         color: black;
@@ -219,7 +219,7 @@ https://prismjs.com/download.html#themes=prism-coy */
     }
 }
 
-@media (prefers-color-scheme: dark) {
+:root.dark-mode {
     /**
     * prism.js tomorrow night eighties for JavaScript, CoffeeScript, CSS and HTML
     * Based on https://github.com/chriskempson/tomorrow-theme
