@@ -1,4 +1,6 @@
 /*! purgecss start ignore */
+@import './prism';
+
 article {
     p,
     li {
@@ -62,7 +64,7 @@ article {
     }
 }
 
-@media (prefers-color-scheme: dark) {
+:root.dark-mode {
     article {
         pre {
             background: #2d2d2d;

@@ -17,6 +17,7 @@ import TheNavbar from '@/components/TheNavbar.vue';
 import MainWithSidebar from '@/components/MainWithSidebar.vue';
 import TheFooter from '@/components/TheFooter.vue';
 import { login, logout, setCategories } from '@/types/mutations';
+import isError from './types/error';
 
 export default defineComponent({
     name: 'App',
@@ -40,7 +41,7 @@ export default defineComponent({
             const categories = await fetch('/api/categories').then((res) => res.json());
             this.$store.commit(setCategories, categories);
         } catch (e) {
-            alert(e.message);
+            if (isError(e)) alert(e.message);
         }
     },
 });
