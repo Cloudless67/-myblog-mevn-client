@@ -15,16 +15,6 @@
             </div>
             <div class="d-flex fs-5 text-white">
                 <a v-if="login" href="#" class="text-white" @click.prevent="logout">logout</a>
-                <router-link v-else to="/login">
-                    <span class="text-white">login</span>
-                </router-link>
-                <a
-                    href="https://github.com/Cloudless67"
-                    target="_blank"
-                    class="text-white ms-3"
-                    rel="noopener noreferrer"
-                    ><i class="fab fa-github"></i
-                ></a>
                 <div class="form-check form-switch ms-3">
                     <input
                         id="dark-mode-override"
