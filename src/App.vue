@@ -13,11 +13,18 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import jwt_decode from 'jwt-decode';
 import TheNavbar from '@/components/TheNavbar.vue';
 import MainWithSidebar from '@/components/MainWithSidebar.vue';
 import TheFooter from '@/components/TheFooter.vue';
 import { login, logout, setCategories } from '@/types/mutations';
 import isError from './types/error';
+
+type JWTPayload = {
+    authorized: boolean;
+    exp: number;
+    iat: number;
+};
 
 export default defineComponent({
     name: 'App',
@@ -32,8 +39,15 @@ export default defineComponent({
         },
     },
     async mounted() {
-        if (localStorage.getItem('token')) {
-            this.$store.commit(login);
+        const token = localStorage.getItem('token');
+        if (token) {
+            const payload = jwt_decode<JWTPayload>(token);
+            const exp = payload.exp;
+            const now = new Date().getTime() / 1000;
+
+            if (exp < now) {
+                this.$store.commit(login);
+            }
         } else {
             this.$store.commit(logout);
         }
