@@ -26,9 +26,9 @@ export default defineComponent({
     },
     methods: {
         async tryLogin() {
-            const token = await postLoginData(this.id, this.password);
+            const { token } = await postLoginData(this.id, this.password);
 
-            localStorage.setItem('token', token.token);
+            localStorage.setItem('token', token);
             this.$router.push({ path: '/' });
             this.$store.commit('login');
         },
