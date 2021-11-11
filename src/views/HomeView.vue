@@ -1,16 +1,17 @@
 <template>
-    <div>
+    <div v-if="posts.length > 0">
         <h1 class="fw-bold">{{ title }}</h1>
         <ul class="list-unstyled">
             <post-list-item v-for="post in posts" :key="post._id" :post="post" />
         </ul>
         <post-list-pagination v-if="maxIndex > 1" :max-index="maxIndex" />
     </div>
+    <div v-else>Loading...</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { RouteLocationNormalized } from 'vue-router';
+import { RouteLocationNormalizedLoaded } from 'vue-router';
 import { PostPreview } from '@/types/post';
 import PostListItem from '@/components/PostListItem.vue';
 import PostListPagination from '@/components/PostListPagination.vue';
@@ -18,20 +19,26 @@ import PostListPagination from '@/components/PostListPagination.vue';
 type PostsRes = { posts: PostPreview[]; totalLength: number };
 const maxPostPerPage = 10;
 
+async function getPosts(url: string) {
+    const res = await fetch(url).then((res) => res.json());
+
+    const posts: PostPreview[] = res.posts;
+    const totalLength: number = res.totalLength;
+    return { posts, totalLength };
+}
+
+function buildPath(to: RouteLocationNormalizedLoaded): string {
+    let path: string;
+    if (to.params.category) path = '/posts' + to.fullPath;
+    else if (to.params.tag) path = to.fullPath;
+    else path = '/posts' + to.fullPath;
+
+    return `/api${path}`;
+}
+
 export default defineComponent({
     name: 'HomeView',
     components: { PostListItem, PostListPagination },
-    async beforeRouteEnter(to, from, next) {
-        const res = await getPosts(buildPath(to));
-        document.title = 'Cloudless의 블로그';
-        // Using any due to issue: https://github.com/vuejs/vue-router-next/issues/701
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        next((vm: any) => vm.setPosts(res));
-    },
-    async beforeRouteUpdate(to, from, next) {
-        this.setPosts(await getPosts(buildPath(to)));
-        next();
-    },
     data() {
         return {
             posts: [] as PostPreview[],
@@ -47,6 +54,13 @@ export default defineComponent({
             return Math.ceil(this.totalLength / maxPostPerPage);
         },
     },
+    async mounted() {
+        const { posts, totalLength } = await getPosts(buildPath(this.$route));
+        this.posts = posts;
+        this.totalLength = totalLength;
+
+        document.title = 'Cloudless의 블로그';
+    },
     methods: {
         setPosts({ posts, totalLength }: PostsRes) {
             this.posts = posts;
@@ -54,21 +68,4 @@ export default defineComponent({
         },
     },
 });
-
-async function getPosts(url: string) {
-    const res = await fetch(url).then((res) => res.json());
-
-    const posts: PostPreview[] = res.posts;
-    const totalLength: number = res.totalLength;
-    return { posts, totalLength };
-}
-
-function buildPath(to: RouteLocationNormalized): string {
-    let path: string;
-    if (to.params.category) path = '/posts' + to.fullPath;
-    else if (to.params.tag) path = to.fullPath;
-    else path = '/posts' + to.fullPath;
-
-    return `/api${path}`;
-}
 </script>
