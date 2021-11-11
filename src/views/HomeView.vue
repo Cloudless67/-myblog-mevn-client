@@ -6,12 +6,13 @@
         </ul>
         <post-list-pagination v-if="maxIndex > 1" :max-index="maxIndex" />
     </div>
-    <div v-else>Loading...</div>
+    <LoadingSkeleton v-else />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { RouteLocationNormalizedLoaded } from 'vue-router';
+import LoadingSkeleton from '@/components/LoadingSkeleton.vue';
 import { PostPreview } from '@/types/post';
 import PostListItem from '@/components/PostListItem.vue';
 import PostListPagination from '@/components/PostListPagination.vue';
@@ -38,7 +39,7 @@ function buildPath(to: RouteLocationNormalizedLoaded): string {
 
 export default defineComponent({
     name: 'HomeView',
-    components: { PostListItem, PostListPagination },
+    components: { PostListItem, PostListPagination, LoadingSkeleton },
     data() {
         return {
             posts: [] as PostPreview[],

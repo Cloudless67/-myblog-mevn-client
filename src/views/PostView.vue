@@ -10,13 +10,14 @@
         <hr />
         <replies :replies="post.replies" />
     </div>
-    <div v-else>Loading...</div>
+    <LoadingSkeleton v-else />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import PostContainer from '@/components/Post/PostContainer.vue';
 import Replies from '@/components/Post/ReplyList.vue';
+import LoadingSkeleton from '@/components/LoadingSkeleton.vue';
 import { deletePost, getPost } from '@/lib/httpClient';
 import { Post } from '@/types/post';
 import isError from '@/types/error';
@@ -26,6 +27,7 @@ export default defineComponent({
     components: {
         PostContainer,
         Replies,
+        LoadingSkeleton,
     },
     data() {
         return {
