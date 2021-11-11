@@ -46,8 +46,9 @@
 </template>
 
 <script lang="ts">
-import { postPost } from '@/lib/httpClient';
 import { defineComponent } from 'vue';
+import { postPost } from '@/lib/httpClient';
+import isError from '@/types/error';
 
 export default defineComponent({
     name: 'WriteRoute',
@@ -69,10 +70,10 @@ export default defineComponent({
     methods: {
         async submit() {
             try {
-                const res = await postPost(this.postData);
-                this.$router.push({ path: `/post/${res.url}` });
+                const { url } = await postPost(this.postData);
+                this.$router.push({ path: `/post/${url}` });
             } catch (error) {
-                console.error(error.message);
+                if (isError(error)) console.error(error.message);
             }
         },
     },

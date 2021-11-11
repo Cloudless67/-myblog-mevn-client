@@ -80,13 +80,13 @@ export default defineComponent({
     methods: {
         async submit() {
             try {
-                const res = await putPost(this.$route.params.slug as string, {
+                const { url } = await putPost(this.$route.params.slug as string, {
                     category: this.postData.category,
                     body: this.postData.body,
                     tags: this.postData.tags,
                 });
 
-                this.$router.push({ path: `/post/${encodeURI(res.url)}` });
+                this.$router.push({ path: `/post/${encodeURI(url)}` });
             } catch (error) {
                 if (isError(error)) alert(error.message);
             }

@@ -10,14 +10,16 @@
         <hr />
         <replies :replies="post.replies" />
     </div>
+    <LoadingSkeleton v-else />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { Post } from '@/types/post';
 import PostContainer from '@/components/Post/PostContainer.vue';
 import Replies from '@/components/Post/ReplyList.vue';
+import LoadingSkeleton from '@/components/LoadingSkeleton.vue';
 import { deletePost, getPost } from '@/lib/httpClient';
+import { Post } from '@/types/post';
 import isError from '@/types/error';
 
 export default defineComponent({
@@ -25,12 +27,7 @@ export default defineComponent({
     components: {
         PostContainer,
         Replies,
-    },
-    async beforeRouteEnter(to, from, next) {
-        const post: Post = await getPost(to.params.title as string);
-        // Using any due to issue: https://github.com/vuejs/vue-router-next/issues/701
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        next((vm: any) => vm.setPost(post));
+        LoadingSkeleton,
     },
     data() {
         return {
@@ -41,6 +38,10 @@ export default defineComponent({
         login() {
             return this.$store.state.login;
         },
+    },
+    async mounted() {
+        const post = await getPost(this.$route.params.title as string);
+        this.setPost(post);
     },
     methods: {
         setPost(post: Post) {

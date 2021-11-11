@@ -41,6 +41,7 @@ import SidebarItem from '@/components/SidebarItem.vue';
 import { defineComponent } from 'vue';
 import { postCategory, putCategory } from '@/lib/httpClient';
 import Category from '@/types/category';
+import isError from '@/types/error';
 
 export default defineComponent({
     name: 'TheSidebar',
@@ -78,8 +79,8 @@ export default defineComponent({
                 } else {
                     alert(await res.text());
                 }
-            } catch (error) {
-                alert(error.message);
+            } catch (error: unknown) {
+                if (isError(error)) alert(error.message);
             }
         },
         async drop(event: DragEvent) {
@@ -91,7 +92,7 @@ export default defineComponent({
                 const res = await putCategory(droppedCategory);
                 this.onStructureChange(res);
             } catch (error) {
-                alert(error.message);
+                if (isError(error)) alert(error.message);
             }
         },
     },
