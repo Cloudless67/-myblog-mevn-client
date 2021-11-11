@@ -16,6 +16,7 @@ import LoadingSkeleton from '@/components/LoadingSkeleton.vue';
 import { PostPreview } from '@/types/post';
 import PostListItem from '@/components/PostListItem.vue';
 import PostListPagination from '@/components/PostListPagination.vue';
+import isError from '@/types/error';
 
 type PostsRes = { posts: PostPreview[]; totalLength: number };
 const maxPostPerPage = 10;
@@ -40,6 +41,15 @@ function buildPath(to: RouteLocationNormalizedLoaded): string {
 export default defineComponent({
     name: 'HomeView',
     components: { PostListItem, PostListPagination, LoadingSkeleton },
+    async beforeRouteUpdate(to, from, next) {
+        try {
+            const res = await getPosts(buildPath(to));
+            this.setPosts(res);
+        } catch (error) {
+            if (isError(error)) console.error(error.message);
+        }
+        next();
+    },
     data() {
         return {
             posts: [] as PostPreview[],
@@ -56,9 +66,8 @@ export default defineComponent({
         },
     },
     async mounted() {
-        const { posts, totalLength } = await getPosts(buildPath(this.$route));
-        this.posts = posts;
-        this.totalLength = totalLength;
+        const res = await getPosts(buildPath(this.$route));
+        this.setPosts(res);
 
         document.title = 'Cloudless의 블로그';
     },
