@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build",
+        "build": "vue-cli-service build --modern",
         "build:report": "vue-cli-service build --report",
         "sass": "sass src/scss/custom.scss public/bootstrap.css --style=compressed",
         "sass:watch": "sass src/scss/custom.scss public/bootstrap.css --watch --style=compressed",
