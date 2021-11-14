@@ -15,15 +15,12 @@
             </div>
             <div class="d-flex fs-5 text-white">
                 <a v-if="login" href="#" class="text-white" @click.prevent="logout">logout</a>
-                <div class="form-check form-switch ms-3">
-                    <input
-                        id="dark-mode-override"
-                        v-model="isDarkMode"
-                        class="form-check-input"
-                        type="checkbox"
-                        @click="toggleTheme"
-                    />
-                </div>
+                <ThemeToggleButton
+                    id="dark-mode-override"
+                    :state="isDarkMode"
+                    type="checkbox"
+                    @click="toggleTheme"
+                />
             </div>
         </div>
     </nav>
@@ -31,10 +28,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import ThemeToggleButton from './ThemeToggleButton.vue';
 import { logout } from '@/types/mutations';
 
 export default defineComponent({
     name: 'Navbar',
+    components: { ThemeToggleButton },
     data() {
         return {
             isDarkMode: false,

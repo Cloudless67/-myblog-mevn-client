@@ -2,6 +2,7 @@
     --text-color: black;
     --text-light: rgba(0 0 0 / 0.5);
     --bg-color: rgba(0, 0, 0, 0.01);
+    --inverse-color: white;
 }
 
 body {
@@ -48,6 +49,7 @@ a {
     --text-color: #ddd;
     --text-light: #bbb;
     --bg-color: #202124;
+    --inverse-color: black;
 
     img {
         filter: brightness(0.8) contrast(1.2);
