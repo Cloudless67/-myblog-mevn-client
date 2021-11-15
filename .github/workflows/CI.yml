@@ -35,3 +35,7 @@ jobs:
 
             - name: Style check
               run: npm run style
+
+concurrency:
+    group: ${{ github.head_ref }}
+    cancel-in-progress: true
