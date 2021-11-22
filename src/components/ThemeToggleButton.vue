@@ -1,7 +1,7 @@
 <template>
     <div class="theme-toggle-container">
-        <i class="fas fa-moon"></i>
-        <i class="fas fa-sun"></i>
+        <img src="@/assets/moon.svg" class="icon icon-moon" />
+        <img src="@/assets/sun.svg" class="icon icon-sun" />
         <div :class="`theme-toggle-switch theme-toggle-${state ? 'light' : 'dark'}`"></div>
     </div>
 </template>
@@ -45,20 +45,17 @@ export default defineComponent({
     background: var(--bs-light);
 }
 
-.fas {
+.icon {
     position: absolute;
-    font-size: 16px;
     color: black;
     top: 4px;
 }
 
-.fa-sun {
+.icon-sun {
     right: 4px;
-    color: yellow;
 }
 
-.fa-moon {
+.icon-moon {
     left: 4px;
-    color: black;
 }
 </style>
