@@ -40,6 +40,7 @@
 import ToggleButton from '@/components/ToggleButton.vue';
 import { putCategory } from '@/lib/httpClient';
 import { defineComponent } from 'vue';
+import isError from '@/types/error';
 
 export default defineComponent({
     name: 'SidebarItem',
@@ -71,7 +72,7 @@ export default defineComponent({
                 const res = await putCategory(droppedCategory, this.name);
                 this.$emit('structureChanged', res);
             } catch (error) {
-                alert(error.message);
+                if (isError(error)) alert(error.message);
             }
         },
         toggle(state: boolean) {
@@ -125,7 +126,7 @@ li {
     &:last-child::before {
         width: 10px;
         height: 100%;
-        border-left: 1px solid var(--bg-color);
+        border-left: 1px solid var(--inverse-color);
     }
 }
 
@@ -133,7 +134,7 @@ li {
     top: 12px;
     bottom: -4px;
     left: -10px;
-    border-left: 1px solid var(--bg-color);
+    border-left: 1px solid var(--inverse-color);
 }
 
 .slide-enter-active {

@@ -6,7 +6,7 @@
         autocomplete="off"
         @click="toggled"
     >
-        <i class="fas position-absolute top-0 start-0" :class="`fa-${icon}-square`"></i>
+        <img :src="icon" />
     </button>
 </template>
 
@@ -20,8 +20,14 @@ export default defineComponent({
         return { state: false };
     },
     computed: {
-        icon(): 'minus' | 'plus' {
-            return this.state ? 'minus' : 'plus';
+        icon() {
+            const btnColor = document.documentElement.classList.contains('dark-mode')
+                ? 'white'
+                : 'black';
+
+            return this.state
+                ? require(`@/assets/minus-${btnColor}.svg`)
+                : require(`@/assets/plus-${btnColor}.svg`);
         },
     },
     methods: {
@@ -37,8 +43,8 @@ export default defineComponent({
 .btn {
     position: relative;
     color: var(--text-color);
-    width: 1em;
-    height: 1em;
+    width: 24px;
+    height: 24px;
 
     &:hover {
         color: var(--text-color);
