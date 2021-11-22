@@ -126,7 +126,7 @@ li {
     &:last-child::before {
         width: 10px;
         height: 100%;
-        border-left: 1px solid var(--bg-color);
+        border-left: 1px solid var(--inverse-color);
     }
 }
 
@@ -134,7 +134,7 @@ li {
     top: 12px;
     bottom: -4px;
     left: -10px;
-    border-left: 1px solid var(--bg-color);
+    border-left: 1px solid var(--inverse-color);
 }
 
 .slide-enter-active {
