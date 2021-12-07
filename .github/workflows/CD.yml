@@ -1,0 +1,44 @@
+name: Client CD
+
+on:
+    push:
+        branches: [main]
+
+jobs:
+    deployment:
+        runs-on: self-hosted
+
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  path: '../../../../myblog/client'
+
+            - name: Use Node.js 16.x
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 16.x
+
+            - name: Cache node modules
+              id: node-cache
+              uses: actions/cache@v2
+              env:
+                  cache-name: cache-node-modules
+              with:
+                  path: node_modules
+                  key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+                  restore-keys: |
+                      ${{ runner.os }}-node-modules-
+
+            - name: Install dependencies
+              if: steps.node-cache.outputs.cache-hit != 'true'
+              run: npm ci
+
+            - name: Build
+              run: npm run build
+
+            - name: Reload app
+              run: pm2 reload app
+
+concurrency:
+    group: deployment
+    cancel-in-progress: true
