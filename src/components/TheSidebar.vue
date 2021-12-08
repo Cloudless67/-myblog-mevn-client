@@ -8,12 +8,13 @@
     >
         <div class="d-flex flex-row align-items-center">
             <span class="ms-3 fs-3 fw-bold">게시판</span>
-            <i
+            <img
                 v-if="$store.state.login"
                 id="edit-categories"
+                :src="configIcon"
                 class="fas fa-cog ms-2 hover-cursor-pointer"
                 @click="toggleEditState"
-            ></i>
+            />
         </div>
         <li
             v-for="category in categories"
@@ -51,11 +52,18 @@ export default defineComponent({
             categories: [] as Category[],
             categoryToAdd: '',
             editing: false,
+            configIcon: null,
         };
     },
     async created() {
         const res = await fetch('/api/categories/structured');
         this.categories = await res.json();
+
+        const btnColor = document.documentElement.classList.contains('dark-mode')
+            ? 'white'
+            : 'black';
+
+        this.configIcon = require(`@/assets/config-${btnColor}.svg`);
     },
     methods: {
         getCategoryName(category: Category) {
