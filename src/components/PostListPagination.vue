@@ -34,12 +34,10 @@ import { defineComponent } from 'vue';
 export default defineComponent({
     name: 'PostListPagination',
     props: { maxIndex: { type: Number, default: 1 } },
-    data() {
-        return {
-            index: 1,
-        };
-    },
     computed: {
+        index(): number {
+            return Number(this.$route.query.page) || 1;
+        },
         indexOfPagination() {
             return Math.floor((this.index - 1) / 10);
         },
@@ -49,7 +47,6 @@ export default defineComponent({
             return i == this.index;
         },
         changeIndex(index: number) {
-            this.index = index;
             this.$router.push({ query: { page: index !== 1 ? index : undefined } });
         },
     },
