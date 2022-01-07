@@ -41,15 +41,6 @@ function buildPath(to: RouteLocationNormalizedLoaded): string {
 export default defineComponent({
     name: 'HomeView',
     components: { PostListItem, PostListPagination, LoadingSkeleton },
-    async beforeRouteUpdate(to, from, next) {
-        try {
-            const res = await getPosts(buildPath(to));
-            this.setPosts(res);
-        } catch (error) {
-            if (isError(error)) console.error(error.message);
-        }
-        next();
-    },
     data() {
         return {
             posts: [] as PostPreview[],
@@ -65,16 +56,27 @@ export default defineComponent({
             return Math.ceil(this.totalLength / maxPostPerPage);
         },
     },
-    async mounted() {
-        const res = await getPosts(buildPath(this.$route));
-        this.setPosts(res);
-
+    async created() {
         document.title = 'Cloudless의 블로그';
+        try {
+            const res = await getPosts(buildPath(this.$route));
+            this.setPosts(res);
+        } catch (error) {
+            if (isError(error)) console.error(error.message);
+        }
     },
     methods: {
         setPosts({ posts, totalLength }: PostsRes) {
             this.posts = posts;
             this.totalLength = totalLength;
+
+            const dummy = document.querySelector<HTMLDivElement>('.dummy');
+
+            if (dummy === null) {
+                throw new ReferenceError('Dummy element not found.');
+            }
+
+            dummy.style.height = '0';
         },
     },
 });
