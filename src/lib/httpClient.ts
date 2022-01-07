@@ -57,6 +57,7 @@ export function getPost(url: string) {
 }
 
 export function postPost(body: PostPostData) {
+    body.thumbnail = body.thumbnail === '' ? undefined : body.thumbnail;
     return fetch('/api/post', {
         method: 'POST',
         headers: {

@@ -30,6 +30,19 @@
                 />
             </div>
         </div>
+        <div class="row align-items-center mb-2">
+            <label for="write-thumbnail" class="col-sm-1 form-label fw-bold text-end"
+                >Thumbnail</label
+            >
+            <div class="col-sm-11">
+                <input
+                    id="write-thumbnail"
+                    v-model="postData.thumbnail"
+                    class="form-control"
+                    type="text"
+                />
+            </div>
+        </div>
         <div class="row align-items-start mb-2">
             <label for="write-url" class="col-sm-1 form-label fw-bold text-end">Body</label>
             <div class="col-sm-11">
@@ -67,6 +80,7 @@ export default defineComponent({
                 category: '',
                 title: '',
                 url: '',
+                thumbnail: '',
                 body: '',
                 tags: '',
             },
@@ -75,13 +89,15 @@ export default defineComponent({
     created() {
         this.categories = this.$store.state.categories;
         const post = this.$store.state.lastPost;
-        if (post) this.postData = { ...post, tags: post.tags.join(',') };
+        if (post) this.postData = { ...post, tags: post.tags.join(','), thumbnail: '' };
     },
     methods: {
         async submit() {
             try {
                 const { url } = await putPost(this.$route.params.slug as string, {
+                    title: this.postData.title,
                     category: this.postData.category,
+                    thumbnail: this.postData.thumbnail === '' ? undefined : this.postData.thumbnail,
                     body: this.postData.body,
                     tags: this.postData.tags,
                 });
