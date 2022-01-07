@@ -4,7 +4,7 @@
         <main-with-sidebar>
             <router-view v-slot="{ Component, route }" class="view">
                 <transition name="fade" mode="out-in">
-                    <component :is="Component" :key="route.path" />
+                    <component :is="Component" :key="route.fullPath" />
                 </transition>
             </router-view>
         </main-with-sidebar>
