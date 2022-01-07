@@ -22,6 +22,17 @@
                 <input id="write-url" v-model="postData.url" class="form-control" type="text" />
             </div>
         </div>
+        <div class="row mb-2">
+            <label for="write-thumbnail" class="col-sm-1 form-label">Thumbnail</label>
+            <div class="col-sm-11">
+                <input
+                    id="write-thumbnail"
+                    v-model="postData.thumbnail"
+                    class="form-control"
+                    type="text"
+                />
+            </div>
+        </div>
         <div class="row align-items-start mb-2">
             <label for="write-url" class="col-sm-1 form-label">Body</label>
             <div class="col-sm-11">
@@ -59,6 +70,7 @@ export default defineComponent({
                 category: '',
                 title: '',
                 url: '',
+                thumbnail: '',
                 body: '',
                 tags: '',
             },
