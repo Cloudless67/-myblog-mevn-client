@@ -2,7 +2,11 @@
     <the-navbar />
     <section class="container my-4">
         <main-with-sidebar>
-            <router-view />
+            <router-view v-slot="{ Component, route }" class="view">
+                <transition name="fade" mode="out-in">
+                    <component :is="Component" :key="route.path" />
+                </transition>
+            </router-view>
         </main-with-sidebar>
     </section>
     <router-link v-if="login" id="write-button" class="btn btn-primary" to="/write"
@@ -91,5 +95,22 @@ img {
     position: fixed;
     bottom: 60px;
     right: 40px;
+}
+
+section > div.row {
+    transition: height 0.2s;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: all 0.2s ease;
+}
+
+.fade-enter-from {
+    opacity: 0;
+}
+
+.fade-leave-to {
+    opacity: 0;
 }
 </style>
