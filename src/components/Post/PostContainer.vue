@@ -1,7 +1,7 @@
 <template>
     <post-header :post="post" />
     <!-- eslint-disable-next-line vue/no-v-html -->
-    <article class="py-2" v-html="post.formattedBody"></article>
+    <article class="py-2" v-html="body"></article>
 </template>
 
 <script lang="ts">
@@ -19,8 +19,18 @@ export default defineComponent({
             required: true,
         },
     },
+    data() {
+        return {
+            body: '',
+        };
+    },
     created() {
         this.$store.commit(setLastPost, this.post);
+
+        const thumbnail = this.post.thumbnail
+            ? `<p><img src="${this.post.thumbnail}" alt="썸네일"></p>`
+            : '';
+        this.body = thumbnail + this.post.formattedBody;
     },
 });
 </script>
