@@ -14,6 +14,5 @@ export default defineComponent({
 .paragraph {
     display: block;
     width: 100%;
-    height: 90vh;
 }
 </style>
