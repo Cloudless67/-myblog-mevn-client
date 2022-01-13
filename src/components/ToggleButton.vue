@@ -6,7 +6,7 @@
         autocomplete="off"
         @click="toggled"
     >
-        <img :src="icon" />
+        <img :src="icon" width="22" height="22" />
     </button>
 </template>
 

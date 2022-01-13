@@ -1,7 +1,7 @@
 <template>
     <div class="theme-toggle-container">
-        <img src="@/assets/moon.svg" class="icon icon-moon" />
-        <img src="@/assets/sun.svg" class="icon icon-sun" />
+        <img src="@/assets/moon.svg" width="18" height="18" class="icon icon-moon" />
+        <img src="@/assets/sun.svg" width="18" height="18" class="icon icon-sun" />
         <div :class="`theme-toggle-switch theme-toggle-${state ? 'light' : 'dark'}`"></div>
     </div>
 </template>

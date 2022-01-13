@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand navbar-dark bg-primary p-0">
         <div class="container">
             <router-link class="navbar-brand" to="/">
-                <img id="logo" src="../assets/logo-white.png" alt="Logo" height="" />
+                <img id="logo" src="../assets/logo-white.png" alt="Logo" width="48" height="48" />
             </router-link>
             <div id="navbarSupportedContent" class="collapse navbar-collapse">
                 <ul class="navbar-nav me-auto fs-4">
