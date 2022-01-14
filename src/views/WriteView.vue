@@ -1,55 +1,40 @@
 <template>
     <form>
-        <div class="row mb-2">
-            <label for="write-category" class="col-sm-1 form-label">Category</label>
-            <div class="col-sm-11">
-                <select id="write-category" v-model="postData.category" class="form-select">
-                    <option v-for="category in categories" :key="category" :value="category">
-                        {{ category }}
-                    </option>
-                </select>
-            </div>
+        <div class="mb-2">
+            <label for="write-category" class="form-label">Category</label>
+            <select id="write-category" v-model="postData.category" class="form-select">
+                <option v-for="category in categories" :key="category" :value="category">
+                    {{ category }}
+                </option>
+            </select>
         </div>
-        <div class="row mb-2">
-            <label for="write-title" class="col-sm-1 form-label">Title</label>
-            <div class="col-sm-11">
-                <input id="write-title" v-model="postData.title" class="form-control" type="text" />
-            </div>
+        <InputForm v-model="postData.title" name="write-title" label="Title" />
+        <InputForm v-model="postData.url" name="write-url" label="URL" />
+        <div class="row">
+            <InputForm
+                v-model="postData.thumbnail.url"
+                class="col-6"
+                name="write-thumbnail-url"
+                label="Thumbnail URL"
+            />
+            <InputForm
+                v-model="postData.thumbnail.aspectRatio"
+                class="col-6"
+                name="write-thumbnail-ratio"
+                label="Aspect Ratio"
+                type="number"
+            />
         </div>
-        <div class="row mb-2">
-            <label for="write-url" class="col-sm-1 form-label">URL</label>
-            <div class="col-sm-11">
-                <input id="write-url" v-model="postData.url" class="form-control" type="text" />
-            </div>
+        <div class="align-items-start mb-2">
+            <label for="write-url" class="form-label">Body</label>
+            <textarea
+                id="write-body"
+                v-model="postData.body"
+                class="form-control"
+                rows="10"
+            ></textarea>
         </div>
-        <div class="row mb-2">
-            <label for="write-thumbnail" class="col-sm-1 form-label">Thumbnail</label>
-            <div class="col-sm-11">
-                <input
-                    id="write-thumbnail"
-                    v-model="postData.thumbnail"
-                    class="form-control"
-                    type="text"
-                />
-            </div>
-        </div>
-        <div class="row align-items-start mb-2">
-            <label for="write-url" class="col-sm-1 form-label">Body</label>
-            <div class="col-sm-11">
-                <textarea
-                    id="write-body"
-                    v-model="postData.body"
-                    class="form-control"
-                    rows="10"
-                ></textarea>
-            </div>
-        </div>
-        <div class="row mb-2">
-            <label for="write-tags" class="col-sm-1 form-label">Tags</label>
-            <div class="col-sm-11">
-                <input id="write-tags" v-model="postData.tags" class="form-control" type="text" />
-            </div>
-        </div>
+        <InputForm v-model="postData.tags" name="write-tags" label="Tags" />
         <div class="d-flex justify-content-end">
             <button type="submit" class="btn btn-primary" @click.prevent="submit">글쓰기</button>
         </div>
@@ -59,10 +44,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { postPost } from '@/lib/httpClient';
+import { PostPostData } from '@/types/post';
+import InputForm from '@/components/InputForm.vue';
 import isError from '@/types/error';
 
 export default defineComponent({
     name: 'WriteRoute',
+    components: { InputForm },
     data() {
         return {
             categories: [],
@@ -70,10 +58,10 @@ export default defineComponent({
                 category: '',
                 title: '',
                 url: '',
-                thumbnail: '',
+                thumbnail: { url: '', aspectRatio: 0 },
                 body: '',
                 tags: '',
-            },
+            } as unknown,
         };
     },
     async created() {
@@ -82,7 +70,12 @@ export default defineComponent({
     methods: {
         async submit() {
             try {
-                const { url } = await postPost(this.postData);
+                const body = this.postData as PostPostData;
+                const { url } = await postPost({
+                    ...body,
+                    thumbnail: body.thumbnail?.url ? body.thumbnail : undefined,
+                });
+
                 this.$router.push({ path: `/post/${url}` });
             } catch (error) {
                 if (isError(error)) console.error(error.message);
