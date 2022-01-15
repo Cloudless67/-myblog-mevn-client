@@ -27,7 +27,6 @@
                 name="write-thumbnail-ratio"
                 label="Aspect Ratio"
                 type="number"
-                disabled="true"
             />
         </div>
         <div class="align-items-start mb-2">
