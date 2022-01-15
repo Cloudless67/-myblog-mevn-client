@@ -1,7 +1,7 @@
 <template>
     <post-header :post="post" />
     <!-- eslint-disable-next-line vue/no-v-html -->
-    <article class="py-2" v-html="body"></article>
+    <article ref="postContainer" class="py-2" v-html="body"></article>
 </template>
 
 <script lang="ts">
@@ -24,13 +24,20 @@ export default defineComponent({
             body: '',
         };
     },
-    created() {
+    mounted() {
         this.$store.commit(setLastPost, this.post);
 
-        const thumbnail = this.post.thumbnail
-            ? `<p><img src="${this.post.thumbnail}" alt="썸네일"></p>`
-            : '';
-        this.body = thumbnail + this.post.formattedBody;
+        if (this.post.thumbnail) {
+            const postContainer = this.$refs.postContainer as HTMLElement;
+            const containerWidth = postContainer.getBoundingClientRect().width;
+            const thumbnail = `<p><img src="${
+                this.post.thumbnail.url
+            }" width="${containerWidth}" height="${
+                containerWidth / this.post.thumbnail.aspectRatio
+            }" alt="썸네일"></p>`;
+
+            this.body = thumbnail + this.post.formattedBody;
+        }
     },
 });
 </script>

@@ -12,7 +12,7 @@
                 <a href="mailto:cloudlesslakitu67@gmail.com" class="text-white"
                     >cloudlesslakitu67@gmail.com</a
                 >
-                | &copy; 2021 by Cloudless
+                | &copy; 2022 by Cloudless
             </address>
         </small>
     </footer>

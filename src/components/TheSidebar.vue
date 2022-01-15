@@ -13,6 +13,8 @@
                 id="edit-categories"
                 :src="configIcon"
                 class="fas fa-cog ms-2 hover-cursor-pointer"
+                width="24"
+                height="24"
                 @click="toggleEditState"
             />
         </div>

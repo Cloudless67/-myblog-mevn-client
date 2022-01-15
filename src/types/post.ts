@@ -1,5 +1,10 @@
 import { Reply } from './reply';
 
+type Thumbnail = {
+    url: string;
+    aspectRatio: number;
+};
+
 type Post = {
     tags: string[];
     writtenTime: string;
@@ -8,7 +13,7 @@ type Post = {
     category: string;
     title: string;
     url: string;
-    thumbnail?: string;
+    thumbnail?: Thumbnail;
     body: string;
     formattedBody: string;
     replies: Reply[];
@@ -21,7 +26,7 @@ type PostPreview = {
     repliesNum: number;
     title: string;
     url: string;
-    thumbnail?: string;
+    thumbnail?: Thumbnail;
     preview: string;
 };
 
@@ -29,7 +34,7 @@ type PostPostData = {
     category: string;
     title: string;
     url: string;
-    thumbnail?: string;
+    thumbnail?: Thumbnail;
     body: string;
     tags: string;
 };
