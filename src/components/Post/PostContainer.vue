@@ -37,6 +37,8 @@ export default defineComponent({
             }" alt="썸네일"></p>`;
 
             this.body = thumbnail + this.post.formattedBody;
+        } else {
+            this.body = this.post.formattedBody;
         }
     },
 });
