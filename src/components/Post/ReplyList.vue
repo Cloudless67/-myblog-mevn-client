@@ -1,7 +1,7 @@
 <template>
     <section v-if="replies" class="replies">
         <h3 class="fw-bold mb-3">Replies</h3>
-        <reply-list-item
+        <ReplyListItem
             v-for="reply in replies"
             :key="reply._id"
             :reply="reply"

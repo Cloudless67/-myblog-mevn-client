@@ -3,7 +3,7 @@
         <main class="col-lg-9">
             <slot></slot>
         </main>
-        <the-sidebar class="col-lg-3" />
+        <TheSidebar class="col-lg-3" />
     </div>
 </template>
 

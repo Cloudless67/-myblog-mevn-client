@@ -8,8 +8,8 @@
         @dragover.prevent
     >
         <div>
-            <toggle-button v-if="children.length" @toggled="toggle" />
-            <router-link v-if="!editing" :to="`/${name}`">{{ name }}</router-link>
+            <ToggleButton v-if="children.length" @toggled="toggle" />
+            <RouterLink v-if="!editing" :to="`/${name}`">{{ name }}</RouterLink>
             <span v-else>{{ name }}</span>
         </div>
         <transition name="slide">
@@ -23,7 +23,7 @@
                     :key="category.name"
                     class="nav-item nav-link p-0 mt-1"
                 >
-                    <sidebar-item
+                    <SidebarItem
                         class="branch"
                         :name="category.name || category"
                         :children="category.children || []"

@@ -1,5 +1,5 @@
 <template>
-    <post-header :post="post" />
+    <PostHeader :post="post" />
     <!-- eslint-disable-next-line vue/no-v-html -->
     <article ref="postContainer" class="py-2" v-html="body"></article>
 </template>

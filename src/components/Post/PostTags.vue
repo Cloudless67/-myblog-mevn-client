@@ -1,11 +1,11 @@
 <template>
     <div class="tags">
-        <router-link
+        <RouterLink
             v-for="tag in tags"
             :key="tag"
             class="btn btn-outline-primary fs-6 rounded-pill mx-1 py-0"
             :to="`/tags/${tag}`"
-            >{{ tag }}</router-link
+            >{{ tag }}</RouterLink
         >
     </div>
 </template>
