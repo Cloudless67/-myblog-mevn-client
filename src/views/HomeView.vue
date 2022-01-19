@@ -4,7 +4,7 @@
         <ul class="list-unstyled">
             <post-list-item v-for="post in posts" :key="post._id" :post="post" />
         </ul>
-        <post-list-pagination v-if="maxIndex > 1" :max-index="maxIndex" />
+        <post-list-pagination v-if="maxIndex > 1" :total-page="maxIndex" />
     </div>
     <LoadingSkeleton v-else />
 </template>

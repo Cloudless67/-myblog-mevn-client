@@ -66,7 +66,6 @@ export default defineComponent({
         async drop(dataTransfer: DataTransfer) {
             const droppedCategory = dataTransfer.getData('category');
             if (droppedCategory === this.name) return;
-            console.log(`${droppedCategory} dropped to ${this.name}`);
 
             try {
                 const res = await putCategory(droppedCategory, this.name);
