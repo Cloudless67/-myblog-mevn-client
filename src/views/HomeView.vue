@@ -69,14 +69,6 @@ export default defineComponent({
         setPosts({ posts, totalLength }: PostsRes) {
             this.posts = posts;
             this.totalLength = totalLength;
-
-            const dummy = document.querySelector<HTMLDivElement>('.dummy');
-
-            if (dummy === null) {
-                throw new ReferenceError('Dummy element not found.');
-            }
-
-            dummy.style.height = '0';
         },
     },
 });

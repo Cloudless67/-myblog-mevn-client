@@ -2,7 +2,6 @@
     <div class="row">
         <main class="col-lg-9">
             <slot></slot>
-            <div class="dummy"></div>
         </main>
         <the-sidebar class="col-lg-3" />
     </div>

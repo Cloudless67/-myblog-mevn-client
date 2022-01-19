@@ -54,14 +54,6 @@ export default defineComponent({
             const end = Math.min(firstHeading > 0 ? firstHeading : 160, 160);
             const description = post.body.substring(0, end);
             this.setMetaContent('description', description);
-
-            const dummy = document.querySelector<HTMLDivElement>('.dummy');
-
-            if (dummy === null) {
-                throw new ReferenceError('Dummy element not found.');
-            }
-
-            dummy.style.height = '0';
         },
         setMetaContent(name: string, content: string) {
             const metaTag = document.querySelector(`meta[name=${name}]`);
