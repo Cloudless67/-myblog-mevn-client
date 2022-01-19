@@ -41,8 +41,8 @@
 import { defineComponent } from 'vue';
 import { postPost } from '@/lib/httpClient';
 import { PostPostData } from '@/types/post';
-import SelectBox from '@/components/SelectBox.vue';
-import InputForm from '@/components/InputForm.vue';
+import SelectBox from '@/components/forms/SelectBox.vue';
+import InputForm from '@/components/forms/InputForm.vue';
 import isError from '@/types/error';
 
 export default defineComponent({

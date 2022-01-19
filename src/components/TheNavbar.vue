@@ -28,7 +28,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import ThemeToggleButton from './ThemeToggleButton.vue';
+import ThemeToggleButton from './forms/ThemeToggleButton.vue';
 import { logout } from '@/types/mutations';
 
 export default defineComponent({

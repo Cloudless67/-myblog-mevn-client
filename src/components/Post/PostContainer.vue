@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import PostHeader from '@/components/Post/PostHeader.vue';
+import PostHeader from '@/components/post/PostHeader.vue';
 import { setLastPost } from '@/types/mutations';
 import { Post } from '@/types/post';
 

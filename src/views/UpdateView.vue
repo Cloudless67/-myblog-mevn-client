@@ -39,8 +39,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import SelectBox from '@/components/SelectBox.vue';
-import InputForm from '@/components/InputForm.vue';
+import SelectBox from '@/components/forms/SelectBox.vue';
+import InputForm from '@/components/forms/InputForm.vue';
 import { putPost } from '@/lib/httpClient';
 import isError from '@/types/error';
 import { PutPostData } from '@/types/post';

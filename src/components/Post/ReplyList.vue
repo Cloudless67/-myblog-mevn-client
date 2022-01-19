@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import ReplyListItem from '@/components/Post/ReplyListItem.vue';
+import ReplyListItem from '@/components/post/ReplyListItem.vue';
 import { Reply } from '@/types/reply';
 import { defineComponent, PropType } from 'vue';
 

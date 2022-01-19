@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import ToggleButton from '@/components/ToggleButton.vue';
+import ToggleButton from '@/components/forms/ToggleButton.vue';
 import { putCategory } from '@/lib/httpClient';
 import { defineComponent } from 'vue';
 import isError from '@/types/error';

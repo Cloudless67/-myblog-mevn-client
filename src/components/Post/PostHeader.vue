@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import PostTags from '@/components/Post/PostTags.vue';
+import PostTags from '@/components/post/PostTags.vue';
 import { Post } from '@/types/post';
 import dayjs from 'dayjs';
 
