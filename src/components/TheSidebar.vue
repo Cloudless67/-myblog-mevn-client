@@ -23,7 +23,7 @@
             :key="getCategoryName(category)"
             class="nav-item nav-link ps-3 py-0 my-1"
         >
-            <sidebar-item
+            <SidebarItem
                 :name="getCategoryName(category)"
                 :children="getCategoryChildren(category)"
                 :editing="editing"

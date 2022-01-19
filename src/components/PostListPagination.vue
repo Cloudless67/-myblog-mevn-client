@@ -2,25 +2,25 @@
     <nav class="mt-3">
         <ul class="pagination justify-content-center">
             <li
-                v-show="indexOfPagination > 0"
+                v-show="paginationStartPage > 0"
                 class="page-item hover-cursor-pointer"
-                @click="changeIndex(indexOfPagination * 10)"
+                @click="changeIndex(paginationStartPage)"
             >
                 <span class="page-link">&laquo;</span>
             </li>
             <li
-                v-for="i in Math.min(10, maxIndex - indexOfPagination * 10)"
-                :key="indexOfPagination * 10 + i"
+                v-for="i in Math.min(10, totalPage - paginationStartPage)"
+                :key="paginationStartPage + i"
                 class="page-item hover-cursor-pointer"
-                :class="{ active: isSelected(indexOfPagination * 10 + i) }"
-                @click="changeIndex(indexOfPagination * 10 + i)"
+                :class="{ active: isSelected(paginationStartPage + i) }"
+                @click="changeIndex(paginationStartPage + i)"
             >
-                <span class="page-link">{{ indexOfPagination * 10 + i }}</span>
+                <span class="page-link">{{ paginationStartPage + i }}</span>
             </li>
             <li
-                v-show="Math.floor((maxIndex - 1) / 10) * 10 >= index"
+                v-show="Math.floor((totalPage - 1) / 10) * 10 >= page"
                 class="page-item hover-cursor-pointer"
-                @click="changeIndex(indexOfPagination * 10 + 11)"
+                @click="changeIndex(paginationStartPage + 11)"
             >
                 <span class="page-link">&raquo;</span>
             </li>
@@ -33,18 +33,18 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
     name: 'PostListPagination',
-    props: { maxIndex: { type: Number, default: 1 } },
+    props: { totalPage: { type: Number, default: 1 } },
     computed: {
-        index(): number {
+        page(): number {
             return Number(this.$route.query.page) || 1;
         },
-        indexOfPagination() {
-            return Math.floor((this.index - 1) / 10);
+        paginationStartPage() {
+            return Math.floor((this.page - 1) / 10) * 10;
         },
     },
     methods: {
         isSelected(i: number) {
-            return i == this.index;
+            return i == this.page;
         },
         changeIndex(index: number) {
             this.$router.push({ query: { page: index !== 1 ? index : undefined } });

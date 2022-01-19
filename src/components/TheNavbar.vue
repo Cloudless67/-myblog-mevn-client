@@ -1,15 +1,15 @@
 <template>
     <nav class="navbar navbar-expand navbar-dark bg-primary p-0">
         <div class="container">
-            <router-link class="navbar-brand" to="/">
+            <RouterLink class="navbar-brand" to="/">
                 <img id="logo" src="../assets/logo-white.png" alt="Logo" width="48" height="48" />
-            </router-link>
+            </RouterLink>
             <div id="navbarSupportedContent" class="collapse navbar-collapse">
                 <ul class="navbar-nav me-auto fs-4">
                     <li class="nav-item d-none d-md-block">
-                        <router-link class="nav-link active fw-bold" aria-current="page" to="/"
-                            >Cloudless' Blog</router-link
-                        >
+                        <RouterLink class="nav-link active fw-bold" aria-current="page" to="/">
+                            Cloudless' Blog
+                        </RouterLink>
                     </li>
                 </ul>
             </div>
@@ -28,7 +28,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import ThemeToggleButton from './ThemeToggleButton.vue';
+import ThemeToggleButton from './forms/ThemeToggleButton.vue';
 import { logout } from '@/types/mutations';
 
 export default defineComponent({

@@ -1,7 +1,7 @@
 <template>
     <section v-if="replies" class="replies">
         <h3 class="fw-bold mb-3">Replies</h3>
-        <reply-list-item
+        <ReplyListItem
             v-for="reply in replies"
             :key="reply._id"
             :reply="reply"
@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import ReplyListItem from '@/components/Post/ReplyListItem.vue';
+import ReplyListItem from '@/components/post/ReplyListItem.vue';
 import { Reply } from '@/types/reply';
 import { defineComponent, PropType } from 'vue';
 

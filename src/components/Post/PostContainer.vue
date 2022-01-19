@@ -1,12 +1,12 @@
 <template>
-    <post-header :post="post" />
+    <PostHeader :post="post" />
     <!-- eslint-disable-next-line vue/no-v-html -->
     <article ref="postContainer" class="py-2" v-html="body"></article>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import PostHeader from '@/components/Post/PostHeader.vue';
+import PostHeader from '@/components/post/PostHeader.vue';
 import { setLastPost } from '@/types/mutations';
 import { Post } from '@/types/post';
 

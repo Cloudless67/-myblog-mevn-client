@@ -3,7 +3,7 @@ import Category from '@/types/category';
 
 const bearerToken = () => `Bearer ${localStorage.getItem('token')}`;
 
-export function postCategory(category: string) {
+function postCategory(category: string) {
     return fetch('/api/category', {
         method: 'POST',
         headers: {
@@ -14,7 +14,7 @@ export function postCategory(category: string) {
     });
 }
 
-export function putCategory(category: string, parent?: string) {
+function putCategory(category: string, parent?: string) {
     return fetch(`/api/category/${category}`, {
         method: 'PUT',
         headers: {
@@ -25,14 +25,14 @@ export function putCategory(category: string, parent?: string) {
     }).then<Category[]>((res) => res.json());
 }
 
-export function forceDeleteReply(postUrl: string, replyID: string) {
+function forceDeleteReply(postUrl: string, replyID: string) {
     return fetch(`/api/post/${postUrl}/reply/${replyID}`, {
         method: 'DELETE',
         headers: { Authorization: bearerToken() },
     });
 }
 
-export function deleteReply(postUrl: string, replyID: string, password: string) {
+function deleteReply(postUrl: string, replyID: string, password: string) {
     return fetch(`/api/post/${postUrl}/reply/${replyID}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
@@ -40,7 +40,7 @@ export function deleteReply(postUrl: string, replyID: string, password: string) 
     });
 }
 
-export function postLoginData(id: string, password: string) {
+function postLoginData(id: string, password: string) {
     return fetch('/api/login', {
         method: 'POST',
         headers: {
@@ -50,13 +50,13 @@ export function postLoginData(id: string, password: string) {
     }).then<{ token: string }>((res) => res.json());
 }
 
-export function getPost(url: string) {
+function getPost(url: string) {
     return fetch(`/api/post/${url}`, {
         headers: { Authorization: bearerToken() },
     }).then<Post>((res) => res.json());
 }
 
-export function postPost(body: PostPostData) {
+function postPost(body: PostPostData) {
     return fetch('/api/post', {
         method: 'POST',
         headers: {
@@ -67,7 +67,7 @@ export function postPost(body: PostPostData) {
     }).then<{ url: string }>((res) => res.json());
 }
 
-export function putPost(url: string, body: PutPostData) {
+function putPost(url: string, body: PutPostData) {
     return fetch(`/api/post/${url}`, {
         method: 'PUT',
         headers: {
@@ -78,9 +78,21 @@ export function putPost(url: string, body: PutPostData) {
     }).then<{ url: string }>((res) => res.json());
 }
 
-export function deletePost(url: string) {
+function deletePost(url: string) {
     return fetch(`/api/post/${url}`, {
         method: 'DELETE',
         headers: { Authorization: bearerToken() },
     });
 }
+
+export {
+    postCategory,
+    putCategory,
+    forceDeleteReply,
+    deleteReply,
+    postLoginData,
+    getPost,
+    postPost,
+    putPost,
+    deletePost,
+};

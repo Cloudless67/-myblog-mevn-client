@@ -15,8 +15,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import PostContainer from '@/components/Post/PostContainer.vue';
-import Replies from '@/components/Post/ReplyList.vue';
+import PostContainer from '@/components/post/PostContainer.vue';
+import Replies from '@/components/post/ReplyList.vue';
 import LoadingSkeleton from '@/components/LoadingSkeleton.vue';
 import { deletePost, getPost } from '@/lib/httpClient';
 import { Post } from '@/types/post';
@@ -54,14 +54,6 @@ export default defineComponent({
             const end = Math.min(firstHeading > 0 ? firstHeading : 160, 160);
             const description = post.body.substring(0, end);
             this.setMetaContent('description', description);
-
-            const dummy = document.querySelector<HTMLDivElement>('.dummy');
-
-            if (dummy === null) {
-                throw new ReferenceError('Dummy element not found.');
-            }
-
-            dummy.style.height = '0';
         },
         setMetaContent(name: string, content: string) {
             const metaTag = document.querySelector(`meta[name=${name}]`);

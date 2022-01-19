@@ -2,11 +2,7 @@
     <form>
         <div class="mb-2">
             <label for="write-category" class="form-label">Category</label>
-            <select id="write-category" v-model="postData.category" class="form-select">
-                <option v-for="category in categories" :key="category" :value="category">
-                    {{ category }}
-                </option>
-            </select>
+            <SelectBox id="write-category" v-model="postData.category" :items="categories" />
         </div>
         <InputForm v-model="postData.title" name="write-title" label="Title" />
         <InputForm v-model="postData.url" name="write-url" label="URL" />
@@ -45,12 +41,13 @@
 import { defineComponent } from 'vue';
 import { postPost } from '@/lib/httpClient';
 import { PostPostData } from '@/types/post';
-import InputForm from '@/components/InputForm.vue';
+import SelectBox from '@/components/forms/SelectBox.vue';
+import InputForm from '@/components/forms/InputForm.vue';
 import isError from '@/types/error';
 
 export default defineComponent({
     name: 'WriteRoute',
-    components: { InputForm },
+    components: { SelectBox, InputForm },
     data() {
         return {
             categories: [],
