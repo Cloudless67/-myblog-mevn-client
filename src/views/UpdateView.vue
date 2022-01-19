@@ -71,7 +71,17 @@ export default defineComponent({
     created() {
         this.categories = this.$store.state.categories;
         const post = this.$store.state.lastPost;
-        if (post) this.postData = { ...post, tags: post.tags.join(',') };
+        if (post) {
+            if (post.thumbnail?.url) {
+                this.postData = { ...post, tags: post.tags.join(',') };
+            } else {
+                this.postData = {
+                    ...post,
+                    thumbnail: { url: post.thumbnail || '', aspectRatio: 0 },
+                    tags: post.tags.join(','),
+                };
+            }
+        }
     },
     methods: {
         async submit() {
