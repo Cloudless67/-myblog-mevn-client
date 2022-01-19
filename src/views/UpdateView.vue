@@ -1,16 +1,8 @@
 <template>
     <form>
-        <div class="row align-items-center mb-2">
-            <label for="write-category" class="col-sm-1 form-label fw-bold text-end"
-                >Category</label
-            >
-            <div class="col-sm-11">
-                <select id="write-category" v-model="postData.category" class="form-select">
-                    <option v-for="category in categories" :key="category" :value="category">
-                        {{ category }}
-                    </option>
-                </select>
-            </div>
+        <div class="mb-2">
+            <label for="write-category" class="form-label">Category</label>
+            <SelectBox id="write-category" v-model="postData.category" :items="categories" />
         </div>
         <InputForm v-model="postData.title" name="write-title" label="Title" />
         <InputForm v-model="postData.url" name="write-url" label="URL" />
@@ -47,6 +39,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import SelectBox from '@/components/SelectBox.vue';
 import InputForm from '@/components/InputForm.vue';
 import { putPost } from '@/lib/httpClient';
 import isError from '@/types/error';
@@ -54,7 +47,7 @@ import { PutPostData } from '@/types/post';
 
 export default defineComponent({
     name: 'UpdateRoute',
-    components: { InputForm },
+    components: { SelectBox, InputForm },
     data() {
         return {
             categories: [] as string[],
