@@ -26,8 +26,8 @@ export default defineComponent({
                 : 'black';
 
             return this.state
-                ? require(`@/assets/minus-${btnColor}.svg`)
-                : require(`@/assets/plus-${btnColor}.svg`);
+                ? new URL(`/icons/minus-${btnColor}.svg`, import.meta.url).href
+                : new URL(`/icons/plus-${btnColor}.svg`, import.meta.url).href;
         },
     },
     methods: {
