@@ -10,7 +10,8 @@
         "sass:watch": "sass src/scss/custom.scss public/bootstrap.css --watch --style=compressed",
         "lint:es": "npx eslint src/**/*.{ts,vue}",
         "prettier": "npx prettier -c .",
-        "style": "npm run lint:es && npm run prettier"
+        "style": "npm run lint:es && npm run prettier",
+        "prepare": "husky install"
     },
     "dependencies": {
         "bootstrap": "^5.0.1",
