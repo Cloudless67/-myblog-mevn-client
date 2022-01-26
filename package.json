@@ -3,15 +3,14 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build --modern",
-        "build:report": "vue-cli-service build --report",
+        "dev": "vite",
+        "build": "vite build",
+        "serve": "vite preview",
         "sass": "sass src/scss/custom.scss public/bootstrap.css --style=compressed",
         "sass:watch": "sass src/scss/custom.scss public/bootstrap.css --watch --style=compressed",
         "lint:es": "npx eslint src/**/*.{ts,vue}",
         "prettier": "npx prettier -c .",
         "style": "npm run lint:es && npm run prettier",
-        "test": "vue-cli-service test:unit"
     },
     "dependencies": {
         "bootstrap": "^5.0.1",
