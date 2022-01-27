@@ -46,7 +46,7 @@ import { Reply } from '@/types/reply';
 import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
-    name: 'Replies',
+    name: 'ReplyList',
     components: { ReplyListItem },
     props: {
         replies: { type: Array as PropType<Reply[]>, required: true },
