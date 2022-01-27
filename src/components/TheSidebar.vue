@@ -27,7 +27,7 @@
                 :name="getCategoryName(category)"
                 :children="getCategoryChildren(category)"
                 :editing="editing"
-                @structureChanged="onStructureChange"
+                @structure-changed="onStructureChange"
             />
         </li>
         <form v-if="editing" class="text-end">
@@ -54,7 +54,7 @@ export default defineComponent({
             categories: [] as Category[],
             categoryToAdd: '',
             editing: false,
-            configIcon: null,
+            configIcon: '',
         };
     },
     async created() {
@@ -65,7 +65,7 @@ export default defineComponent({
             ? 'white'
             : 'black';
 
-        this.configIcon = require(`@/assets/config-${btnColor}.svg`);
+        this.configIcon = `/icons/config-${btnColor}.svg`;
     },
     methods: {
         getCategoryName(category: Category) {

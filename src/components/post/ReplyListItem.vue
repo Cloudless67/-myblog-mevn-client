@@ -35,7 +35,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import { Reply } from '@/types/reply';
 
 export default defineComponent({
-    name: 'ReplyItem',
+    name: 'ReplyListItem',
     props: { reply: { type: Object as PropType<Reply>, required: true } },
     emits: ['removed'],
     data() {

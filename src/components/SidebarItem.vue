@@ -28,7 +28,7 @@
                         :name="category.name || category"
                         :children="category.children || []"
                         :editing="editing"
-                        @structureChanged="$emit('structureChanged')"
+                        @structure-changed="$emit('structureChanged')"
                     />
                 </li>
             </ul>

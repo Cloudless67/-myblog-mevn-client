@@ -32,7 +32,7 @@ import ThemeToggleButton from './forms/ThemeToggleButton.vue';
 import { logout } from '@/types/mutations';
 
 export default defineComponent({
-    name: 'Navbar',
+    name: 'TheNavbar',
     components: { ThemeToggleButton },
     data() {
         return {

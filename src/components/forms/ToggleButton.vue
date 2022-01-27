@@ -25,9 +25,7 @@ export default defineComponent({
                 ? 'white'
                 : 'black';
 
-            return this.state
-                ? require(`@/assets/minus-${btnColor}.svg`)
-                : require(`@/assets/plus-${btnColor}.svg`);
+            return this.state ? `/icons/minus-${btnColor}.svg` : `/icons/plus-${btnColor}.svg`;
         },
     },
     methods: {
