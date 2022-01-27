@@ -25,9 +25,7 @@ export default defineComponent({
                 ? 'white'
                 : 'black';
 
-            return this.state
-                ? new URL(`/icons/minus-${btnColor}.svg`, import.meta.url).href
-                : new URL(`/icons/plus-${btnColor}.svg`, import.meta.url).href;
+            return this.state ? `/icons/minus-${btnColor}.svg` : `/icons/plus-${btnColor}.svg`;
         },
     },
     methods: {

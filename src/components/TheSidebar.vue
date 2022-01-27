@@ -65,7 +65,7 @@ export default defineComponent({
             ? 'white'
             : 'black';
 
-        this.configIcon = new URL(`/icons/config-${btnColor}.svg`, import.meta.url).href;
+        this.configIcon = `/icons/config-${btnColor}.svg`;
     },
     methods: {
         getCategoryName(category: Category) {
