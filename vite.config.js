@@ -4,10 +4,6 @@ import vue from '@vitejs/plugin-vue';
 import viteCompression from 'vite-plugin-compression';
 import purgecss from '@fullhuman/postcss-purgecss';
 
-const PATHS = {
-    src: path.join(__dirname, 'src'),
-};
-
 export default defineConfig({
     plugins: [vue(), viteCompression()],
     resolve: {
