@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import HomeView from '@/views/HomeView.vue';
+import PostView from '@/views/PostView.vue';
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -19,17 +21,17 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/post/:title',
         name: 'Post',
-        component: () => import('@/views/PostView.vue'),
+        component: PostView,
     },
     {
         path: '/tags/:tag?',
         name: 'Tags View',
-        component: () => import('@/views/HomeView.vue'),
+        component: HomeView,
     },
     {
         path: '/:category?',
         name: 'Categories View',
-        component: () => import('@/views/HomeView.vue'),
+        component: HomeView,
     },
 ];
 
