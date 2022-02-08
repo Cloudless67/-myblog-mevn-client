@@ -7,7 +7,7 @@
         @dragover.prevent
     >
         <div class="d-flex flex-row align-items-center">
-            <span class="ms-3 fs-3 fw-bold">게시판</span>
+            <span class="ms-3 fs-3">게시판</span>
             <img
                 v-if="$store.state.login"
                 id="edit-categories"

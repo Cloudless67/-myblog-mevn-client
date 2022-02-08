@@ -7,7 +7,7 @@
             <div id="navbarSupportedContent" class="collapse navbar-collapse">
                 <ul class="navbar-nav me-auto fs-4">
                     <li class="nav-item d-none d-md-block">
-                        <RouterLink class="nav-link active fw-bold" aria-current="page" to="/">
+                        <RouterLink class="nav-link active" aria-current="page" to="/">
                             Cloudless' Blog
                         </RouterLink>
                     </li>

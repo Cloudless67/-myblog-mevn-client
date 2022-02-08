@@ -1,10 +1,10 @@
 <template>
     <header class="position-relative">
         <div class="d-flex justify-content-between">
-            <RouterLink class="fw-bold" :to="`/${post.category}`">{{ post.category }} </RouterLink>
+            <RouterLink :to="`/${post.category}`">{{ post.category }} </RouterLink>
             <PostTags :tags="post.tags" />
         </div>
-        <h1 class="fw-bold mb-2">
+        <h1 class="mb-2">
             {{ post.title }}
         </h1>
         <time class="post-time position-absolute end-0 bottom-0">{{

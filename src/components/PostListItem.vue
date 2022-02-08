@@ -2,7 +2,7 @@
     <li class="pb-3 pt-3 border-bottom">
         <RouterLink :to="`/post/${encodeURI(post.url)}`">
             <small class="float-end">조회 {{ post.views }} | 댓글 {{ post.repliesNum }}</small>
-            <h4 class="fw-bold">{{ post.title }}</h4>
+            <h4>{{ post.title }}</h4>
             <p class="lh-sm m-0 overflow-hidden">{{ post.preview }}</p>
         </RouterLink>
     </li>
