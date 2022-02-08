@@ -1,6 +1,6 @@
 <template>
     <div v-if="posts.length > 0">
-        <h1 class="fw-bold">{{ title }}</h1>
+        <h1>{{ title }}</h1>
         <ul class="list-unstyled">
             <post-list-item v-for="post in posts" :key="post._id" :post="post" />
         </ul>
