@@ -7,6 +7,20 @@ $font-family-sans-serif: 'Nanum Gothic', system-ui, -apple-system, 'Segoe UI', ë
     'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
+@font-face {
+    font-family: 'Nanum Gothic';
+    src: url('/fonts/NanumGothic.woff') format('woff');
+    font-display: fallback;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Nanum Gothic';
+    src: url('/fonts/NanumGothicBold.woff') format('woff');
+    font-display: fallback;
+    font-weight: bold;
+}
+
 // Configuration
 @import 'bootstrap/scss/functions';
 @import 'bootstrap/scss/variables';
