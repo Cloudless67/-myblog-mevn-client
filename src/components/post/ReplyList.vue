@@ -1,8 +1,8 @@
 <template>
-    <section v-if="replies" class="replies">
+    <section v-if="currentRepliesList" class="replies">
         <h3 class="fw-bold mb-3">Replies</h3>
         <ReplyListItem
-            v-for="reply in replies"
+            v-for="reply in currentRepliesList"
             :key="reply._id"
             :reply="reply"
             @removed="removeReply"
@@ -22,7 +22,6 @@
                     class="col-sm-6 form-control"
                     placeholder="password"
                     type="password"
-                    required
                 />
             </div>
             <div class="input-group">
@@ -41,9 +40,9 @@
 </template>
 
 <script lang="ts">
+import { defineComponent, PropType } from 'vue';
 import ReplyListItem from '@/components/post/ReplyListItem.vue';
 import { Reply } from '@/types/reply';
-import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
     name: 'ReplyList',
@@ -58,10 +57,26 @@ export default defineComponent({
                 password: '',
                 body: '',
             },
+            currentRepliesList: this.replies,
         };
     },
     methods: {
         async submitReply() {
+            if (this.replyFormData.nickname === '') {
+                alert('닉네임을 입력해주세요.');
+                return;
+            }
+
+            if (this.replyFormData.password === '') {
+                alert('삭제를 위한 패스워드를 입력해주세요.');
+                return;
+            }
+
+            if (this.replyFormData.body === '') {
+                alert('내용을 입력해주세요.');
+                return;
+            }
+
             const url = `/api${this.$route.fullPath}/reply`;
             const newReply = await fetch(url, {
                 method: 'POST',
@@ -70,16 +85,14 @@ export default defineComponent({
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(this.replyFormData),
-            }).then((res) => res.json());
+            }).then<Reply>((res) => res.json());
 
             this.resetSubmitForm();
-            // eslint-disable-next-line vue/no-mutating-props
-            this.replies.push(newReply);
+            this.currentRepliesList.push(newReply);
         },
         removeReply(id: string) {
-            // eslint-disable-next-line vue/no-mutating-props
-            this.replies.splice(
-                this.replies.findIndex((reply) => reply._id === id),
+            this.currentRepliesList.splice(
+                this.currentRepliesList.findIndex((reply) => reply._id === id),
                 1
             );
         },
