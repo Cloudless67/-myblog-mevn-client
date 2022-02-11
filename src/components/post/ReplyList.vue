@@ -1,8 +1,8 @@
 <template>
-    <section v-if="replies" class="replies">
+    <section v-if="currentRepliesList" class="replies">
         <h3 class="fw-bold mb-3">Replies</h3>
         <ReplyListItem
-            v-for="reply in replies"
+            v-for="reply in currentRepliesList"
             :key="reply._id"
             :reply="reply"
             @removed="removeReply"
@@ -57,10 +57,16 @@ export default defineComponent({
                 password: '',
                 body: '',
             },
+            currentRepliesList: this.replies,
         };
     },
     methods: {
         async submitReply() {
+            if (this.replyFormData.nickname === '') {
+                alert('닉네임을 입력해주세요.');
+                return;
+            }
+
             if (this.replyFormData.password === '') {
                 alert('삭제를 위한 패스워드를 입력해주세요.');
                 return;
@@ -82,13 +88,11 @@ export default defineComponent({
             }).then<Reply>((res) => res.json());
 
             this.resetSubmitForm();
-            // eslint-disable-next-line vue/no-mutating-props
-            this.replies.push(newReply);
+            this.currentRepliesList.push(newReply);
         },
         removeReply(id: string) {
-            // eslint-disable-next-line vue/no-mutating-props
-            this.replies.splice(
-                this.replies.findIndex((reply) => reply._id === id),
+            this.currentRepliesList.splice(
+                this.currentRepliesList.findIndex((reply) => reply._id === id),
                 1
             );
         },
