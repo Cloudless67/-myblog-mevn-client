@@ -9,13 +9,13 @@
         <div class="row">
             <InputForm
                 v-model="postData.thumbnail.url"
-                class="col-6"
+                class="col-6 mb-2"
                 name="write-thumbnail-url"
                 label="Thumbnail URL"
             />
             <InputForm
                 v-model="postData.thumbnail.aspectRatio"
-                class="col-6"
+                class="col-6 mb-2"
                 name="write-thumbnail-ratio"
                 label="Aspect Ratio"
                 type="number"

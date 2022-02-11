@@ -40,9 +40,9 @@
 </template>
 
 <script lang="ts">
+import { defineComponent, PropType } from 'vue';
 import ReplyListItem from '@/components/post/ReplyListItem.vue';
 import { Reply } from '@/types/reply';
-import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
     name: 'ReplyList',

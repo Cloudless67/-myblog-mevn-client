@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-2">
+    <div>
         <label :for="name" class="form-label">{{ label }}</label>
         <input
             :id="name"
