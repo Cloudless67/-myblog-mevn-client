@@ -22,7 +22,6 @@
                     class="col-sm-6 form-control"
                     placeholder="password"
                     type="password"
-                    required
                 />
             </div>
             <div class="input-group">
@@ -62,6 +61,16 @@ export default defineComponent({
     },
     methods: {
         async submitReply() {
+            if (this.replyFormData.password === '') {
+                alert('삭제를 위한 패스워드를 입력해주세요.');
+                return;
+            }
+
+            if (this.replyFormData.body === '') {
+                alert('내용을 입력해주세요.');
+                return;
+            }
+
             const url = `/api${this.$route.fullPath}/reply`;
             const newReply = await fetch(url, {
                 method: 'POST',
@@ -70,7 +79,7 @@ export default defineComponent({
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(this.replyFormData),
-            }).then((res) => res.json());
+            }).then<Reply>((res) => res.json());
 
             this.resetSubmitForm();
             // eslint-disable-next-line vue/no-mutating-props
