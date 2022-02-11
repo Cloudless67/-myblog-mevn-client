@@ -3,7 +3,13 @@
         <h6 class="fw-bold d-inline-block me-1">{{ reply.nickname }}</h6>
         <time class="reply-time">{{ formatDateTime(reply.writtenTime) }}</time>
         <span class="position-relative float-end">
-            <i class="fas fa-trash-alt hover-cursor-pointer" @click="onDeleteClick"></i>
+            <img
+                :src="`/icons/delete-${btnColor}.svg`"
+                width="24"
+                height="24"
+                class="hover-cursor-pointer"
+                @click="onDeleteClick"
+            />
             <form v-show="showPasswordForm" class="position-absolute border shadow p-1">
                 <div class="input-group">
                     <input
@@ -43,6 +49,11 @@ export default defineComponent({
             showPasswordForm: false,
             password: '',
         };
+    },
+    computed: {
+        btnColor() {
+            return document.documentElement.classList.contains('dark-mode') ? 'white' : 'black';
+        },
     },
     methods: {
         async onDeleteClick() {
