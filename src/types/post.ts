@@ -41,4 +41,4 @@ type PostPostData = {
 
 type PutPostData = Omit<PostPostData, 'url'>;
 
-export { Post, PostPreview, PostPostData, PutPostData };
+export type { Post, PostPreview, PostPostData, PutPostData };
